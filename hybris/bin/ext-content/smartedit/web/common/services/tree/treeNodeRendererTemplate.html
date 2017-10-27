@@ -1,0 +1,34 @@
+<div ui-tree-handle
+    class="tree-node tree-node-content ySETreeNodeDesktop">
+
+    <div data-ng-show="!ctrl.showAsList"
+        class="col-sm-1">
+        <a class="btn btn-link ySETreeNodeDesktop__expander"
+            data-ng-if="ctrl.hasChildren(this)"
+            data-ng-disabled="ctrl.isDisabled"
+            data-ng-click="ctrl.toggleAndfetch(this)">
+            <span class="glyphicon"
+                data-ng-class="{'glyphicon-chevron-down': collapsed,'glyphicon-chevron-up': !collapsed}"></span>
+        </a>
+    </div>
+
+    <div data-ng-show="ctrl.displayDefaultTemplate()"
+        class="ySETreeNodeDesktop__node-name">
+        <span>{{node.name | l10n}}</span>
+        <h6 data-ng-show="node.title">{{node.title | l10n}}
+        </h6>
+    </div>
+    <div data-ng-include="ctrl.nodeTemplateUrl"
+        data-ng-if="ctrl.nodeTemplateUrl"
+        data-include-replace></div>
+
+</div>
+<ol data-ui-tree-nodes=""
+    data-ng-model="node.nodes"
+    data-ng-class="{hidden: collapsed}"
+    class="ySETreeNodeDesktop__ol">
+    <li data-ng-repeat="node in node.nodes"
+        data-ui-tree-node
+        data-ng-include="'web/common/services/tree/treeNodeRendererTemplate.html'">
+    </li>
+</ol>

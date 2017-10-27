@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Dec 07 20:16:41 CET 2016
+builddate=20161207 2016
+description=sapmodelbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapmodelbackoffice
+releasedate=20161206 1357
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

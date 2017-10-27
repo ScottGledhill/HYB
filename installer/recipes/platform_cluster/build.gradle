@@ -1,0 +1,43 @@
+apply plugin: 'installer-platform-plugin'
+
+hsqldb.port 49302
+
+def barePlatform = platformRole {
+    roleName 'barePlatform'
+}
+
+def theCluster = cluster {
+    nodes 3
+    role barePlatform
+    portsStartingFrom 9002
+    messagingBasedOn jgroups()
+    dbSetup hsqldb.createDb("dbForCluster")
+    sysTempMediaStorage()
+    loadBalancer embeddedLoadBalancer {
+        host "localhost"
+	adminPort 8001
+        port 8002
+        nodeCookieName "platformOnly_node_id"
+        stickySessionForCookie "JSESSIONID"
+    }
+}
+
+task setup << {
+    theCluster.setup()
+}
+
+task initialize << {
+    hsqldb.startInBackground()
+    theCluster.initialize()
+    hsqldb.stopInBackground()
+}
+
+task start << {
+    hsqldb.startInBackground()
+    theCluster.startAllNodes()
+}
+
+task stop << {
+    theCluster.stopAllNodes()
+    hsqldb.stopInBackground()
+}

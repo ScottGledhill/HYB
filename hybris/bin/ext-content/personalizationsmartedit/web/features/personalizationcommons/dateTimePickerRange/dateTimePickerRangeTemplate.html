@@ -1,0 +1,18 @@
+<div class="col-md-6">
+    <label for="customization-start-date" data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.startdate" class="optional-label"></label>
+    <div class="input-group date ySEDateField" data-ng-class="{'ySEDataDisabled':!isEditable}" id="date-picker-range-from">
+        <input type='text' name="date_from_key" class="form-control" placeholder="{{ placeholderText | translate}}" ng-disabled="!isEditable" name="{{name}}" data-ng-model="dateFrom" id="customization-start-date" />
+        <span class="input-group-addon" data-ng-show="isEditable">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</div>
+<div class="col-md-6">
+    <label for="customization-end-date" data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddate" class="optional-label"></label>
+    <div class="input-group date ySEDateField" data-ng-class="{'ySEDataDisabled':!isEditable}" id="date-picker-range-to">
+        <input type='text' name="date_to_key" class="form-control" placeholder="{{ placeholderText | translate}}" ng-disabled="!isEditable" name="{{name}}" isinthefuture data-ng-model="dateTo" id="customization-end-date" />
+        <span class="input-group-addon" data-ng-show="isEditable">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</div>

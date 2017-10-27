@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Jan 16 11:43:35 CET 2017
+builddate=20170116 1143
+description=platformbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=platformbackoffice
+releasedate=20161207 1619
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

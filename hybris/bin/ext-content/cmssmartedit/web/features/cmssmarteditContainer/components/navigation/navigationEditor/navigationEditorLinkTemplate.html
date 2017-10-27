@@ -1,0 +1,9 @@
+<div class="nav-management-link-container">
+    <div data-ng-repeat="catalogVersion in catalog.catalogVersions"
+        class="col-xs-6 nav-management-link-item">
+        <a class="nav-management-link-item__link"
+            data-ng-href="#/navigations/{{catalogVersion.siteDescriptor.uid}}/{{catalogVersion.catalogId}}/{{catalogVersion.catalogVersion}}"
+            data-translate="cataloginfo.navigationmanagement"></a>
+    </div>
+</div>
+<div class="ySECatalogDivider"></div>

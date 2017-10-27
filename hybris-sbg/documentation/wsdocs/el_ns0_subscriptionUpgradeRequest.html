@@ -1,0 +1,325 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>subscriptionUpgradeRequest</title>
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS: implied media="all" -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/prettify.css">
+
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="js/libs/modernizr-1.7.min.js"></script>
+
+</head>
+
+<body class="home">
+
+  <div class="container">
+    <header>
+      <div id="header" class="column first last span-20">
+        <div id="site-name" class="column span-18 append-1 prepend-1 first last"><a href="index.html">subscriptionUpgradeRequest</a></div>
+        <div id="primary" class="column span-18 append-1 prepend-1 first last">
+          <ul class="navigation">
+            <li id="nav-rest"><a href="rest.html">REST</a></li>
+            <li id="nav-data"><a href="model.html">Data Model</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="xbreadcrumbs" id="breadcrumbs">
+            <li>
+              <a href="index.html" class="home">Home</a> &gt;
+            </li>
+            <li>
+              <a href="model.html">Data Model</a> &gt;
+              <ul>
+                <li><a href="model.html">Data Model</a></li>
+                <li><a href="rest.html">REST</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="ns0.html">ns0</a> &gt;
+              <ul>
+                <li><a href="ns0.html">ns0</a></li>
+              </ul>
+            </li>
+            <li class="current">
+              <a href="el_ns0_subscriptionUpgradeRequest.html">subscriptionUpgradeRequest element</a>
+              <ul>
+                <li><a href="el_ns0_address.html">address element</a></li>
+                <li><a href="el_ns0_billing.html">billing element</a></li>
+                <li><a href="el_ns0_billingActivityList.html">billingActivityList element</a></li>
+                <li><a href="el_ns0_customerUsage.html">customerUsage element</a></li>
+                <li><a href="el_ns0_customerUsageRequest.html">customerUsageRequest element</a></li>
+                <li><a href="el_ns0_fileStream.html">fileStream element</a></li>
+                <li><a href="el_ns0_paymentMethodResult.html">paymentMethodResult element</a></li>
+                <li><a href="el_ns0_paymentMethodUpdateRequest.html">paymentMethodUpdateRequest element</a></li>
+                <li><a href="el_ns0_subscriptionCancelSubscriptionRequest.html">subscriptionCancelSubscriptionRequest element</a></li>
+                <li><a href="el_ns0_subscriptionChangePaymentMethodRequest.html">subscriptionChangePaymentMethodRequest element</a></li>
+                <li><a href="el_ns0_subscriptionChangeStateRequest.html">subscriptionChangeStateRequest element</a></li>
+                <li><a href="el_ns0_subscriptionCreateRequest.html">subscriptionCreateRequest element</a></li>
+                <li><a href="el_ns0_subscriptionData.html">subscriptionData element</a></li>
+                <li><a href="el_ns0_subscriptionorder.html">subscriptionorder element</a></li>
+                <li><a href="el_ns0_subscriptionOrderPostRequest.html">subscriptionOrderPostRequest element</a></li>
+                <li><a href="el_ns0_subscriptionProcessPayNowRequest.html">subscriptionProcessPayNowRequest element</a></li>
+                <li><a href="el_ns0_subscriptionProfileRequest.html">subscriptionProfileRequest element</a></li>
+                <li><a href="el_ns0_subscriptionProfileResult.html">subscriptionProfileResult element</a></li>
+                <li><a href="el_ns0_subscriptionReplacePaymentMethodRequest.html">subscriptionReplacePaymentMethodRequest element</a></li>
+                <li><a href="el_ns0_subscriptionRequest.html">subscriptionRequest element</a></li>
+                <li><a href="el_ns0_subscriptionSessionFinalization.html">subscriptionSessionFinalization element</a></li>
+                <li><a href="el_ns0_subscriptionSessionInitRequest.html">subscriptionSessionInitRequest element</a></li>
+                <li><a href="el_ns0_subscriptionTransactionResult.html">subscriptionTransactionResult element</a></li>
+                <li><a href="el_ns0_subscriptionUpdateRequest.html">subscriptionUpdateRequest element</a></li>
+                <li><a href="el_ns0_subscriptionUpgradeRequest.html">subscriptionUpgradeRequest element</a></li>
+                <li><a href="el_ns0_subscriptionUpgradeResult.html">subscriptionUpgradeResult element</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="main" class="column first last span-20">
+      <h1>subscriptionUpgradeRequest element</h1>
+      <table>
+        <tr>
+          <td align="right">Type:</td>
+          <td><a href="ns0_cisSubscriptionUpgradeRequest.html">cisSubscriptionUpgradeRequest</a></td>
+        </tr>
+        <tr>
+          <td align="right">Namespace:</td>
+          <td>(default namespace)</td>
+        </tr>
+        <tr>
+          <td align="right">XML Schema:</td>
+          <td><a href="ns0.xsd">ns0.xsd</a></td>
+        </tr>
+      </table>
+      <p>
+            Generic request type for subscription upgrades.
+          </p>
+      <h2>Example XML</h2>
+      <code class="prettyprint lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;subscriptionUpgradeRequest&gt;
+  &lt;vendorParameters&gt;
+    &lt;parameter key=&quot;...&quot; value=&quot;...&quot; /&gt;
+    &lt;parameter key=&quot;...&quot; value=&quot;...&quot;&gt;
+      &lt;!--...--&gt;
+    &lt;/parameter&gt;
+    &lt;!--...more &quot;parameter&quot; elements...--&gt;
+  &lt;/vendorParameters&gt;
+  &lt;orderId&gt;...&lt;/orderId&gt;
+  &lt;currency&gt;...&lt;/currency&gt;
+  &lt;orderDate&gt;...&lt;/orderDate&gt;
+  &lt;merchantAccountId&gt;...&lt;/merchantAccountId&gt;
+  &lt;merchantPaymentMethodId&gt;...&lt;/merchantPaymentMethodId&gt;
+  &lt;subscriptionItem id=&quot;...&quot;&gt;
+    &lt;code&gt;...&lt;/code&gt;
+    &lt;name&gt;...&lt;/name&gt;
+    &lt;subscriptionTerm id=&quot;...&quot;&gt;
+      &lt;name&gt;...&lt;/name&gt;
+      &lt;number&gt;...&lt;/number&gt;
+      &lt;frequency&gt;...&lt;/frequency&gt;
+      &lt;autoRenewal&gt;...&lt;/autoRenewal&gt;
+      &lt;cancellable&gt;...&lt;/cancellable&gt;
+      &lt;billingPlanId&gt;...&lt;/billingPlanId&gt;
+      &lt;billingPlanName&gt;...&lt;/billingPlanName&gt;
+      &lt;billingCycleDay&gt;...&lt;/billingCycleDay&gt;
+      &lt;billingFrequency&gt;...&lt;/billingFrequency&gt;
+      &lt;vendorParameters&gt;
+        &lt;parameter key=&quot;...&quot; value=&quot;...&quot; /&gt;
+        &lt;parameter key=&quot;...&quot; value=&quot;...&quot;&gt;
+          &lt;!--...--&gt;
+        &lt;/parameter&gt;
+        &lt;!--...more &quot;parameter&quot; elements...--&gt;
+      &lt;/vendorParameters&gt;
+    &lt;/subscriptionTerm&gt;
+    &lt;subscriptionPlan id=&quot;...&quot;&gt;
+      &lt;name&gt;...&lt;/name&gt;
+      &lt;charges&gt;
+        &lt;charge&gt;
+          &lt;chargePrice&gt;...&lt;/chargePrice&gt;
+          &lt;numberOfCycles&gt;...&lt;/numberOfCycles&gt;
+          &lt;oneTimeChargeTime&gt;...&lt;/oneTimeChargeTime&gt;
+          &lt;vendorParameters&gt;
+            &lt;parameter key=&quot;...&quot; value=&quot;...&quot; /&gt;
+            &lt;parameter key=&quot;...&quot; value=&quot;...&quot;&gt;
+              &lt;!--...--&gt;
+            &lt;/parameter&gt;
+            &lt;!--...more &quot;parameter&quot; elements...--&gt;
+          &lt;/vendorParameters&gt;
+        &lt;/charge&gt;
+        &lt;charge&gt;
+          &lt;!--...--&gt;
+        &lt;/charge&gt;
+        &lt;!--...more &quot;charge&quot; elements...--&gt;
+      &lt;/charges&gt;
+      &lt;usageCharges&gt;
+        &lt;usageCharge&gt;
+          &lt;name&gt;...&lt;/name&gt;
+          &lt;type&gt;...&lt;/type&gt;
+          &lt;unitId&gt;...&lt;/unitId&gt;
+          &lt;tier&gt;
+            &lt;chargePrice&gt;...&lt;/chargePrice&gt;
+            &lt;numberOfUnits&gt;...&lt;/numberOfUnits&gt;
+          &lt;/tier&gt;
+          &lt;tier&gt;
+            &lt;!--...--&gt;
+          &lt;/tier&gt;
+          &lt;!--...more &quot;tier&quot; elements...--&gt;
+        &lt;/usageCharge&gt;
+        &lt;usageCharge&gt;
+          &lt;!--...--&gt;
+        &lt;/usageCharge&gt;
+        &lt;!--...more &quot;usageCharge&quot; elements...--&gt;
+      &lt;/usageCharges&gt;
+      &lt;vendorParameters&gt;
+        &lt;parameter key=&quot;...&quot; value=&quot;...&quot; /&gt;
+        &lt;parameter key=&quot;...&quot; value=&quot;...&quot;&gt;
+          &lt;!--...--&gt;
+        &lt;/parameter&gt;
+        &lt;!--...more &quot;parameter&quot; elements...--&gt;
+      &lt;/vendorParameters&gt;
+    &lt;/subscriptionPlan&gt;
+    &lt;vendorParameters&gt;
+      &lt;parameter key=&quot;...&quot; value=&quot;...&quot; /&gt;
+      &lt;parameter key=&quot;...&quot; value=&quot;...&quot;&gt;
+        &lt;!--...--&gt;
+      &lt;/parameter&gt;
+      &lt;!--...more &quot;parameter&quot; elements...--&gt;
+    &lt;/vendorParameters&gt;
+  &lt;/subscriptionItem&gt;
+  &lt;sourceSubscriptionId&gt;...&lt;/sourceSubscriptionId&gt;
+  &lt;settlement&gt;...&lt;/settlement&gt;
+  &lt;effectiveFrom&gt;...&lt;/effectiveFrom&gt;
+  &lt;preview&gt;...&lt;/preview&gt;
+&lt;/subscriptionUpgradeRequest&gt;</code>
+      <h2>Example JSON</h2>
+      <code class="prettyprint lang-js">{
+  &quot;sourceSubscriptionId&quot; : &quot;...&quot;,
+  &quot;settlement&quot; : &quot;...&quot;,
+  &quot;effectiveFrom&quot; : &quot;...&quot;,
+  &quot;preview&quot; : false,
+  &quot;orderId&quot; : &quot;...&quot;,
+  &quot;currency&quot; : &quot;...&quot;,
+  &quot;orderDate&quot; : ...,
+  &quot;merchantAccountId&quot; : &quot;...&quot;,
+  &quot;merchantPaymentMethodId&quot; : &quot;...&quot;,
+  &quot;subscriptionItem&quot; : {
+    &quot;id&quot; : &quot;...&quot;,
+    &quot;code&quot; : &quot;...&quot;,
+    &quot;name&quot; : &quot;...&quot;,
+    &quot;subscriptionTerm&quot; : {
+      &quot;id&quot; : &quot;...&quot;,
+      &quot;name&quot; : &quot;...&quot;,
+      &quot;number&quot; : ...,
+      &quot;frequency&quot; : &quot;...&quot;,
+      &quot;autoRenewal&quot; : false,
+      &quot;cancellable&quot; : false,
+      &quot;billingPlanId&quot; : &quot;...&quot;,
+      &quot;billingPlanName&quot; : &quot;...&quot;,
+      &quot;billingCycleDay&quot; : ...,
+      &quot;billingFrequency&quot; : &quot;...&quot;,
+      &quot;vendorParameters&quot; : {
+        &quot;parameter&quot; : [ {
+          &quot;key&quot; : &quot;...&quot;,
+          &quot;value&quot; : &quot;...&quot;
+        }, ... ]
+      }
+    },
+    &quot;subscriptionPlan&quot; : {
+      &quot;id&quot; : &quot;...&quot;,
+      &quot;name&quot; : &quot;...&quot;,
+      &quot;charges&quot; : [ {
+        &quot;chargePrice&quot; : ...,
+        &quot;numberOfCycles&quot; : ...,
+        &quot;oneTimeChargeTime&quot; : &quot;...&quot;,
+        &quot;vendorParameters&quot; : {
+          &quot;parameter&quot; : [ {
+            &quot;key&quot; : &quot;...&quot;,
+            &quot;value&quot; : &quot;...&quot;
+          }, ... ]
+        }
+      }, ... ],
+      &quot;usageCharges&quot; : [ {
+        &quot;name&quot; : &quot;...&quot;,
+        &quot;type&quot; : &quot;...&quot;,
+        &quot;unitId&quot; : &quot;...&quot;,
+        &quot;tier&quot; : [ {
+          &quot;chargePrice&quot; : ...,
+          &quot;numberOfUnits&quot; : ...
+        }, ... ]
+      }, ... ],
+      &quot;vendorParameters&quot; : {
+        &quot;parameter&quot; : [ {
+          &quot;key&quot; : &quot;...&quot;,
+          &quot;value&quot; : &quot;...&quot;
+        }, ... ]
+      }
+    },
+    &quot;vendorParameters&quot; : {
+      &quot;parameter&quot; : [ {
+        &quot;key&quot; : &quot;...&quot;,
+        &quot;value&quot; : &quot;...&quot;
+      }, ... ]
+    }
+  },
+  &quot;vendorParameters&quot; : {
+    &quot;parameter&quot; : [ {
+      &quot;key&quot; : &quot;...&quot;,
+      &quot;value&quot; : &quot;...&quot;
+    }, ... ]
+  }
+}</code>
+
+      <div class="clear" />
+    </div>
+    <footer>
+      <div id="footer">
+        Copyright &copy; <script type="text/javascript" language="javascript">d = new Date;document.write(d.getFullYear());</script> <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">hybris.com</span><br/>
+        Generated by <a href="http://enunciate.codehaus.org">Enunciate</a>.
+      </div>
+    </footer>
+  </div> <!--! end of #container -->
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>
+
+  <!--manage the navigation menu-->
+  <script src="js/libs/xbreadcrumbs.js"></script>
+  <script>
+    $(function() {
+      $('#breadcrumbs').xBreadcrumbs();
+    });
+  </script>
+
+
+  <!-- prettify code blocks. see http://code.google.com/p/google-code-prettify/ -->
+  <script src="js/libs/prettify/prettify.js"></script>
+  <script>
+    $(function() {
+      prettyPrint();
+    });
+  </script>
+
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+  <![endif]-->
+
+</body>
+</html>

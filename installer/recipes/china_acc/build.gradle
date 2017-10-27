@@ -1,0 +1,59 @@
+def config = {
+    extensions {
+        extName 'mcc'	
+
+        extName 'timedaccesspromotionsbackoffice'
+        extName 'alipaymentbackoffice'
+        extName 'chinaacceleratorbackoffice'		
+        extName 'commercesearchbackoffice'		
+		extName 'commerceservicesbackoffice'
+		extName 'solrfacetsearchbackoffice'	
+	    extName 'timedaccesspromotionsstorefront'
+		extName 'solrserver'
+        extName 'ychinaacceleratorstorefront'
+        extName 'chinastoreelectronics'
+        extName 'yacceleratorfulfilmentprocess'
+        extName 'ycommercewebservices'
+        extName 'yacceleratorcockpits'
+        extName 'btgcockpit'		
+    }
+}
+
+task setup << {
+    apply plugin: 'installer-platform-plugin'
+    apply plugin: 'installer-addon-plugin'
+    def pl = platform(config)
+	
+	pl.localProperties {
+		properties (
+			"commerceservices.default.desktop.ui.experience": "desktop"
+		)
+	}
+	
+    pl.setup()
+    
+     pl.project.addons {
+        names "timedaccesspromotionsstorefront"
+        template "ychinaacceleratorstorefront"
+        storeFronts "ychinaacceleratorstorefront"
+        platform pl
+    }
+	
+
+
+    
+}
+
+task initialize << {
+    apply plugin: 'installer-platform-plugin'
+    def pl = platform(config)
+    pl.build()
+    pl.initialize()
+}
+
+
+task start << {
+    apply plugin: 'installer-platform-plugin'
+    def pl = platform(config)
+    pl.start()
+}

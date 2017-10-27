@@ -1,0 +1,70 @@
+@se-actionable-search-item__name--font-size: 15px;
+@se-actionable-search-item__name--font-style: italic;
+@se-actionable-search-item__name--padding: .2*@smartedit-gutter;
+@se-actionable-search-item__create-btn--font-size: 17px;
+@se-actionable-search-item__create-btn--color: @light-blue-100;
+@se-actionable-search-item__create-btn--background-color: @nested-body-backgroundcolor;
+@se-actionable-search-item--border-bottom: 1px solid @smartedit-grey22;
+@y-infinite-scrolling__listbox-header--font-site: 13px;
+
+.se-actionable-search-item__name{
+    font-family: @font-open-sans;
+    font-size: @se-actionable-search-item__name--font-size;
+    font-style: @se-actionable-search-item__name--font-style;
+    color: @dark-blue;
+    display: inline-block;
+    padding-top: @se-actionable-search-item__name--padding;
+    padding-left: @se-actionable-search-item__name--padding;
+}
+
+.se-actionable-search-item__create-btn,
+.se-actionable-search-item__create-btn:hover,
+.se-actionable-search-item__create-btn.hover{
+    font-family: @font-open-sans;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: @font-weight--bold;
+    color: @se-actionable-search-item__create-btn--color;
+    background-color: @se-actionable-search-item__create-btn--background-color;
+}
+
+.se-actionable-search-item{
+    overflow: auto;
+    border-bottom: @se-actionable-search-item--border-bottom;
+}
+
+.y-infinite-scrolling__listbox-header{
+    font-family: @font-open-sans;
+    font-size: @y-infinite-scrolling__listbox-header--font-site;
+    color: @gray;
+    padding-left: @se-actionable-search-item__name--padding;
+    padding-top: @se-actionable-search-item__name--padding;
+    padding-bottom: @se-actionable-search-item__name--padding;
+    border-bottom: @se-actionable-search-item--border-bottom;
+}
+
+//overwrite ui-select styling
+.se-generic-editor-dropdown__match2 item-printer.y-select-item-printer > div{
+    background: transparent;
+    border-left: none;
+}
+
+.select2-container .select2-choice.se-generic-editor-dropdown__match2 .select2-arrow,
+.select2-container .select2-choice.se-generic-editor-dropdown__match2  div{
+    border-left: none;
+    background: transparent;
+    color: @dark-blue !important;
+    b{
+        margin-top: 5px;
+        color: @dark-blue;
+    }
+}
+
+.se-generic-editor-dropdown__match2.select2-choice,
+.se-generic-editor-dropdown__match2.select2-choice{
+    border-radius: 0;
+}
+
+.y-select-no-result-label{
+    padding: 5px 10px 10px 15px;
+}

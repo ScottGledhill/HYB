@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 06 11:50:27 CET 2016
+builddate=20161206 1150
+description=cissubscriptionatddtests
+group.id=de.hybris.platform
+module.name=platform-module
+name=cissubscriptionatddtests
+releasedate=20161124 1033
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

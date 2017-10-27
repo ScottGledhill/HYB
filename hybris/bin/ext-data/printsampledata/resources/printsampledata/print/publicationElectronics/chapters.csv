@@ -1,0 +1,31 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+﻿##############################################################################################################################
+### Import root chapters
+
+INSERT_UPDATE Chapter;code[unique=true];publicationPOS;$publication[unique=true];
+;components;0;
+;datastorage;1;
+;cameras;2;
+;binoculars;3;
+
+##############################################################################################################################
+### Import sub chapters
+
+INSERT_UPDATE Chapter;code[unique=true];$superchapter;superChapterPOS;$publication[unique=true];
+;powersupplies;components;0;
+
+;filmcameras;cameras;0;
+;digitalcameras;cameras;1;
+;webcams;cameras;2;
+;hand-heldcamcorders;cameras;3;
+;cameraaccessories_supplies;cameras;4;

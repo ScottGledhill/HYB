@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<base href="/web/webroot" />-->
+    <base href="/buildArtifacts/static-resources/" />
+
+    <!--3rd prty libs-->
+    <script src="dist/smartedit/js/thirdparties.js"></script>
+    <script src="thirdparties/ckeditor/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="dist/smartedit/css/outer-styling.css">
+    <link rel="stylesheet" href="../../web/webroot/css/style.css">
+
+    <script src="smarteditloader/js/smarteditloader.js"></script>
+    <script src="smarteditcontainer/js/smarteditcontainer.js"></script>
+    <script src="../../jsTests/ui/common/uiOnLoadingSetup.js"></script>
+    <script src="../../jsTests/ui/common/outerMocks.js"></script>
+</head>
+
+<body data-ng-app="smarteditloader">
+    <div data-ng-view></div>
+</body>
+
+</html>

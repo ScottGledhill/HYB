@@ -1,0 +1,36 @@
+<div class="slot-sync-button-template"
+    data-ng-if="ctrl.isContentCatalogVersionNonActive">
+    <div class="btn-group se-slot-ctx-menu__btn-group"
+        data-uib-dropdown
+        data-dropdown-append-to-body
+        data-auto-close="outsideClick"
+        data-is-open="ctrl.isPopupOpened">
+        <button type="button"
+            data-uib-dropdown-toggle
+            class="btn btn-primary se-slot-ctx-menu__btn"
+            data-ng-class="{'ySESyncOpen': ctrl.isPopupOpened}"
+            id="slot-sync-button-{{::ctrl.slotId}}">
+            <span class="hyicon hyicon-sync se-slot-ctx-menu__btn__sync"></span>
+            <span data-ng-if="!ctrl.isSlotInSync"
+                class="hyicon hyicon-caution "></span>
+            </span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right btn-block se-toolbar-menu-content se-toolbar-menu-content__page-sync"
+            data-uib-dropdown-menu
+            role="menu">
+            <li role="menuitem">
+                <div class="se-toolbar-menu-content--wrapper">
+                    <div class="se-toolbar-menu-content--header">
+                        <div class="se-toolbar-menu-content--header__title"
+                            data-translate="se.cms.synchronization.slot.header">
+                        </div>
+                    </div>
+                    <div class="se-toolbar-menu-content--body">
+                        <slot-synchronization-panel data-ng-if="ctrl.isPopupOpened"
+                            data-slot-id="ctrl.slotId"></slot-synchronization-panel>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

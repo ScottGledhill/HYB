@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Dec 02 16:19:05 CET 2016
+builddate=20161202 1619
+description=privacyoverlayeraddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=privacyoverlayeraddon
+releasedate=20161118 1518
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

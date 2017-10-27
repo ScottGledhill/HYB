@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Dec 09 07:11:01 CET 2016
+builddate=20161209 0710
+description=commerceorgsamplesaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=commerceorgsamplesaddon
+releasedate=20161208 1831
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

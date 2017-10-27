@@ -1,0 +1,9 @@
+<span data-ng-if="addPageWizardCtl.isRestrictionsActive()">
+    <page-restrictions-editor data-page="addPageWizardCtl.getPageInfo()"
+        data-editable="true"
+        data-save-fn="addPageWizardCtl.restrictionsEditorFunctionBindings.save"
+        data-reset-fn="addPageWizardCtl.restrictionsEditorFunctionBindings.reset"
+        data-cancel-fn="addPageWizardCtl.restrictionsEditorFunctionBindings.cancel"
+        data-is-dirty-fn="addPageWizardCtl.restrictionsEditorFunctionBindings.isDirty">
+    </page-restrictions-editor>
+</span>

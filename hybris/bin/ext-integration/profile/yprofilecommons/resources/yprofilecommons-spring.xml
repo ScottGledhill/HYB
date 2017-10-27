@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="defaultRetrieveRestClientStrategy" alias="retrieveRestClientStrategy"/>
+	<bean id="defaultRetrieveRestClientStrategy" class="com.hybris.yprofile.services.impl.DefaultRetrieveRestClientStrategy">
+		<property name="charonFactory" ref="charonFactory" />
+		<property name="profileConfigurationService" ref="profileConfigurationService"/>
+	</bean>
+	<!--//-->
+
+	<alias name="defaultProfileConfigurationService" alias="profileConfigurationService"/>
+	<bean name="defaultProfileConfigurationService" class="com.hybris.yprofile.services.impl.DefaultProfileConfigurationService">
+		<constructor-arg value="${yaas.profile.appId}"/>
+		<property name="yaasConfigurationService" ref="yaasConfigurationService" />
+		<property name="yaasSessionService" ref="yaasSessionService"/>
+	</bean>
+
+
+	<alias name="defaultConsentService" alias="consentService"/>
+	<bean id="defaultConsentService" class="com.hybris.yprofile.consent.services.DefaultConsentService">
+		<property name="profileConfigurationService" ref="profileConfigurationService"/>
+		<property name="cookieGenerator" ref="consentCookieGenerator"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="retrieveRestClientStrategy" ref="retrieveRestClientStrategy"/>
+	</bean>
+
+	<alias name="defaultConsentCookieGenerator" alias="consentCookieGenerator"/>
+	<bean id="defaultConsentCookieGenerator" class="com.hybris.yprofile.consent.cookie.ConsentReferenceCookieGenerator" >
+		<property name="cookieSecure" value="true"/>
+		<property name="cookieMaxAge" value="360000000"/>
+		<property name="useDefaultPath" value="true"/>
+		<property name="httpOnly" value="true"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="profileConfigurationService" ref="profileConfigurationService"/>
+	</bean>
+
+	<!--Add this filter to your filter chain to enable the consent layer for Hybris Profile integration-->
+	<bean id="consentLayerFilter" class="com.hybris.yprofile.consent.filters.ConsentLayerFilter">
+		<property name="consentService" ref="consentService"/>
+		<property name="enabled" value="${yprofilecommons.automatic.consent-reference.generation.enabled}"/>
+	</bean>
+			
+</beans>

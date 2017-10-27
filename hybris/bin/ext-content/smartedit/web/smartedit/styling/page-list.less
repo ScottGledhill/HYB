@@ -1,0 +1,242 @@
+// CMS Page list styles
+
+.pageListWrapper {
+    min-height: 100%;
+    padding-top: 110px;
+    background-color: @smartedit-grey10;
+}
+
+client-paged-list,
+.ySEPageListResult{
+    //background-color: @smartedit-grey10;
+}
+
+.ySEPageListResult{
+    margin-left: @smartedit-gutter;
+    margin-right: @smartedit-gutter;
+}
+
+.ySEPage-list-title {
+    font-family: @font-dosis;
+    color: @smartedit-grey9;
+    font-size: 30px;
+    font-weight: @font-weight--medium;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.ySEPage-list-label {
+    font-family: @font-open-sans;
+    color: @smartedit-grey3;
+    font-size: 20px;
+    font-weight: @font-weight--book;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.ySEPage-list-search {
+    width: 50%;
+    margin: 1em auto .5em auto;
+    font-family: @font-open-sans;
+    font-size: 16px;
+    color: @smartedit-grey4;
+    border-right: @default-grey-700 1px solid;
+}
+
+.ySEPage-list-search-icon{
+    top:0;
+    background-color: @smartedit-white;
+    border-right: none;
+    font-size: 30px;
+    padding: 0 0 4px 6px;
+}
+.ySEPage-list-search-input.form-control{
+    border-left: none;
+    box-shadow: none;
+    z-index: auto;
+    padding-left: 5px;
+    border-radius: 0;
+    border-right: none;
+}
+
+.ySEPage-list-search-input:focus{
+    box-shadow: initial;
+    border-color: #d4d7dc;
+}
+
+.paged-list-header{
+    font-family: @font-open-sans;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: @smartedit-grey3;
+    font-weight: @font-weight--bold;
+}
+
+.page-list-link-container {
+    display: table;
+    width: 100%;
+}
+
+.page-list-link-item {
+    display: table-cell;
+
+    &:first-child {
+        padding-left: 20px;
+    }
+
+    &:last-child {
+        padding-left: 10px;
+    }
+}
+
+.page-list-link-item__link {
+    display: block;
+    font-weight: @font-weight--bold;
+    text-transform: uppercase;
+    margin-top: 1em;
+}
+
+//TODO to be reviewed 
+.ySEAdd-Page-button{
+    margin-left: @smartedit-gutter;
+    margin-right: @smartedit-gutter;
+}
+
+.page-wizard-list{
+  height: 311px;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  .page-wizard-list-item{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-top: 1px solid @smartedit-grey22;
+    border-bottom: 1px solid @smartedit-grey22;
+
+    .page-wizard-item-title{
+      font-weight: bold;
+      font-size: larger;
+    }
+
+    &.page-wizard-item-selected{
+      background-color: @smartedit-grey22;
+    }
+  }
+}
+
+.page-wizard-type-item {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top: 1px solid @smartedit-grey22;
+  border-bottom: 1px solid @smartedit-grey22;
+
+  .page-wizard-type-item-title {
+    font-weight: bold;
+    font-size: larger;
+  }
+
+  &.page-wizard-type-item-selected{
+    background-color: @smartedit-grey22;
+  }
+}
+
+.page-type-step-template__item__icon,
+.page-type-step-template__item--info{
+    display: inline-block;
+}
+
+.page-type-step-template__item{
+    height: 85px;
+    border-top: 1px solid @smartedit-grey6;
+    display:flex;
+    align-items:center;
+}
+
+.page-type-step-template:last-child{
+    border-bottom: 1px solid @smartedit-grey6;;
+}
+
+.page-type-step-template__item__icon{
+    font-size: 30px;
+    padding-left: (@smartedit-gutter * .4);
+    padding-right: 20px;
+    padding-bottom: 10px;
+    color: @smartedit-blue2;
+    opacity: .15;
+}
+
+.page-type-step-template__item--info__title,
+.page-type-step-template__item--info__description{
+    font-family: @font-open-sans;
+    color: @smartedit-grey7;
+}
+
+.page-type-step-template__item--info__title{
+    font-size: 15px;
+    font-weight: @font-weight--bold;
+}
+
+.page-type-step-template__item--info__description{
+    font-size: 14px;
+    font-weight: @font-weight--normal;
+}
+
+.page-type-step-template__item__selected{
+    background-color: @smartedit-blue2-opacity;
+}
+
+.page-type-step-template__item__selected .page-type-step-template__item__icon{
+    opacity: 1;
+}
+
+.page-type-step-template__text{
+    padding-bottom: 30px;
+}
+
+.paged-list-table.table-striped > tbody > tr:nth-of-type(even),
+.paged-list-table.table-striped > thead > tr {
+    background-color: @smartedit-grey10;
+}
+
+.paged-list-item .paged-list-table__body__td-menu {
+    padding: 0; 
+}
+
+.y-dropdown-more-menu__ddlb__icon{
+    font-size: 20px;
+}
+
+.page-editor-basic-info__pagetype,
+.page-editor-basic-info__p{
+    color: @smartedit-grey3;
+}
+
+.page-editor-basic-info__pagetype{
+    margin-top: 0;
+}
+
+.restrictionPageListIcon{
+    width: 20px;
+}
+
+.page-type-step-template-list-search{
+    margin-bottom: .2*@smartedit-gutter;
+    border-right: 1px solid @default-grey-700;
+}
+
+.ySESearchIcon{
+    background-color: @smartedit-white;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid @default-grey-700;
+    border-bottom: 1px solid @default-grey-700;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    top: 0;
+    font-size: large;
+    color: @smartedit-grey3;
+}
+
+.ySESearchIcon.input-group-addon{
+    border-radius: 0;
+}

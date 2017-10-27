@@ -1,0 +1,19 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Usage Units
+
+INSERT_UPDATE UsageUnit;id[unique=true];accumulative[default=false]
+;radio_stations;true
+;theme_packages;true
+;movies_on_demand;;
+;documentaries_on_demand;;
+;blockbusters_on_demand;;
+;videos_on_demand;;

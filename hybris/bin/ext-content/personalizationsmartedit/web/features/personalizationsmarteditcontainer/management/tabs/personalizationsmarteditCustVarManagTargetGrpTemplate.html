@@ -1,0 +1,133 @@
+<div ng-controller="personalizationsmarteditManagerTargetGrpController" class="customization-form">
+    <div class="navtab-info">
+        <div class="row navtab-row">
+            <div class="col-xs-10 navtab-col">
+                <span ng-bind="customization.name" class="navtab-col navtab-info--name"></span>
+            </div>
+            <div class="col-xs-2 text-right navtab-col">
+                <span class="badge" ng-bind="customization.status" ng-class="{'status-active':'badge-success', 'status-inactive':'', 'status-ignore':''}[getActivityStateForCustomization(customization)]"></span>
+            </div>
+        </div>
+        <div ng-show="customization.status === PERSONALIZATION_MODEL_STATUS_CODES.ENABLED" class="navtab-info--dates">
+            <span ng-if='!customization.enabledStartDate && customization.enabledEndDate'>...</span>
+            <span ng-bind="customization.enabledStartDate"></span>
+            <span ng-if='customization.enabledStartDate || customization.enabledEndDate'> - </span>
+            <span ng-bind="customization.enabledEndDate"></span>
+            <span ng-if='customization.enabledStartDate && !customization.enabledEndDate'>...</span>
+        </div>
+    </div>
+    <div class="navtab-forms">
+        <div class="row">
+            <div class="col-xs-6">
+                <div ng-show='filteredVariations.length === 0'>
+                    <label class="control-label required" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab"></label>
+                    <h6 data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.notargetgroups"></h6>
+                </div>
+
+                <div ng-show='filteredVariations.length > 0'>
+                    <label class="control-label required" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab"></label>
+
+                    <ul class="list-group">
+                        <li class="list-group-item" data-ng-repeat="variation in customization.variations | statusNotDeleted as filteredVariations">
+
+                            <div class="row">
+                                <div class="col-md-11 col-xs-10" ng-class="isSelected(variation) ? 'variation-layout--selected':''">
+                                    <div>
+                                        <span ng-class="isSelected(variation) ? 'variation-layout--selected':'variation-layout'" ng-bind="variation.name"></span>
+                                        <span ng-class="hasCommerceCustomization(variation) ? 'commerce-customization__marker--icon':''" data-uib-tooltip="{{getCommerceCustomizationTooltip(variation)}}"></span>
+                                        <span class="variation-status" ng-class="getActivityStateForVariation(customization, variation)" ng-bind="getEnablementTextForVariation(variation)"></span>
+                                    </div>
+                                    <div ng-bind="getSegmentCodesStrForVariation(variation)" class="segments-layout"></div>
+                                    <div ng-if="getSegmentLenghtForVariation(variation) > 1">
+                                        <span class="criteria-layout__title" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.criteria.colon"></span>
+                                        <span ng-bind="getCriteriaDescrForVariation(variation)"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1 col-xs-2">
+                                    <button type="button" ng-disabled="isSelected(variation)" class="dropdown pull-right btn btn-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span class="hyicon hyicon-more hyicon-in-modal-size"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" role="menu">
+                                        <li>
+                                            <a ng-click="editVariationAction(variation)" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.variation.options.edit" />
+                                        </li>
+
+                                        <li>
+                                            <a ng-click="removeVariationClick(variation)" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.variation.options.remove" />
+                                        </li>
+
+                                        <li ng-class="$first ? 'disabled' : '' ">
+                                            <a ng-click="setVariationRank(variation, -1, $event, $first)" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.variation.options.moveup" />
+                                        </li>
+
+                                        <li ng-class="$last ? 'disabled' : '' ">
+                                            <a ng-click="setVariationRank(variation, 1, $event, $last)" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.variation.options.movedown" />
+                                        </li>
+
+                                        <li>
+                                            <a ng-click="toogleVariationActive(variation)" ng-bind="getActivityActionTextForVariation(variation)" />
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <form>
+                    <div class="form-group">
+                        <label for="targetgroup-name" class="control-label required" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroupname"></label>
+                        <input uniquetargetgroupname type="text" class="form-control" placeholder="{{'personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroupname.placeholder' | translate}}" name="variationname_key" data-ng-model="edit.name" id="targetgroup-name">
+                        <span ng-show="{{tab.formName}}.variationname_key.$error.uniquetargetgroupname" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.targetgroup.uniquename.validation.message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="targetgroup-segments" class="control-label required" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.segments"></label>
+                        <ui-select uis-open-close="initUiSelect($select)" ng-model="singleSegment" theme="select2" class="form-control" ng-keyup="segmentSearchInputKeypress($event, $select.search)" on-select="segmentSelectedEvent($item, $select.items)" id="targetgroup-segments">
+                            <ui-select-match placeholder="{{ 'personalization.modal.customizationvariationmanagement.targetgrouptab.segments.placeholder' | translate}}">
+                                <span>{{'personalization.modal.customizationvariationmanagement.targetgrouptab.segments.placeholder' | translate}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in edit.segments" ui-disable-choice="isItemInSelectDisabled(item)" personalization-infinite-scroll="addMoreSegmentItems()" personalization-infinite-scroll-distance="2">
+                                <small>
+                                    {{'personalization.modal.customizationvariationmanagement.targetgrouptab.segments' | translate}}: {{item.code}}
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <div class="select2-choices">
+                            <div class="ui-select-match-item select2-search-choice" data-ng-repeat="segment in temporarySelectedSegments">
+                                <span>{{segment.code}}</span>
+                                <span class="ui-select-match-close select2-search-choice-close" ng-click="removeSelectedSegment(segment)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-if="canShowVariationSegmentationCriteria()">
+                        <label class="optional-label" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.criteria"></label>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <input type="checkbox" data-ng-model="edit.allSegmentsChecked">
+                                <label data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.allsegments" ng-click="edit.allSegmentsChecked = !edit.allSegmentsChecked"></label>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="checkbox" negate data-ng-model="edit.allSegmentsChecked">
+                                <label data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.anysegments" ng-click="edit.allSegmentsChecked = !edit.allSegmentsChecked"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="!isVariationSelected()">
+                        <button type="button" class="btn btn-default add-target-group" data-ng-click="addVariationClick()" data-ng-disabled="!canSaveVariation()" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.addvariation"></button>
+                    </div>
+                    <div ng-if="isVariationSelected()">
+                        <button type="button" class="btn btn-default submit-target-group-edit" data-ng-click="submitChangesClick()" data-ng-disabled="!canSaveVariation()" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.savechanges"></button>
+                        <button type="button" class="btn btn-subordinate cancel-target-group-edit" data-ng-click="cancelChangesClick()" data-translate="personalization.modal.customizationvariationmanagement.targetgrouptab.cancelchanges"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

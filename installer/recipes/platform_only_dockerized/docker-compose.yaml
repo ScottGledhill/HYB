@@ -1,0 +1,61 @@
+version: '2'
+services:
+    hsql:
+        image: simple_deployment_hsql
+        volumes:
+        - ./state/hsql:/opt/hsqldb/data
+    platform_admin_init:
+        image: simple_deployment_platform
+        environment:
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql     
+        command: admin initialize  
+    platformhac1:
+        image: simple_deployment_platform
+        environment:
+            - JVM_ROUTE=platformhac1
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: hac
+    platformhac2:
+        image: simple_deployment_platform
+        environment:
+            - JVM_ROUTE=platformhac2
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: hac
+    platform_background_processing:
+        image: simple_deployment_platform
+        environment:
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: backgroundProcessing
+    load_balancer:
+        image: simple_deployment_load_balancer
+        volumes:
+            - ./resources/secrets/:/usr/local/apache2/conf/ssl
+        environment:
+            - NODE_IP_platformhac1=ajp://platformhac1:8009
+            - NODE_IP_platformhac2=ajp://platformhac2:8009
+        links:
+            - platformhac1
+            - platformhac2
+        ports:
+            - "80:80"
+            - "443:443"

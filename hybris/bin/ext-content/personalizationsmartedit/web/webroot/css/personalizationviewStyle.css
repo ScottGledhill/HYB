@@ -1,0 +1,174 @@
+.personalizationsmarteditVariationComponentSelected-icon {
+  background-image: url("../icons/selected_component.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+.personalizationsmarteditComponentSelected,
+.personalizationsmarteditVariationComponentSelected,
+.personalizationsmarteditComponentSelected0,
+.personalizationsmarteditComponentSelected1,
+.personalizationsmarteditComponentSelected2,
+.personalizationsmarteditComponentSelected3,
+.personalizationsmarteditComponentSelected4,
+.personalizationsmarteditComponentSelected5,
+.personalizationsmarteditComponentSelected6,
+.personalizationsmarteditComponentSelected7 {
+  border: 5px;
+  border-style: solid;
+  border-color: #0486e0;
+}
+.personalizationsmarteditComponentSelected0 {
+  border-color: #0486e0;
+}
+.personalizationsmarteditComponentSelected1 {
+  border-color: #9dc75b;
+}
+.personalizationsmarteditComponentSelected2 {
+  border-color: #fd621f;
+}
+.personalizationsmarteditComponentSelected3 {
+  border-color: #b831b4;
+}
+.personalizationsmarteditComponentSelected4 {
+  border-color: #faba0d;
+}
+.personalizationsmarteditComponentSelected5 {
+  border-color: #1ec8df;
+}
+.personalizationsmarteditComponentSelected6 {
+  border-color: #de356b;
+}
+.personalizationsmarteditComponentSelected7 {
+  border-color: #1f4d70;
+}
+.personalizationsmarteditComponentSelectedList,
+.personalizationsmarteditComponentSelectedList0,
+.personalizationsmarteditComponentSelectedList1,
+.personalizationsmarteditComponentSelectedList2,
+.personalizationsmarteditComponentSelectedList3,
+.personalizationsmarteditComponentSelectedList4,
+.personalizationsmarteditComponentSelectedList5,
+.personalizationsmarteditComponentSelectedList6,
+.personalizationsmarteditComponentSelectedList7 {
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  padding-top: 10px;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+}
+.personalizationsmarteditComponentSelectedList0 {
+  background: #0486e0;
+}
+.personalizationsmarteditComponentSelectedList1 {
+  background: #9dc75b;
+}
+.personalizationsmarteditComponentSelectedList2 {
+  background: #fd621f;
+}
+.personalizationsmarteditComponentSelectedList3 {
+  background: #b831b4;
+}
+.personalizationsmarteditComponentSelectedList4 {
+  background: #faba0d;
+}
+.personalizationsmarteditComponentSelectedList5 {
+  background: #1ec8df;
+}
+.personalizationsmarteditComponentSelectedList6 {
+  background: #de356b;
+}
+.personalizationsmarteditComponentSelectedList7 {
+  background: #1f4d70;
+}
+.customization__marker,
+.commerce-customization__marker--icon {
+  width: 30px;
+  height: 30px;
+  top: -5px;
+  background-color: transparent;
+  display: inline-block;
+}
+.commerce-customization__marker--icon {
+  background-image: url("../icons/promotion_off.png");
+  background-repeat: no-repeat;
+}
+.modal-fullscreen {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.modal-fullscreen > .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  background-color: #e0e9f0;
+}
+.modal_bigger {
+  font-size: 15px;
+}
+.ySEComponentMenuW--button-with-context,
+.ySEComponentMenuW--button-with-context:hover,
+.ySEComponentMenuW--button-with-context:active,
+.ySEComponentMenuW--button-with-context:hover:active,
+.ySEComponentMenuW--button-with-context:focus,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:hover,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:active,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:hover:active,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:focus,
+.ySEComponentMenuW.open .toolbar-context--btn,
+.ySEComponentMenuW.open .toolbar-context--btn:hover,
+.ySEComponentMenuW.open .toolbar-context--btn:active,
+.ySEComponentMenuW.open .toolbar-context--btn:hover:active,
+.ySEComponentMenuW.open .toolbar-context--btn:focus {
+  border-right: 0 none;
+}
+.toolbar-context {
+  display: inline-block;
+  background-color: #e5f1f9;
+}
+.toolbar-context .hyicon {
+  font-size: 20px;
+  padding-top: 2px;
+  padding-left: 0;
+}
+.toolbar-context .hyicon:hover {
+  opacity: 0.6;
+}
+.toolbar-context .ySEComponentMenuW--button-hyicon {
+  min-width: 30px;
+}
+.toolbar-context--btn,
+.toolbar-context--btn:hover,
+.toolbar-context--btn:active,
+.toolbar-context--btn:hover:active,
+.toolbar-context--btn:focus {
+  border-right: 0 none;
+  margin-left: -4px;
+  margin-right: -3px;
+  background: url("../icons/toolbar-context-border.png") no-repeat;
+  cursor: default;
+  opacity: 1;
+}
+.toolbar-context--btn--txt {
+  height: 50px;
+  padding-top: 7px;
+  padding-left: 15px;
+  text-transform: capitalize;
+  font-size: 13px;
+}
+.yPersonalizationModal {
+  z-index: 1066 !important;
+}
+.yPersonalizationContextModal {
+  z-index: 1046 !important;
+}
+.yPersonalizationContextModal + .modal-backdrop {
+  z-index: 1045 !important;
+}
+.yPersonalizationManagerModal {
+  z-index: 1052 !important;
+}

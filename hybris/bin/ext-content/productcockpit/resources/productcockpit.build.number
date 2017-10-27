@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Nov 28 16:11:48 CET 2016
+builddate=20161128 1611
+description=productcockpit
+group.id=de.hybris.platform
+module.name=platform-module
+name=productcockpit
+releasedate=20161124 1033
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultRecommendationDao" alias="recommendationDao" />
+	<bean id="defaultRecommendationDao"	class="de.hybris.platform.sapprodrecobuffer.dao.impl.DefaultSapRecommendationDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultRecommendationBufferService" alias="recommendationBufferService" />
+	<bean id="defaultRecommendationBufferService" class="de.hybris.platform.sapprodrecobuffer.service.impl.DefaultSapRecommendationService">
+		<property name="recommendationDao" ref="recommendationDao" />
+		<!-- Setting to false disables the getRecommendation methods -->
+		<property name="enableRecommendationBuffer" value="${sapprodrecobuffer.enable:true}" />
+		<!-- Value in days for cronjob table maintenance - a recommendation is considered expired when (expiresOn+expiryOffset) > currentDate -->
+		<property name="expiryOffset" value="${sapprodrecobuffer.expiryoffset:34}" />
+	</bean>
+
+	<bean id="sapRecommendationCleanupCronJob" class="de.hybris.platform.sapprodrecobuffer.cronjobs.SapRecommendationCleanupCronJob"
+		parent="abstractJobPerformable">
+		<property name="recommendationBufferService" ref="recommendationBufferService" />		
+	</bean>
+	
+</beans>

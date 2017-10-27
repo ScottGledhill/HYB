@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!--3rd prty libs-->
+	<script src="/buildArtifacts/static-resources/dist/smartedit/js/thirdparties.js"></script>
+	<script src="/buildArtifacts/static-resources/thirdparties/ckeditor/ckeditor.js"></script>
+	<script src="/buildArtifacts/static-resources/smarteditloader/js/smarteditloader.js"></script>
+	<script src="/buildArtifacts/static-resources/smarteditcontainer/js/smarteditcontainer.js"></script>
+	<script src="/buildArtifacts/seLibraries/smartEditContainer/services/templates.js"></script>
+
+	<script src="/jsTests/tests/cmssmarteditContainer/e2e/e2eOnLoadingSetup.js"></script>
+	<script src="/jsTarget/web/features/cmssmarteditContainer/templates.js"></script>
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/buildArtifacts/static-resources/dist/smartedit/css/outer-styling.css">
+
+	<script src="/web/features/cmssmarteditContainer/facades/displayConditionsFacade.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/editorTabset/editorTabset.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/pageEditorModalService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/tabs/basic/editPageBasicTab.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/tabs/basic/editPageBasicTabController.js"></script>
+    <script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/tabs/visibility/editPageVisibilityTab.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/tabs/displayConditions/displayConditionsTab.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/editPageModal/tabs/displayConditions/displayConditionsTabController.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsEditor/displayConditionsEditor.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsEditor/displayConditionsEditorController.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPageInfo/displayConditionsPageInfo.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPageInfo/displayConditionsPageInfoController.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPageVariations/displayConditionsPageVariations.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPageVariations/displayConditionsPageVariationsController.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPrimaryPage/displayConditionsPrimaryPage.js"></script>
+	<script src="/web/features/cmssmarteditContainer/components/pages/displayConditions/displayConditionsPrimaryPage/displayConditionsPrimaryPageController.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pageDisplayConditions/displayConditionsEditorModel.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pageRestrictions/pageRestrictionsService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pageRestrictions/restrictionTypesService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pageRestrictions/pageTypesRestrictionTypesService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/restrictionsService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pages/pageService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pages/pageListService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/genericEditorModalService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/contextAwarePageStructureService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/services/pageDisplayConditions/pageDisplayConditionsService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/pageRestrictionsRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/pageTypesRestrictionTypesRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/structuresRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/restrictionTypesRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/restrictionsRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/typeStructureRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/catalogVersionRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/pagesFallbacksRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/pagesVariationsRestService.js"></script>
+	<script src="/web/features/cmssmarteditContainer/dao/pagesRestService.js"></script>
+	<script src="/web/features/cmscommons/dao/resource.js"></script>
+	<script src="/web/features/cmscommons/dao/resourceLocations.js"></script>
+
+	<script src="pageEditorModalTestFixture.js"></script>
+</head>
+
+<body data-ng-app="pageEditorTestFixtureModule" data-ng-controller="pageEditorTestFixtureController as controller">
+	 <table class="table">
+        <thead>
+            <tr>
+              	<th>Page Uid</th>
+				<th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              	<td>Primary Content Page</td>
+				<td><button class="btn btn-default" id="openPageEditorSuccess" data-ng-click="controller.openModal('primaryContentPage')" type="button">Edit Page</button></td>
+            </tr>
+            <tr>
+              	<td>Variation Content Page</td>
+				<td><button class="btn btn-default" id="openPageEditorFail" data-ng-click="controller.openModal('variationContentPage')" type="button">Edit Page</button></td>
+            </tr>
+			<tr>
+				<td>Primary Category Page</td>
+				<td><button class="btn btn-default" data-ng-click="controller.openModal('primaryCategoryPage')" type="button">Edit Page</button></td>
+			</tr>
+			<tr>
+				<td>Variation Category Page</td>
+				<td><button class="btn btn-default" data-ng-click="controller.openModal('variationCategoryPage')" type="button">Edit Page</button></td>
+			</tr>
+			<tr>
+				<td>Primary Product Page</td>
+				<td><button class="btn btn-default" data-ng-click="controller.openModal('primaryProductPage')" type="button">Edit Page</button></td>
+			</tr>
+			<tr>
+				<td>Variation Product Page</td>
+				<td><button class="btn btn-default" data-ng-click="controller.openModal('variationProductPage')" type="button">Edit Page</button></td>
+			</tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

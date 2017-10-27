@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+﻿INSERT_UPDATE Category;code[unique=true];$superCategories;name[lang=de];name[lang=en];description[lang=de];description[lang=en];order;$catalogversion[unique=true];
+;contentblocks;;Inhaltsblöcke;Content blocks;Zusammenstellung verschiedener Inhaltsblöcke;Collection of different content blocks;0;
+;textblocks;contentblocks;Textinhalte;Text contents;Verschiedene Textinhalte;Collection of text contents;0;
+;imageblocks;contentblocks;Bildinhalte;Image contents;Verschiedene Bildinhalte;Different image contents;1;
+;tableblocks;contentblocks;Tabellen;Tables;Tabellen;Tables;2;

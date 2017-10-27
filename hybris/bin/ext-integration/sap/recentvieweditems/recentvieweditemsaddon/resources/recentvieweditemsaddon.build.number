@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Dec 07 19:49:20 CET 2016
+builddate=20161207 1949
+description=recentvieweditemsaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=recentvieweditemsaddon
+releasedate=20161206 1357
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

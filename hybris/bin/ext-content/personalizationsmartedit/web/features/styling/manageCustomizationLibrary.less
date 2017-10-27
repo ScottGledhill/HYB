@@ -1,0 +1,296 @@
+/* *
+/* This file includes the styles used in Manage Customization Library modal
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+
+@import (reference) "variables.less";
+@import (reference) "commons.less";
+.manage-customization {
+    text-align: center;
+    font-size: 16px;
+    word-wrap: break-word; //in extreme scenarios
+    .modal-header.ng-scope h4 {
+        font-family: Dosis, medium;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+        color: @text-color-dark-blue;
+        margin: 0 auto 0 auto; //to center it
+    }
+    .modal-header {
+        border: none;
+        padding-right: 0px;
+    }
+    .modal-body {
+        padding-top: 0;
+    }
+    .h2-color--grey-font {
+        color: @text-color-grey;
+        font-size: 20px;
+        font-weight: 300;
+        text-transform: uppercase; //TODO: remove after bootstrap update
+    }
+    .customization-search {
+        margin: 2em auto .5em auto;
+        .glyphicon {
+            top: 0;
+            background-color: @background-color-white;
+            font-size: 16px;
+        }
+        .glyphicon-search {
+            border-right: none;
+        }
+        .form-control {
+            color: @text-color-dark-blue;
+            font-size: 15px;
+            font-weight: 500; //semibold
+            border-left: none;
+            padding-left: 0;
+            box-shadow: none;
+            border-right: none
+        }
+        input[type=text]:focus {
+            border-bottom: 1px solid @border-color-light-grey; //focus and not on focus should be the same
+            border-top: 1px solid @border-color-light-grey;
+            border-left: none;
+            border-right: none;
+        }
+    }
+    .search-results {
+        width: 50%;
+        margin: auto auto .5em auto;
+        color: @text-color-grey;
+        font-style: italic;
+    }
+    .filter-layout .ui-select-container {
+        width: 96%;
+        text-align: left;
+    }
+    .filter-layout--no-results {
+        min-height: 150px; //to avoid the default dropdown overflow
+    }
+    .col-reset-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .categoryTable {
+        margin: 0 auto .5em auto;
+        color: @text-color-dark-blue;
+    }
+    .categoryTable-lefttoolbar {
+        margin-top: 5px;
+    }
+    .statusDataValue {
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: @font-weight-bold;
+    }
+    .dates-layout {
+        font-size: 12px;
+    }
+    .customization__glyphicon-chevron {
+        padding-left: 5px;
+        padding-right: 10px;
+    }
+    .glyphicon-down-lefttoolbar {
+        font-size: 14px;
+        top: 10px;
+    }
+    .hyicon-more {
+        font-size: 24px;
+    }
+    .divider {
+        border-bottom: 1px solid @border-color-light-grey;
+    }
+    .button-margin {
+        margin-top: 15px;
+    }
+    .hyicon {
+        font-family: inherit;
+    }
+    .hyicon:before {
+        vertical-align: top;
+    }
+    .hyicon-lefttoolbar::before {
+        vertical-align: middle;
+        font-size: 28px;
+    }
+    .y-add-btn .hyicon:before {
+        padding-right: 5px;
+    }
+    a:hover {
+        border: none;
+    }
+    .primaryData {
+        font-weight: @font-weight-semibold;
+    }
+    .hyicon-arrow {
+        font-size: 18px;
+    }
+    .customizationLayout,
+    .variationLayout {
+        padding: 20px 15px 10px 15px;
+        background: @background-color-white;
+    }
+    .customizationLayoutGrey {
+        background: @background-color-grey;
+    }
+    .row-reset-margin {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    personalizationsmartedit-pagination .dropdown-menu {
+        min-width: 160px;
+        text-align: left;
+    }
+    .search-item-lefttoolbar {
+        width: 102%;
+        height: 100%;
+        padding: 15px;
+        background: @background-color-grey;
+        box-shadow: 0 2px 3px rgba(138, 143, 161, 0.2);
+        .select2-search-field input {
+            padding-left: 5px;
+        }
+        .select2-search-field::before {
+            font-weight: @font-weight-normal;
+            font-family: hyicon;
+            content: "\e00f";
+            padding-left: 10px;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+        .statusDataValue {
+            font-size: 11px;
+        }
+    }
+    .row-lefttoolbar {
+        margin-left: 0;
+        padding: 15px;
+        border-bottom: 1px solid @border-color-light-grey;
+    }
+    .row-lefttoolbar.filter-layout.filter-layout--no-results,
+    .row-lefttoolbar.customization--last {
+        border-bottom: none; //for esthetics
+    }
+    .customization--last {
+        padding-bottom: 30px; //increase the padding for the link not to overflow the parent
+    }
+    .col-lefttoolbar-glyphicon {
+        padding-left: 0;
+        padding-right: 15px;
+    }
+    .col-lefttoolbar-hyicon {
+        padding-left: 0;
+        padding-right: 5px;
+    }
+    .dropdown-menu-leftoolbar {
+        min-width: 100px;
+    }
+    .overflow-wrapper-lefttoolbar {
+        margin-bottom: -30px;
+        max-height: 55vh;
+        overflow-x: hidden;
+    }
+    .dropdown-menu-single-item {
+        margin-top: -5px;
+        margin-bottom: -5px;
+        padding: 10px 16px;
+    }
+    .selectedVariation {
+        background-color: @background-color-blue;
+        color: @background-color-white;
+        .selectedVariation-icon {
+            background-image: @personalizationVariationIcon;
+            background-repeat: no-repeat;
+            width: 45px;
+            height: 45px;
+            top: -5px;
+        }
+        .status-active,
+        .status-inactive,
+        .status-ignore {
+            color: @background-color-white;
+        }
+        .commerce-customization__marker--icon {
+            background-image: @personalizationCommerceCustomizationSelectedIcon;
+        }
+    }
+    .btn-link:hover, //remove after techne update
+    .btn-link:focus,
+    .no-underline a:hover,
+    .no-underline a:focus {
+        text-decoration: none;
+    }
+}
+
+.select2-highlighted {
+    .status-active, .status-inactive, .status-ignore {
+        color: @background-color-white;
+    }
+}
+
+.customize-panel__marker-icon {
+    margin-left: -10px;
+}
+
+.ySEComponentMenu-customized {
+    max-width: 360px;
+    top: inherit;
+    .ySEComponentMenuList--item, .ySEComponentMenuList--item--last {
+        padding-left: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-top: -10px;
+        overflow: hidden;
+        .ySEComponentMenu-anchor {
+            color: @background-color-white;
+            font-size: 15px;
+            font-weight: @font-weight-bold;
+            padding-bottom: 0;
+        }
+        .ySEComponentMenu-anchor:hover,
+        .ySEComponentMenu-anchor:focus {
+            background: none;
+            text-decoration: none;
+            color: @background-color-white;
+            opacity: 0.8;
+        }
+    }
+    .ySEComponentMenuList--item--last {
+        margin-bottom: 9px;
+    }
+}
+
+.ySEComponentMenu-headers {
+    color: @background-color-white;
+    padding-left: 25px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    .h2 {
+        font-size: 19px;
+        font-weight: normal;
+    }
+    .small {
+        font-style: italic;
+    }
+}
+
+.ySEComponentMenu-customized > li.item:first-of-type {
+    padding: 0 0 30px 0;
+}
+
+.menuitem-lefttoolbar {
+    background: @background-color-white;
+    margin-bottom: -5px;
+}
+
+.divider-lefttoolbar {
+    margin: 0;
+}
+
+@media (min-width: 1600px) {
+    .header-status-layout {
+        padding-right: 25%;
+    }
+}

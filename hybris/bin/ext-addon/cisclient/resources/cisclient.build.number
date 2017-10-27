@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Dec 01 20:43:37 CET 2016
+builddate=20161201 2043
+description=cisclient
+group.id=de.hybris.platform
+module.name=platform-module
+name=cisclient
+releasedate=20161129 1237
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

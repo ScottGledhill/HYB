@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<base href="/web/webroot" />-->
+    <base href="/buildArtifacts/static-resources/" />
+
+    <!--3rd prty libs-->
+	<script src="../../../../../../buildArtifacts/static-resources/dist/smartedit/js/thirdparties.js"></script>
+	<script src="../../../../../../buildArtifacts/static-resources/thirdparties/ckeditor/ckeditor.js"></script>
+
+
+    <link rel="stylesheet" href="/buildArtifacts/static-resources/dist/smartedit/css/outer-styling.css">
+
+    <script src="/buildArtifacts/static-resources/smarteditloader/js/smarteditloader.js"></script>
+    <script src="/buildArtifacts/static-resources/smarteditcontainer/js/smarteditcontainer.js"></script>
+    <script src="/web/webroot/cmssmartedit/js/cmssmarteditContainer.js"></script>
+
+    <!-- mocks -->
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorModal/editorModalServiceTestFixture.js"></script>
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorModal/backendMocks.js"></script>
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorModal/experienceInterceptorMock.js"></script>
+
+</head>
+
+<body data-ng-app="editorEnablerServiceTestFixture" data-ng-controller="editorEnablerServiceE2ETestController as controller">
+    <div class="container-fluid">
+        <div class="row">
+            <button id="openCMSParagraphComponentEditorModal" class="btn btn-primary" data-ng-click="controller.clickEditButton('CMSParagraphComponent', 'MyParagraph')">
+                Edit CMSParagraphComponent: MyParagraph
+            </button>
+        </div>
+
+        <div class="row">
+            Mock Backend Calls
+        </div>
+        <div class="row">
+            <button id='mockBackendToPassSave' class='btn btn-primary' data-ng-click="controller.mockBackendToPassSave()">Save will pass</button>
+            <button id='mockBackendToFailSave' class='btn btn-primary' data-ng-click="controller.mockBackendToFailSave()">Save will fail</button>
+            <button id='unrelatedValidation' class='btn btn-primary' data-ng-click="controller.mockBackendToTriggerUnrelatedValidationErrors()">Trigger Unrelated Validation</button>
+        </div>
+    </div>
+</body>
+
+</html>

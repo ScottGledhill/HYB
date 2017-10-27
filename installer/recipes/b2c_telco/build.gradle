@@ -1,0 +1,134 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-addon-plugin'
+apply plugin: 'installer-coreplus-plugin'
+
+def config = {
+
+	localProperties {
+		property 'subscription.client.endpoint.uri', 'http://localhost:9001/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock'
+		property 'persistence.engine.mongodb.databaseName', 'entitlements'
+		property 'cis.client.subscription.mock', 'false'
+		property 'kernel.events.cluster.jgroups.channel', 'disable'
+		property 'datahub.publication.saveImpex', ''
+		property 'commerceservices.default.desktop.ui.experience', 'desktop'
+		property 'kernel.autoInitMode', 'update'
+	}
+
+	extensions {
+
+		extensions {
+			extName 'acceleratorcms'
+			extName 'addonsupport'
+			extName 'b2ctelcocheckoutaddon'
+			extName 'b2ctelcocockpits'
+			extName 'b2ctelcostore'
+			extName 'b2ctelcostorefront'
+			extName 'cissubscription'
+			extName 'cissubscriptionatddtests'
+			extName 'commercesearchbackoffice'
+			extName 'commerceservicesbackoffice'
+			extName 'emsclient'
+			extName 'emsui'
+			extName 'entitlementstorefront'
+			extName 'entitlementatddtests'
+			extName 'mcc'
+			extName 'solrfacetsearchbackoffice'
+			extName 'solrserver'
+			extName 'configurablebundleatddtests'
+			extName 'subscriptionstorefront'
+			extName 'subscriptionatddtests'
+			extName 'subscriptionbackoffice'
+			extName 'yacceleratorstorefront'
+			extName 'yacceleratorcockpits'
+			extName 'yacceleratorfulfilmentprocess'
+			extName 'yacceleratorcore'
+		}
+		webApp {
+			contextRoot 'entitlements-web'
+			path '${HYBRIS_BIN_DIR}/../../hybris-ems/binary/entitlements-web.war'
+		}
+		webApp {
+			contextRoot 'hybris-cis-mock-subscription-web'
+			path '${HYBRIS_BIN_DIR}/../../hybris-sbg/binary/hybris-cis-mock-subscription-web.war'
+		}
+	}
+}
+
+def pl = platformFactory.createPlatform config
+
+void modifySubscriptioncockpitsRequiredExtensions() {
+
+	def extensioninfoFile = "${suiteHome}/hybris/bin/ext-commerce/subscriptioncockpits/extensioninfo.xml"
+	def root = new XmlParser().parse(extensioninfoFile)
+	def required = root.extension[0].children()
+	def dependency = required.find { node -> node.@name == 'yacceleratorcockpits'}
+
+	if(dependency == null) {
+		def node = new Node(null, 'requires-extension', [name: 'yacceleratorcockpits'])
+		required.add(0, node)
+		new XmlNodePrinter(new PrintWriter(new FileWriter(extensioninfoFile))).print(root)
+	}
+}
+
+task setup << {
+
+	modifySubscriptioncockpitsRequiredExtensions()
+
+	pl.setup()
+
+	pl.project.addons {
+		names "b2ctelcostorefront,b2ctelcocheckoutaddon"
+		b2c "yacceleratorstorefront"
+		platform pl
+	}
+	pl.project.addons {
+		names "entitlementstorefront"
+		b2c "yacceleratorstorefront"
+		platform pl
+	}
+	pl.project.addons {
+		names 'subscriptionstorefront'
+		b2c 'yacceleratorstorefront'
+		platform pl
+	}
+
+	copy {
+		from "${installerHome}/recipes/b2c_telco/logback.xml"
+		into "${suiteHome}/hybris/bin/platform/tomcat/lib"
+	}
+	copy {
+		from "${installerHome}/recipes/b2c_telco/sbg_properties"
+		into "${suiteHome}/hybris/bin/platform/tomcat/lib"
+		exclude "**/*.txt"
+	}
+
+
+}
+
+ext {
+	host = "http://localhost:9001"
+	contextRoot = "entitlements-web"
+	tenant = "single"
+	config = {
+		localProperties {
+			properties(
+					'tomcat.generaloptions': '-Xmx3096M',
+					'standalone.javaoptions': '-Xmx3040M'
+			)
+		}
+	}
+}
+
+
+task initialize << {
+	pl.build()
+	pl.initialize()
+}
+
+task start << {
+	pl.startInBackground()
+}
+
+task stop << {
+	pl.stopInBackground()
+}

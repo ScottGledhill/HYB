@@ -1,0 +1,41 @@
+<div data-ng-controller="topToolbarMenuController" data-uib-dropdown data-is-open="status.isopen" data-auto-close="disabled" class="ySEComponentMenuW">
+    <button type="button" class="btn btn-default yHybridAction ySEComponentMenuW--button personalizationsmarteditTopToolbarButton" data-uib-dropdown-toggle data-ng-disabled="disabled" aria-pressed="false">
+        <img data-ng-if="status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_combined_view_s.png" />
+        <img data-ng-if="!status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_combined_view.png" />
+        <span class=" ySEComponentMenuW--button--txt " data-translate="personalization.toolbar.combinedview.name "></span>
+    </button>
+
+    <ul data-ng-if="status.isopen " class="dropdown-menu dropdown-menu-left btn-block ySEComponentMenu ySEComponentMenu-customized " role="menu " data-ng-click="preventDefault($event); ">
+        <div class="ySEComponentMenu-headers ">
+            <h2 class="text-uppercase h2 " data-translate="personalization.toolbar.combinedview.header.title "></h2>
+            <small class="small " data-translate="personalization.toolbar.combinedview.header.description "></small>
+        </div>
+        <li role="menuitem " class="item menuitem-lefttoolbar ">
+            <div class="manage-customization overflow-wrapper-lefttoolbar" data-ng-controller="personalizationsmarteditCombinedViewMenuController">
+                <div class="row combinedview-configure-layout">
+                    <div class="col-xs-2 status-toggle">
+                        <span class="y-toggle y-toggle-lg" data-ng-click="$parent.clearContext()">
+                            <input type="checkbox" id="test-checkbox" data-ng-model="combinedView.enabled" />
+                            <label for="test-checkbox" data-activelabel="On" data-inactivelabel="Off"></label>
+                        </span>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        <button class="btn btn-link combinedview-btn" data-ng-click="$parent.combinedViewClick()" data-translate="personalization.toolbar.combinedview.openconfigure.button">
+                        </button>
+                    </div>
+                </div>
+                <div class="categoryTable" ng-class="combinedView.enabled ? '':'combinedview-inactive-layout'">
+                    <div class="row combinedview-list-layout" data-ng-repeat="item in selectedItems" ng-class="{'combinedview-list-item--last': $last, 'combinedview-divider': $first}">
+                        <div class="col-xs-2">
+                            <div ng-class="getClassForElement($index)" data-ng-bind="getLetterForElement($index)"></div>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <div data-ng-bind="item.customization.name"></div>
+                            <div class="text-uppercase combinedview-variation-layout" data-ng-bind="item.variation.name"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

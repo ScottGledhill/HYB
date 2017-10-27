@@ -1,0 +1,27 @@
+<div class="edit-page-basic-tab">
+
+    <div class=" edit-page-basic-tab--header">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="control-label">{{ "se.pageinfo.page.type" | translate }}</label>
+                <div class="form-readonly-text form-readonly-text__tight">{{$ctrl.page.typeCode}}</div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label class="control-label">{{ "se.pageinfo.page.template" | translate }}</label>
+                <div class="form-readonly-text form-readonly-text__tight">{{$ctrl.page.template}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div data-ng-if="$ctrl.structure">
+        <generic-editor data-id="$ctrl.tabId"
+            data-smartedit-component-id="$ctrl.model.uid"
+            data-smartedit-component-type="$ctrl.model.typeCode"
+            data-structure="$ctrl.structure"
+            data-content-api="$ctrl.contentApi"
+            data-submit="$ctrl.submitCallback"
+            data-reset="$ctrl.resetTab"
+            data-is-dirty="$ctrl.isDirtyTab">
+        </generic-editor>
+    </div>
+</div>

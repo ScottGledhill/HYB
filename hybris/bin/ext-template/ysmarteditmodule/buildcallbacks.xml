@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<project name="ysmarteditmodule_buildcallbacks">
+
+	<patternset id="extension.ysmarteditmodule.binary.filter">
+		<patternset refid="extension.binary.filter" />
+		<exclude name="node_modules/" />
+		<exclude name="jsTarget/" />
+		<exclude name="**/static-resources/dist/" />
+		<exclude name="**/webroot/ysmarteditmodule/" />
+		<exclude name="**/webroot/css/style.css" />
+		<exclude name="buildArtifacts/" />
+	</patternset>
+ 
+	<patternset id="extension.ysmarteditmodule.source.filter">
+		<patternset refid="extension.source.filter" />
+		<exclude name="node_modules/" />
+		<exclude name="jsTarget/" />
+		<exclude name="**/static-resources/dist/" />
+		<exclude name="**/webroot/ysmarteditmodule/" />
+		<exclude name="**/webroot/css/style.css" />
+		<exclude name="buildArtifacts/" />
+	</patternset>
+
+	<patternset id="extension.ysmarteditmodule.production.filter">
+	    <patternset refid="extension.production.filter" />
+	    <exclude name="node_modules/**" />
+		<exclude name="jsTarget/" />
+        <exclude name="seLibraries/"/>
+		<exclude name="buildArtifacts/" />
+	</patternset>
+	
+	<macrodef name="ysmarteditmodule_before_clean">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<removeLinkToSELibraries path="${ext.ysmarteditmodule.path}"/>
+					<removeLink path="${ext.ysmarteditmodule.path}/tmp" />
+					<removeLink path="${ext.ysmarteditmodule.path}/jsTarget" />
+					<removeLink path="${ext.ysmarteditmodule.path}/web/webroot/ysmarteditmodule/js" />
+
+					<removeNodeModulesSymlink path="${ext.ysmarteditmodule.path}"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+	<macrodef name="ysmarteditmodule_before_build">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<linkToSELibraries path="${ext.ysmarteditmodule.path}"/>
+					<gruntBuild path="${ext.ysmarteditmodule.path}" phase="packageSkipTests" />
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="ysmarteditmodule_before_yunit">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<gruntBuild path="${ext.ysmarteditmodule.path}" phase="test_only" />
+					<!--<gruntBuild path="${ext.ysmarteditmodule.path}" phase="verify_only" />-->
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="ysmarteditmodule_before_extgen">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<removeNodeModulesSymlink  path="${ext.ysmarteditmodule.path}"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+</project>

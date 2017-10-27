@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Dec 16 07:59:31 UTC 2016
+builddate=20161216 0759
+description=personalizationfacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=personalizationfacades
+releasedate=20161212 1508
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

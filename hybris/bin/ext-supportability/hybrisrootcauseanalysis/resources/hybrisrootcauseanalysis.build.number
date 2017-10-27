@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Jan 17 09:29:22 CET 2017
+builddate=20170117 0929
+description=hybrisrootcauseanalysis
+group.id=de.hybris.platform
+module.name=platform-module
+name=hybrisrootcauseanalysis
+releasedate=20161024 1223
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

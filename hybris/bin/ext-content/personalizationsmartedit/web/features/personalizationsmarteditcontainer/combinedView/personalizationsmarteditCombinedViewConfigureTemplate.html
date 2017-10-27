@@ -1,0 +1,36 @@
+<form>
+    <div class="form-group">
+        <div class="combinedview-modal-search">
+            <label for="CombinedViewSearchField1" class="control-label" data-translate="personalization.modal.combinedview.search.label"></label>
+            <ui-select uis-open-close="initUiSelect($select)" ng-model="selectedElement" theme="select2" class="form-control" ng-keyup="searchInputKeypress($event, $select.search)" on-select="selectElement($item)" id="CombinedViewSearchField1">
+                <ui-select-match placeholder="{{ 'personalization.modal.combinedview.search.placeholder' | translate}}">
+                    <span class="combinedview-modal-search-placeholder">{{'personalization.modal.combinedview.search.placeholder' | translate}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="item in selectionArray" ui-disable-choice="isItemInSelectDisabled(item)" personalization-infinite-scroll="addMoreItems()" personalization-infinite-scroll-distance="2">
+                    <div data-ng-class="{'combinedview-dropdown-item-selected': isItemSelected(item)}">
+                        {{item.customization.name}} > {{item.variation.name}}
+                    </div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row combinedview-search-items-layout" data-ng-repeat="item in selectedItems" ng-class="$first ? 'combinedview-divider':''">
+            <div class="col-xs-2 col-sm-1 combinedview-reset-padding">
+                <span ng-class="getClassForElement($index)" data-ng-bind="getLetterForElement($index)"></span>
+            </div>
+            <div class="col-xs-4 col-sm-5 combinedview-reset-right">
+                <div class="combinedview-search-items-text">
+                    <span data-ng-bind="item.customization.name"></span>
+                    <span class="pull-right"> ></span>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-5">
+                <div class="combinedview-search-items-text" data-ng-bind="item.variation.name"></div>
+            </div>
+            <div class="pull-right combinedview-hyicon-remove">
+                <span class="hyicon hyicon-remove" data-ng-click="removeSelectedItem(item)"></span>
+            </div>
+        </div>
+    </div>
+</form>

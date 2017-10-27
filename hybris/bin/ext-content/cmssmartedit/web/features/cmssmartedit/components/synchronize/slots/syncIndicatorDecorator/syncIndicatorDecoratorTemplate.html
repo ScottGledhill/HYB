@@ -1,0 +1,20 @@
+<div class="sync-indicator-decorator"
+    data-ng-class="ctrl.syncStatus.status"
+    data-sync-status="{{ctrl.syncStatus.status}}">
+    <div class="yWrapperData"
+        data-ng-transclude></div>
+</div>
+
+
+<!-- temporary styling -->
+<style>
+.sync-indicator-decorator:not(.IN_SYNC):not(.UNAVAILABLE) .decorator-slot-border {
+    border: 2px dashed #0486e0;
+    /* @smartedit-blue */
+}
+/* or */
+/* .sync-indicator-decorator:not([data-sync-status="IN_SYNC"]):not([data-sync-status="UNAVAILABLE"]) .decorator-slot-border{
+    border: 2px dashed #0486e0;
+}
+*/
+</style>

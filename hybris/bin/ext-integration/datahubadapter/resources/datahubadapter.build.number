@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Dec 07 20:41:40 CET 2016
+builddate=20161207 2041
+description=datahubadapter
+group.id=de.hybris.platform
+module.name=platform-module
+name=datahubadapter
+releasedate=20161129 1237
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

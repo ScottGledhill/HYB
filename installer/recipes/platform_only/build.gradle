@@ -1,0 +1,26 @@
+apply plugin: 'installer-platform-plugin'
+def platformOnly = platformFactory.createPlatform()
+
+task setup << {
+    platformOnly.setup()
+}
+
+task build(dependsOn: setup) << {
+    platformOnly.build()
+}
+
+task initialize(dependsOn: build) << {
+    platformOnly.initialize()
+}
+
+task start << {
+    platformOnly.start()
+}
+
+task startInBackground << {
+    platformOnly.startInBackground()
+}
+
+task stopInBackground << {
+    platformOnly.stopInBackground()
+}

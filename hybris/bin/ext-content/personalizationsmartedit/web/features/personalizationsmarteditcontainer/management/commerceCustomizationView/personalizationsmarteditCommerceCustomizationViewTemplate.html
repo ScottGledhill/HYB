@@ -1,0 +1,42 @@
+<div id="commerceCustomizationBody" class="customization-form">
+    <div class="navtab-info">
+        <div class="row">
+            <div class="col-sm-10 col-xs-9">
+                <span class="text-capitalize navtab-info--name" ng-bind="customization.name"></span>
+            </div>
+            <div class="col-sm-2 col-xs-3 text-right">
+                <span class="badge" ng-bind="customizationStatusText" ng-class="{'status-active':'badge-success', 'status-inactive':'', 'status-ignore':''}[customizationStatus]"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 col-xs-9">
+                <span class="navtab-info--name" ng-bind="variation.name"></span>
+            </div>
+            <div class="col-sm-2 col-xs-3 text-right">
+                <span class="badge" ng-bind="variationStatusText" ng-class="{'status-active':'badge-success', 'status-inactive':'', 'status-ignore':''}[variationStatus]"></span>
+            </div>
+        </div>
+    </div>
+    <form class="navtab-forms">
+        <div class="form-group">
+            <label for="commerce-customization-type-1" class="control-label" data-translate="personalization.modal.commercecustomization.action.type"></label>
+            <ui-select id="commerce-customization-type-1" class="form-control" ng-model="select.type" theme="select2" search-enabled="false">
+                <ui-select-match>
+                    <span ng-bind="$select.selected.text | translate"></span>
+                </ui-select-match>
+                <ui-select-choices repeat="item in availableTypes" position="down">
+                    <span ng-bind="item.text | translate"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <ng-include src="select.type.template" />
+        </div>
+        <div class="select2-choices">
+            <div class="ui-select-match-item select2-search-choice commerce-customization-ui-select-sm" data-ng-repeat="action in getActionsToDisplay()">
+                <span ng-bind="displayAction(action)"></span>
+                <span class="ui-select-match-close select2-search-choice-close" ng-click="removeSelectedAction(action)"></span>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 13 13:04:05 UTC 2016
+builddate=20161213 1304
+description=sapproductconfigrulesbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapproductconfigrulesbackoffice
+releasedate=20161205 1328
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

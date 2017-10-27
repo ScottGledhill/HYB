@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+
+	
+	<context type="CxConfig">
+
+		<!-- Editor area configuration -->
+		<context component="editor-area"  merge-by="type" type="CxConfig" >
+			<editorArea:editorArea>
+				<editorArea:tab name="backoffice.personalizationintegration.properties">
+					<editorArea:section name="backoffice.personalizationservices.section.attributes">
+						<editorArea:attribute qualifier="autoCreateSegments"/>
+					</editorArea:section>
+				</editorArea:tab>
+			</editorArea:editorArea>
+		</context>
+	</context>
+
+</config>

@@ -1,0 +1,233 @@
+// toolbar menu
+// Toolbar Menu with header and body
+
+//.se-toolbar-menu-ddlb{
+//	.se-toolbar-menu-ddlb--button{
+//	}
+//	.se-toolbar-menu-content{
+//      .se-toolbar-menu-content--wrapper{
+//		    .se-toolbar-menu-content--header{
+//              .se-toolbar-menu-content--header__title{
+//              }
+//		    }
+//		    .se-toolbar-menu-content--body{
+//		    }
+//		    .se-toolbar-menu-content--footer{
+//		    }
+//      }
+//	}	
+//}
+
+@se-toolbar-menu-ddlb--width: 780px;
+
+@se-toolbar-menu-content--header--background-color: @smartedit-lightblue;
+@se-toolbar-menu-content--header__title--padding: .6*@smartedit-gutter;
+@se-toolbar-menu-content--header__title--font-family: @font-dosis;
+@se-toolbar-menu-content--header__title--color: @smartedit-white;
+@se-toolbar-menu-content--header__title--font-size: 19px;
+@se-toolbar-menu-content--header__title--font-weight: @font-weight--book;
+@se-toolbar-menu-content--padding: .5*@smartedit-gutter @smartedit-gutter;
+@se-toolbar-menu-content--color: @smartedit-white;
+
+@se-toolbar-menu-ddlb--button__icon--font-size: 37px;
+
+@se-toolbar-menu-ddlb--border: 1px trasnparent;
+
+@se-toolbar-menu-ddlb--button--txt--margin-top: 4px;
+@se-toolbar-menu-ddlb--button--txt--font-size: 10px;
+@se-toolbar-menu-ddlb--button--min-width: 104px;
+@se-toolbar-menu-ddlb--button--padding: 5px 5px 4px 5px;
+
+@se-toolbar-menu-content--body--max-height: 510px;
+
+@se-slot-ctx-menu__btn--height: 44px;
+@se-slot-ctx-menu__btn--width: 62px;
+@se-slot-ctx-menu__btn--font-size: 14px;
+
+.se-toolbar-menu-ddlb{
+}
+
+.se-toolbar-menu-ddlb:hover,
+.se-toolbar-menu-ddlb:active,
+.se-toolbar-menu-ddlb:focus{
+    opacity: 1;
+    border-right: none;
+}
+
+.se-toolbar-menu-ddlb.open .se-toolbar-menu-ddlb--button{
+    border-top: @se-toolbar-menu-ddlb--border;
+    border-bottom: @se-toolbar-menu-ddlb--border;
+    background-color: @se-toolbar-menu-content--header--background-color;
+    opacity: 1;
+}
+
+.se-toolbar-menu-ddlb.open .se-toolbar-menu-ddlb--button:hover,
+.se-toolbar-menu-ddlb.open .se-toolbar-menu-ddlb--button:active,
+.se-toolbar-menu-ddlb.open .se-toolbar-menu-ddlb--button:focus{
+    background-color: @se-toolbar-menu-content--header--background-color;
+    opacity: 1;
+    border-right: none;
+}
+
+.se-toolbar-menu-ddlb--button{
+    padding: @se-toolbar-menu-ddlb--button--padding;
+    min-width: @se-toolbar-menu-ddlb--button--min-width;
+    border-top: @se-toolbar-menu-ddlb--border;
+    border-bottom: @se-toolbar-menu-ddlb--border;
+}
+
+.se-toolbar-menu-ddlb--button:hover,
+.se-toolbar-menu-ddlb--button:focus,
+.se-toolbar-menu-ddlb--button:active,
+.se-toolbar-menu-ddlb--button:hover:active,
+.se-toolbar-menu-ddlb--button{
+    border-right: @smartedit-border1;
+    background-color: @smartedit-grey;
+    color: @smartedit-blue;
+    box-shadow: none;
+    outline: none;
+    outline-offset: 0;
+}
+
+.se-toolbar-menu-ddlb--button:hover,
+.se-toolbar-menu-ddlb--button:focus,
+.se-toolbar-menu-ddlb--button:active,
+.se-toolbar-menu-ddlb--button:hover:active{
+    opacity: 0.6;
+}
+
+.se-toolbar-menu-ddlb--button--txt{
+    font-family: @font-open-sans;
+    font-size: @se-toolbar-menu-ddlb--button--txt--font-size;
+    font-weight: @font-weight--semibold;
+    text-transform: uppercase;
+    margin-top: @se-toolbar-menu-ddlb--button--txt--margin-top;
+    height: 18px;
+        display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.se-toolbar-menu-ddlb.open .se-toolbar-menu-ddlb--button--txt{
+    color: @smartedit-white;
+}
+
+.se-toolbar-menu-ddlb--button__icon{
+    font-size: @se-toolbar-menu-ddlb--button__icon--font-size;
+}
+
+.se-toolbar-menu-ddlb--button__icon:before{
+    display: block;
+}
+
+.se-toolbar-menu-content{
+    margin: 0;
+    border: none;
+    padding: 0;
+    width: @se-toolbar-menu-ddlb--width;
+    cursor: initial;
+}
+
+.se-toolbar-menu-content--header{
+    background: @se-toolbar-menu-content--header--background-color;
+}
+
+.se-toolbar-menu-content--header__title{
+    padding: @se-toolbar-menu-content--header__title--padding;
+    font-family: @se-toolbar-menu-content--header__title--font-family;
+    color: @se-toolbar-menu-content--header__title--color;
+    font-size: @se-toolbar-menu-content--header__title--font-size;
+    font-weight: @se-toolbar-menu-content--header__title--font-weight;
+}
+
+.se-toolbar-menu-content--body{
+    overflow-y: scroll;
+    max-height: @se-toolbar-menu-content--body--max-height;
+}
+
+//slot contextual menu item
+//
+
+// 1. wrap element -> ddlb
+//  1.1. button
+//      1.1.1 extra content
+//  1.2. menu list
+
+.se-slot-ctx-menu{
+}
+
+.se-slot-ctx-menu__btn,
+.se-slot-ctx-menu__btn:focus,
+.se-slot-ctx-menu__btn:active,
+.se-slot-ctx-menu__btn:hover,
+.se-slot-ctx-menu__btn:hover:active {
+    background-color: transparent;
+}
+
+.se-slot-ctx-menu__btn {
+    border: 0;
+    height: @se-slot-ctx-menu__btn--height;
+    width: @se-slot-ctx-menu__btn--width;
+    padding: 0;
+    font-family: @font-open-sans;
+    font-size: @se-slot-ctx-menu__btn--font-size;
+    font-weight: @font-weight--semibold;
+}
+
+.se-slot-ctx-menu__btn.dropdown-toggle {
+    border: none;
+}
+
+.se-slot-ctx-menu__btn-group.open .se-slot-ctx-menu__btn{
+    background-color: @smartedit-white;
+    border: none;
+    color: @smartedit-blue4;
+}
+
+.se-slot-ctx-menu__btn-group.open .se-slot-ctx-menu__btn img.se-slot-ctx-menu__btn {
+    box-shadow: none;
+}
+
+.se-slot-ctx-menu__btn__content{
+}
+
+.se-slot-ctx-menu__content{
+}
+
+.se-generic-editor-multiple-dropdown__match .ui-select-match-close.select2-search-choice-close{
+    position: absolute;
+    top: 15px;
+}
+
+.se-generic-editor-multiple-dropdown__match .ui-select-match-item.select2-search-choice{
+    border: 1px solid @smartedit-grey17;
+    border-radius: 0px;
+}
+
+//popover
+.popover{
+    color:@smartedit-white;
+
+    .popover-inner{
+        margin: .4*@smartedit-gutter
+    }
+
+    .popover-title{
+        border: none;
+        padding: 0;
+    }
+}
+
+.se-toolbar-menu-content__page-sync + .popover,
+.se-toolbar-menu-content__page-sync + .popover .popover-title,
+.se-toolbar-menu-content__page-sync + .popover .popover-inner{
+    background: @default-greyblue;
+}
+
+.se-toolbar-menu-content__page-sync + .popover .popover-inner .popover-content{
+    padding: 0;
+}
+
+.se-toolbar-menu-content__page-sync + .popover .arrow:after{
+    border-top-color:  @default-greyblue;
+}

@@ -1,0 +1,25 @@
+<div class="ySEDisplayConditionsPageInfo">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="control-label">{{ $ctrl.pageNameI18nKey | translate }}</label>
+            <div class="form-readonly-text form-readonly-text__tight dc-page-name">{{ $ctrl.pageName }}</div>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">{{ $ctrl.pageTypeI18nKey | translate }}</label>
+            <div class="form-readonly-text form-readonly-text__tight dc-page-type">{{ $ctrl.pageType }}</div>
+        </div>
+    </div>
+
+    <div class="form-group form-group">
+        <label class="control-label">{{ $ctrl.displayConditionLabelI18nKey | translate }}</label>
+        <span class="help-control"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="{{ $ctrl.getPageDisplayConditionDescriptionI18nKey() | translate }}">
+            <span class="hyicon hyicon-help-icon"></span>
+        </span>
+        <p class="form-readonly-text form-readonly-text__tight dc-page-display-condition form-readonly-text__inline">{{ $ctrl.getPageDisplayConditionI18nKey() | translate }}</p>
+
+    </div>
+
+</div>

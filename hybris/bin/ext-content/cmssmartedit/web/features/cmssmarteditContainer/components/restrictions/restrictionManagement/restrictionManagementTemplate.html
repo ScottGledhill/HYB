@@ -1,0 +1,17 @@
+<div data-ng-if="$ctrl.editMode"
+    class="se-restriction-management se-restriction-management-edit">
+    <restriction-management-edit data-restriction-id="$ctrl.restrictionId"
+        data-uri-context="$ctrl.uriContext"
+        data-is-dirty-fn="$ctrl.isDirtyFn"
+        data-submit-fn="$ctrl.submitInternal">
+    </restriction-management-edit>
+</div>
+<div data-ng-if="!$ctrl.editMode"
+    class="se-restriction-management se-restriction-management-select">
+    <restriction-management-select data-page-type-code="$ctrl.pageTypeCode"
+        data-existing-restrictions="$ctrl.existingRestrictions"
+        data-uri-context="$ctrl.uriContext"
+        data-is-dirty-fn="$ctrl.isDirtyFn"
+        data-submit-fn="$ctrl.submitInternal">
+    </restriction-management-select>
+</div>

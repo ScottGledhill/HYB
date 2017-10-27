@@ -1,0 +1,8 @@
+<div class="page-list-link-container">
+    <div data-ng-repeat="catalogVersion in catalog.catalogVersions"
+        class="col-xs-6 page-list-link-item">
+        <a class="page-list-link-item__link"
+            data-ng-href="#/pages/{{catalogVersion.siteDescriptor.uid}}/{{catalogVersion.catalogId}}/{{catalogVersion.catalogVersion}}"
+            data-translate="cataloginfo.pagelist"></a>
+    </div>
+</div>

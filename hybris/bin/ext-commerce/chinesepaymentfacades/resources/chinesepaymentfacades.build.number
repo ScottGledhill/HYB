@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Dec 05 15:55:20 CET 2016
+builddate=20161205 1555
+description=chinesepaymentfacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=chinesepaymentfacades
+releasedate=20161118 1518
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

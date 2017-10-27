@@ -1,0 +1,2 @@
+INSERT_UPDATE Principal2WriteableCatalogVersionRelation;source(uid)[unique=true];target(catalog(id),version)[unique=true];language(isocode)[unique=true];
+;cmsmanagergroup;ID_APPLE:staged;en

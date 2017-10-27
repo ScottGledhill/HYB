@@ -1,0 +1,85 @@
+/* *
+/* This file includes the styles used in Combined View Panel and Modal
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+.combinedview-configure-layout {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 15px;
+  padding: 15px 0 15px 10px;
+}
+.combinedview-configure-layout .status-toggle label {
+  height: inherit;
+}
+.combinedview-configure-layout .combinedview-btn {
+  font-weight: 600;
+  font-family: 'Open Sans';
+}
+.combinedview-divider {
+  border-top: 1px solid #d4d7dc;
+}
+.combinedview-list-layout {
+  font-size: 15px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 15px;
+  border-bottom: 1px solid #d4d7dc;
+}
+.combinedview-list-item--last {
+  padding-bottom: 0;
+  border-bottom: none;
+  margin-bottom: -20px;
+}
+.combinedview-variation-layout {
+  font-weight: 600;
+}
+.combinedview-inactive-layout {
+  opacity: 0.5;
+}
+.combinedview-modal-search {
+  margin: 20px 0 40px 0;
+}
+.combinedview-modal-search .select2-container .select2-arrow {
+  line-height: 2.5em;
+}
+.combinedview-modal-search .select2-disabled {
+  opacity: 0.4;
+  background: none;
+  cursor: none;
+}
+.combinedview-modal-search-placeholder {
+  font-size: 15px;
+  color: #8a8fa1;
+}
+.combinedview-search-items-layout {
+  border-right: 1px solid #d4d7dc;
+  border-bottom: 1px solid #d4d7dc;
+  margin-left: 0;
+  margin-right: 0;
+}
+.combinedview-search-items-text {
+  padding-top: 15px;
+  font-weight: 600;
+}
+.combinedview-reset-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+.combinedview-reset-right {
+  padding-right: 0;
+}
+.combinedview-hyicon-remove {
+  top: 0;
+  right: 5px;
+  position: relative;
+  padding: 5px 0 0 0;
+  font-weight: 600;
+  font-size: 22px;
+  color: #7f90a4;
+}
+.combinedview-hyicon-remove:hover {
+  opacity: 0.5;
+}
+.combinedview-dropdown-item-selected {
+  font-weight: bold;
+}

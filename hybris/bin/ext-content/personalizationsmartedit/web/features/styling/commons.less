@@ -1,0 +1,18 @@
+ /* *
+/* This file includes the common styles used in Personalization
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+ 
+ @import (reference) "variables.less";
+ /* new: the active status is now called enabled
+ /* the inactive status is now called disabled 
+ */
+ 
+ .status-active {
+     color: @text-color-green;
+ }
+ 
+ .status-ignore,
+ .status-inactive {
+     color: @text-color-grey;
+ }

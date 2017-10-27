@@ -1,0 +1,43 @@
+{
+  "name": "ycmssmartedit",
+  "description": "",
+  "version": "0.0.0",
+  "authors": [
+  ],
+  "homepage": "yettobedetermined",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "jsTests"
+  ],
+  "dependencies": {
+    "font-awesome":"4.2.0",
+    "angular": "1.5.7",
+    "angular-mocks": "1.5.7",
+    "jquery": "2.1.4",
+    "jquery-ui": "1.11.4",
+    "moment":"2.9.0",
+    "bootstrap": "3.1.1",
+    "angular-bootstrap": "2.0.0",
+    "angular-route": "1.5.7",
+    "angular-resource": "1.5.7",
+    "angular-animate": "1.5.7",
+    "angular-cookies": "1.5.7",
+    "angular-translate": "2.6.1",
+    "angular-translate-loader-static-files": "2.6.1",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "select2": "3.4.5",
+    "selectize": "0.8.5",
+    "angular-ui-select": "^0.18.1",
+    "lodash": "4.13.1"
+  },
+  "resolutions":{
+    "angular": "1.5.7",
+    "sifter": "0.3.x",
+    "select2": "3.4.5",
+    "angular-bootstrap": "^2.0.0"
+  }
+}

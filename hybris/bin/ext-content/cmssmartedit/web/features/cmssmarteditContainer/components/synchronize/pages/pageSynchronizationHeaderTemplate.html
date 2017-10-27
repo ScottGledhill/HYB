@@ -1,0 +1,9 @@
+<span class="se-sync-panel-header__label"
+    data-translate="se.cms.synchronization.panel.lastsync.text"></span>
+<span class="se-sync-panel-header__timestamp">{{pageSync.lastSyncTime | date:'short'}}</span>
+<div class="se-sync-panel-header__text">
+    <span data-translate="se.cms.synchronization.page.header"></span>
+    <y-help data-ng-if="pageSync.helpTemplate"
+        data-title="pageSync.helpTitle"
+        data-template="pageSync.helpTemplate"></y-help>
+</div>

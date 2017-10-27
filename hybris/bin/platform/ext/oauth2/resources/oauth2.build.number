@@ -1,0 +1,10 @@
+#Ant properties
+#Fri Dec 16 20:29:41 CET 2016
+builddate=20161216 2029
+description=oauth2
+group.id=de.hybris.platform
+module.name=platform-module
+name=oauth2
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

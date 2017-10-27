@@ -1,0 +1,143 @@
+version: '2'
+services:
+    hsql:
+        image: b2cacc_deployment_hsql
+        volumes:
+        - ./state/hsql:/opt/hsqldb/data
+    solr:
+        image: b2cacc_deployment_solr
+        volumes:
+        - ./state/solr:/opt/solr/server/solr/cores
+        command: standard
+    platform_admin_init:
+        image: b2cacc_deployment_platform
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql 
+        command: admin initialize  
+    platform_hac:
+        image: b2cacc_deployment_platform
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        ports:
+        - "9111:8088"    
+        command: hac
+    platformbackoffice1:
+        image: b2cacc_deployment_platform
+        environment:
+            - JVM_ROUTE=platformbackoffice1
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql       
+        command: backoffice
+    platformbackoffice2:
+        image: b2cacc_deployment_platform
+        environment:
+            - JVM_ROUTE=platformbackoffice2
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: backoffice    
+    platformacceleratorstorefront1:
+        image: b2cacc_deployment_platform
+        environment:
+            - JVM_ROUTE=platformacceleratorstorefront1
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: accstorefront
+    platformacceleratorstorefront2:
+        image: b2cacc_deployment_platform
+        environment:
+            - JVM_ROUTE=platformacceleratorstorefront2
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: accstorefront            
+    platform_background_processing:
+        image: b2cacc_deployment_platform
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: backgroundProcessing
+    load_balancer_frontend:
+        image: b2cacc_deployment_load_balancer
+        volumes:
+            - ./resources/secrets/:/usr/local/apache2/conf/ssl
+        environment:
+            - NODE_IP_platformacceleratorstorefront1=ajp://platformacceleratorstorefront1:8009
+            - NODE_IP_platformacceleratorstorefront2=ajp://platformacceleratorstorefront2:8009
+        links:
+            - platformacceleratorstorefront1
+            - platformacceleratorstorefront2
+        ports:
+            - "80:80"
+            - "443:443"
+    load_balancer_backend:
+         image: b2cacc_deployment_load_balancer
+         volumes:
+            - ./resources/secrets/:/usr/local/apache2/conf/ssl
+         environment:
+            - NODE_IP_platformbackoffice1=ajp://platformbackoffice1:8009
+            - NODE_IP_platformbackoffice2=ajp://platformbackoffice2:8009
+         links:
+            - platformbackoffice1
+            - platformbackoffice2
+         ports:
+            - "81:80"
+            - "444:443"
+    zookeeper1:
+        image: b2cacc_deployment_zookeeper
+        environment:
+            - MYID=1
+    zookeeper2:
+        image: b2cacc_deployment_zookeeper
+        environment:
+            - MYID=2
+    zookeeper3:
+        image: b2cacc_deployment_zookeeper
+        environment:
+            - MYID=3
+    solrc1:
+        image: b2cacc_deployment_solr
+        volumes:
+            - ./state/solr/nodes/1/cores:/opt/solr/server/cores
+        ports:
+            - "8984:8983"
+        environment:
+            - NODE_DIR=/opt/solr/server/cores
+            - ZK_HOSTS=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+            - SOLR_HOST=solrc1
+        links:
+            - zookeeper1
+            - zookeeper2
+            - zookeeper3
+        command: cloud
+    solrc2:
+        image: b2cacc_deployment_solr
+        volumes:
+            - ./state/solr/nodes/2/cores:/opt/solr/server/cores
+        ports:
+            - "8985:8983"
+        environment:
+            - NODE_DIR=/opt/solr/server/cores
+            - ZK_HOSTS=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+            - SOLR_HOST=solrc2
+        links:
+            - solrc1
+        command: cloud

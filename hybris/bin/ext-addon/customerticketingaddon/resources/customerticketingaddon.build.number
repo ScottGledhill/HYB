@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Dec 09 14:53:26 UTC 2016
+builddate=20161209 1453
+description=customerticketingaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=customerticketingaddon
+releasedate=20161208 1831
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+	<bean id="cxPromotionActionAffectedObjectKeyAttributeHandler" class="de.hybris.platform.personalizationpromotions.dynamic.CxPromotionActionAffectedObjectKeyAttributeHandler"/>
+	
+	<bean id="cxPromotionActionPerformable" class="de.hybris.platform.personalizationpromotions.action.CxPromotionActionPerformable" />
+			
+	<bean id="cxPromotionActionTargetProvider" parent="actionTargetProvider">
+		<property name="supportedClass" value="de.hybris.platform.personalizationpromotions.model.CxPromotionActionModel" />
+		<property name="target" value="cxPromotionActionPerformable" />
+	</bean>
+
+	<alias name="defaultCxPromotionActionResultRAOPopulator" alias="cxPromotionActionResultRAOPopulator" />
+	<bean id="defaultCxPromotionActionResultRAOPopulator" class="de.hybris.platform.personalizationpromotions.populator.CxPromotionActionResultRAOPopulator"/>
+	
+	<alias name="defaultCxPromotionActionResultRAOConverter" alias="cxPromotionActionResultRAOConverter" />
+	<bean id="defaultCxPromotionActionResultRAOConverter" parent="abstractPopulatingConverter">
+	    <property name="targetClass" value="de.hybris.platform.personalizationpromotions.rao.CxPromotionActionResultRAO" />
+	    <property name="populators">
+	        <list>
+	            <ref bean="cxPromotionActionResultRAOPopulator" />
+	        </list>
+	    </property>
+	</bean>
+	
+	<alias name="defaultCxPromotionUserRAOPopulator" alias="cxPromotionUserRAOPopulator" />
+	<bean id="defaultCxPromotionUserRAOPopulator" class="de.hybris.platform.personalizationpromotions.populator.CxPromotionUserRAOPopulator">
+		<property name="cxActionResultService" ref="cxActionResultService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="cxPromotionActionResultRAOConverter" ref="cxPromotionActionResultRAOConverter"/>
+	</bean>
+	
+	<alias name="cxPromotionUserRAOConverter" alias="userRaoConverter" />
+ 	<bean id="cxPromotionUserRAOConverter" parent="abstractPopulatingConverter">
+ 		<property name="targetClass" value="de.hybris.platform.ruleengineservices.rao.UserRAO" />
+		<property name="populators">
+			<list>
+				<ref bean="userRaoPopulator" />
+				<ref bean="cxPromotionUserRAOPopulator" />
+			</list>
+		</property>
+ 	</bean>
+
+	<alias alias="ruleCxPromotionActionResultTranslator" name="defaultRuleCxPromotionActionResultTranslator" />
+	<bean id="defaultRuleCxPromotionActionResultTranslator" class="de.hybris.platform.personalizationpromotions.translator.RuleCxPromotionActionResultTranslator" />
+	
+	<bean id="cxPromotionActionPrepareInterceptor" class="de.hybris.platform.personalizationpromotions.action.CxPromotionActionPrepareInterceptor" >
+		<property name="ruleDao" ref="ruleDao" />
+		<property name="ruleMaintenanceService" ref="ruleMaintenanceService" />
+		<property name="modelService" ref="modelService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<bean id="cxPromotionActionPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+	    <property name="interceptor" ref="cxPromotionActionPrepareInterceptor"/>
+    	<property name="typeCode" value="CxPromotionAction"/>
+	</bean>
+	
+	<alias name="defaultPromotionActionResultRaoExtractor" alias="promotionActionResultRaoExtractor"/>	
+	<bean id="defaultPromotionActionResultRaoExtractor" class="de.hybris.platform.personalizationpromotions.extractor.CxPromotionCartRAOFactExtractor"/>	
+		
+	<bean id="promotionActionResultRaoExtractorListMergeDirective" depends-on="cartRAOProviderExtractors" parent="listMergeDirective">
+		<property name="add" ref="promotionActionResultRaoExtractor"/>
+	</bean>
+	
+</beans>

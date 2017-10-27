@@ -1,0 +1,190 @@
+@se-toolbar-menu-content__page-sync--width: 375px;
+@se-toolbar-menu-content__page-sync--gutter: .2*@smartedit-gutter;
+
+@se-sync-panel__msg-notification--height: 100px;
+@se-sync-panel__msg-notification--background-color: @smartedit-yellow;
+@se-sync-panel__msg-notification--font-size: 14px;
+
+@se-sync-panel__sync-status--height: 95px;
+
+@se-sync-panel__sync-status--bottom-border: 1px solid @smartedit-grey22;
+
+@se-sync-panel__msg-notification__icon--radius: 23px; 
+@se-sync-panel__msg-notification__text--width: @se-toolbar-menu-content__page-sync--width - 6*@se-toolbar-menu-content__page-sync--gutter - 2*@se-sync-panel__msg-notification__icon--radius - 4;
+@se-sync-panel__msg-notification__icon--caution--padding-left: 10px;
+@se-sync-panel__msg-notification__icon--font-size: 26px;
+
+@se-sync-panel__sync-info--non-modal-max-height: 300px;
+
+@hyicon__se-sync-panel__sync-info--font-size: 22px;
+
+@hyicon__se-sync-panel__sync-done--color: @badge-success-bg;
+@hyicon__se-sync-panel__sync-not--color: @default-blue;
+
+@se-sync-button__sync--before--padding-top: 5px;
+@se-sync-button__sync--font-size: 25px;
+
+.se-sync-panel__msg-notification__bold{
+    font-weight: bold;
+    font-family: @font-open-sans;
+    font-size: @se-sync-panel__msg-notification--font-size;
+    color: @techne-typo-default;
+    margin-bottom: 0;
+}
+
+.se-sync-panel__msg-notification__normal{
+    font-family: @font-open-sans;
+    font-size: @se-sync-panel__msg-notification--font-size;
+    color: @techne-typo-default;
+    margin-bottom: 0;
+}
+
+.se-toolbar-menu-content__page-sync{
+    width: @se-toolbar-menu-content__page-sync--width;
+}
+
+.se-sync-panel__msg-notification{
+    min-height: @se-sync-panel__msg-notification--height;
+    background-color: @se-sync-panel__msg-notification--background-color;
+    padding: 2*@se-toolbar-menu-content__page-sync--gutter 3*@se-toolbar-menu-content__page-sync--gutter;
+    display: flex;
+    align-items: center;
+}
+
+.se-sync-panel__sync-status{
+    min-height: @se-sync-panel__sync-status--height;
+    padding: 2*@se-toolbar-menu-content__page-sync--gutter 3*@se-toolbar-menu-content__page-sync--gutter;
+    border-bottom: @se-sync-panel__sync-status--bottom-border;
+}
+
+.se-sync-panel__sync-info{
+}
+
+
+.se-toolbar-menu-content--body .se-sync-panel__sync-info,
+slot-sync-button  .se-sync-panel__sync-info{
+    max-height: @se-sync-panel__sync-info--non-modal-max-height;
+    overflow-y: scroll;
+}
+
+.se-sync-panel__msg-notification__icon{
+    width: 2*@se-sync-panel__msg-notification__icon--radius;
+    height: 2*@se-sync-panel__msg-notification__icon--radius; 
+    background: @smartedit-white;
+    -moz-border-radius: @se-sync-panel__msg-notification__icon--radius;
+	-webkit-border-radius: @se-sync-panel__msg-notification__icon--radius;
+	border-radius: @se-sync-panel__msg-notification__icon--radius;
+    display: inline-block;
+    font-size: @se-sync-panel__msg-notification__icon--font-size;
+    color: @se-sync-panel__msg-notification--background-color;
+    vertical-align: top;
+}
+
+.se-sync-panel__msg-notification__text{
+    width: @se-sync-panel__msg-notification__text--width;
+    padding-left: 3*@se-toolbar-menu-content__page-sync--gutter;
+    display: inline-block;
+}
+
+.se-sync-panel__msg-notification__icon--caution{
+    padding-left: @se-sync-panel__msg-notification__icon--caution--padding-left;
+}
+
+.se-sync-panel-header__label,
+.se-sync-panel-header__timestamp,
+.se-sync-panel-header__text{
+    font-size: @se-sync-panel__msg-notification--font-size;
+    font-family: @font-open-sans;
+}
+
+.se-sync-panel-header__label{
+    font-weight: @font-weight--bold;
+}
+
+.se-sync-panel-header__timestamp{
+    font-style: italic; 
+}
+
+.se-sync-panel__footer__btn,
+#smarteditoverlay .se-sync-panel__footer__btn{ // for the inner frame to overwrite the storefront styling
+    width: 100%;
+    .btn;
+    .btn-primary;
+    font-size: 23px;
+    font-weight: @font-weight--book;
+    padding-top: .3*@smartedit-gutter;
+    padding-bottom: .3*@smartedit-gutter;
+}
+
+.se-sync-panel__sync-info__checkbox{
+    display: inline-block;
+}
+
+.hyicon__se-sync-panel__sync-info{
+    font-size: @hyicon__se-sync-panel__sync-info--font-size;
+}
+
+.hyicon__se-sync-panel__sync-done{
+    color: @hyicon__se-sync-panel__sync-done--color;
+}
+
+.hyicon__se-sync-panel__sync-not{
+    color: @hyicon__se-sync-panel__sync-not--color;
+}
+
+.se-sync-panel__sync-info__row:first-child{
+    padding: @se-toolbar-menu-content__page-sync--gutter 3*@se-toolbar-menu-content__page-sync--gutter 0 3*@se-toolbar-menu-content__page-sync--gutter;
+    border-bottom: @se-sync-panel__sync-status--bottom-border;
+}
+
+.se-sync-panel__sync-info__row:not(:first-child){
+    padding: @se-toolbar-menu-content__page-sync--gutter 3*@se-toolbar-menu-content__page-sync--gutter 0 5*@se-toolbar-menu-content__page-sync--gutter;
+    border-bottom: @se-sync-panel__sync-status--bottom-border;
+}
+
+.se-sync-button__sync{
+    font-size: @se-sync-button__sync--font-size;
+    vertical-align: top;
+}
+
+.se-sync-button__sync:before{
+    padding-top: @se-sync-button__sync--before--padding-top;
+}
+
+.se-sync-button__sync__sync-not{
+    color: @hyicon__se-sync-panel__sync-not--color;   
+}
+
+.se-sync-button__sync__done{
+    color: @hyicon__se-sync-panel__sync-done--color;
+}
+
+.se-sync-panel__sync-info__right-icon{
+    width: 23px;
+}
+
+.se-sync-panel__sync-info__right-icon>.help-control{
+    padding: 0;
+}
+
+.se-sync-panel__sync-info__checkbox{
+    width: calc(~"100% - 23px");
+}
+
+.se-sync-panel__sync-info__checkbox-label{
+    max-width: calc(~"100% - 40px");
+}
+
+label.se-sync-panel__sync-info__checkbox-label.se-nowrap-ellipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.se-toolbar-menu-ddlb--button__caution{
+    font-size: 13px;
+}
+
+page-sync-menu-toolbar-item .se-toolbar-menu-ddlb--button--txt{
+    margin-top: 0;
+}

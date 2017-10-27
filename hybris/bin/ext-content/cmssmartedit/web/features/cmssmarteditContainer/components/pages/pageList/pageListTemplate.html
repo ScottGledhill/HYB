@@ -1,0 +1,54 @@
+<div class="ySmartEditToolbars"
+    style="position:absolute">
+    <div>
+        <toolbar data-css-class="ySmartEditTitleToolbar"
+            data-image-root="imageRoot"
+            data-toolbar-name="smartEditTitleToolbar"></toolbar>
+    </div>
+</div>
+<div ng-class="{'alert-overlay': true, 'ySEEmptyMessage': (!alerts || alerts.length == 0 ) }">
+    <alerts-box alerts="alerts" />
+</div>
+<div class="pageListWrapper">
+    <div class="ySEPageListTitle">
+        <h1 class="ySEPage-list-title"
+            data-translate='pagelist.title'></h1>
+        <h4 class="ySEPage-list-label">{{pageListCtl.catalogName | l10n}} - {{pageListCtl.catalogVersion}}</h4>
+    </div>
+
+    <div class="ySEPage-list-search input-group">
+        <span class="input-group-addon hyicon hyicon-search ySEPage-list-search-icon"
+            ng-click="preventDefault($event); "></span>
+        <input type="text"
+            class="form-control ySEPage-list-search-input"
+            placeholder="{{ 'pagelist.searchplaceholder' | translate }}"
+            data-ng-model="pageListCtl.query.value"
+            name="query">
+        <span data-ng-if="pageListCtl.query.value"
+            class="input-group-addon glyphicon glyphicon-remove-sign ySESearchIcon"
+            data-ng-click="pageListCtl.reset()" />
+    </div>
+
+    <div class="ySEAdd-Page-button">
+        <button class="y-add-btn"
+            data-ng-click="pageListCtl.openAddPageWizard()">
+            <!--<img data-ng-src="../cmssmartedit/images/icon_add.png" />-->
+            <span class="hyicon hyicon-add"></span>
+            <span class="">{{'se.cms.addpagewizard.addpage' | translate}}</span>
+        </button>
+    </div>
+
+    <client-paged-list data-ng-if="pageListCtl.itemsReady"
+        data-items="pageListCtl.pages"
+        data-keys="pageListCtl.keys"
+        data-renderers="pageListCtl.renderers"
+        data-injected-context="pageListCtl.injectedContext"
+        data-sort-by="'name'"
+        data-reversed="false"
+        data-items-per-page="10"
+        data-query="pageListCtl.query.value"
+        data-display-count="true"
+        data-dropdown-items=pageListCtl.dropdownItems
+        data-item-filter-keys="pageListCtl.searchKeys">
+    </client-paged-list>
+</div>

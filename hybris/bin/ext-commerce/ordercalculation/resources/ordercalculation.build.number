@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Jan 10 09:25:24 UTC 2017
+builddate=20170110 0925
+description=ordercalculation
+group.id=de.hybris.platform
+module.name=platform-module
+name=ordercalculation
+releasedate=20161216 2029
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

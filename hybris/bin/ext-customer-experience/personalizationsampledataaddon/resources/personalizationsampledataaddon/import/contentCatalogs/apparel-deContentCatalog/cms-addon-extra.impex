@@ -1,0 +1,100 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$lang=de
+$defaultPromoGrp=apparelDEPromoGrp
+$defaultRuleStatus=UNPUBLISHED
+$contentCatalog=apparel-deContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];writePrincipals(uid)[mode=append];readPrincipals(uid)[mode=append];
+;apparel-deContentCatalog;Online;cmsmanagergroup;cmsmanagergroup;
+;apparel-deContentCatalog;Staged;cmsmanagergroup;cmsmanagergroup;
+
+INSERT_UPDATE CxCustomizationsGroup;code;$contentCV[unique=true]
+;apparelDECustomizationGroup;;
+
+INSERT_UPDATE CxCustomization;code[unique=true];name;$contentCV[unique=true];group(code,$contentCV)[default='apparelDECustomizationGroup'];status(code)[default=ENABLED]
+;SummerSale;SummerSale;;
+;SpringSale;SpringSale;;
+;CategoryLover;CategoryLover;;
+;VIP;VIP;;
+
+INSERT_UPDATE CxCmsAction;componentId;code[unique=true];type(code);target;&actionRef;$contentCV[unique=true];containerId;
+#banner
+;springSaleMenSplashBannerComponent;actionSpringSaleMenBanner;PLAIN;cxCmsActionPerformable;actionSpringSaleMenBanner;;Section1SlotHomepageCxContainer
+;springSaleWomenSplashBannerComponent;actionSpringSaleWomenBanner;PLAIN;cxCmsActionPerformable;actionSpringSaleWomenBanner;;Section1SlotHomepageCxContainer
+;springSaleWomenSplashBannerComponent;actionSpringSaleVipSilverWomenBanner;PLAIN;cxCmsActionPerformable;actionSpringSaleVipSilverWomenBanner;;Section1SlotHomepageCxContainer
+;summerSaleMenSplashBannerComponent;actionSummerSaleMenBanner;PLAIN;cxCmsActionPerformable;actionSummerSaleMenBanner;;Section1SlotHomepageCxContainer
+;summerSaleWomenSplashBannerComponent;actionSummerSaleWomenBanner;PLAIN;cxCmsActionPerformable;actionSummerSaleWomenBanner;;Section1SlotHomepageCxContainer
+#content 2A
+;burtonLoverContentComponent;actionSpringSaleBurtonLoverContent2A;PLAIN;cxCmsActionPerformable;actionSpringSaleBurtonLoverContent2A;;Section2ASlotHomepageCxContainer
+;burtonLoverContentComponent;actionSummerSaleBurtonLoverContent2A;PLAIN;cxCmsActionPerformable;actionSummerSaleBurtonLoverContent2A;;Section2ASlotHomepageCxContainer
+;burtonLoverContentComponent;actionBurtonLoverContent2A;PLAIN;cxCmsActionPerformable;actionBurtonLoverContent2A;;Section2ASlotHomepageCxContainer
+;shortsLoverContentComponent;actionSummerSaleShortsLoverContent2A;PLAIN;cxCmsActionPerformable;actionSummerSaleShortsLoverContent2A;;Section2ASlotHomepageCxContainer
+;shortsLoverContentComponent;actionShortsLoverContent2A;PLAIN;cxCmsActionPerformable;actionShortsLoverContent2A;;Section2ASlotHomepageCxContainer
+#content 2B
+;vipGoldContentComponent;actionVipGoldContent2B;PLAIN;cxCmsActionPerformable;actionVipGoldContent2B;;Section2BSlotHomepageCxContainer
+;vipGoldContentComponent;actionSpringSaleVipGoldContent2B;PLAIN;cxCmsActionPerformable;actionSpringSaleVipGoldContent2B;;Section2BSlotHomepageCxContainer
+;vipGoldContentComponent;actionSummerSaleVipGoldContent2B;PLAIN;cxCmsActionPerformable;actionSummerSaleVipGoldContent2B;;Section2BSlotHomepageCxContainer
+;vipSilverContentComponent;actionVipSilverContent2B;PLAIN;cxCmsActionPerformable;actionVipSilverContent2B;;Section2BSlotHomepageCxContainer
+;vipSilverContentComponent;actionSpringSaleVipSilverWomenContent2B;PLAIN;cxCmsActionPerformable;actionSpringSaleVipSilverWomenContent2B;;Section2BSlotHomepageCxContainer
+;vipBronzeContentComponent;actionVipBronzeContent2B;PLAIN;cxCmsActionPerformable;actionVipBronzeContent2B;;Section2BSlotHomepageCxContainer
+;vipBronzeContentComponent;actionSpringSaleVipBronzeContent2B;PLAIN;cxCmsActionPerformable;actionSpringSaleVipBronzeContent2B;;Section2BSlotHomepageCxContainer
+
+INSERT_UPDATE CxVariation;code[unique=true];name;$contentCV[unique=true];actions(&actionRef)[mode=append];enabled[default=true];customization(code,$contentCV)[unique=true];status(code)[default=ENABLED]
+;SpringSaleVipBronzeMen;SpringSaleVipBronzeMen;;actionSpringSaleMenBanner,actionSpringSaleVipBronzeContent2B;;SpringSale;
+;SpringSaleVipGoldWomen;SpringSaleVipGoldWomen;;actionSpringSaleWomenBanner,actionSpringSaleVipGoldContent2B,actionSpringSaleBurtonLoverContent2A;;SpringSale;
+;SpringSaleVipSilverWomen;SpringSaleVipSilverWomen;;actionSpringSaleVipSilverWomenBanner,actionSpringSaleVipSilverWomenContent2B;;SpringSale;
+;SummerSaleMenShortsLover;SummerSaleMenShortsLover;;actionSummerSaleMenBanner,actionSummerSaleShortsLoverContent2A;;SummerSale;
+;SummerSaleVipGoldWomen;SummerSaleVipGoldWomen;;actionSummerSaleWomenBanner,actionSummerSaleVipGoldContent2B,actionSummerSaleBurtonLoverContent2A;;SummerSale;
+;VipGold;VipGold;;actionVipGoldContent2B;;VIP;
+;VipSilver;VipSilver;;actionVipSilverContent2B;;VIP;
+;VipBronze;VipBronze;;actionVipBronzeContent2B;;VIP;
+;ShortsLover;ShortsLover;;actionShortsLoverContent2A;;CategoryLover;
+;BurtonLover;BurtonLover;;actionBurtonLoverContent2A;;CategoryLover;
+
+INSERT_UPDATE CxSegmentTrigger;code[unique=true];variation(code,$contentCV)[unique=true];$contentCV[unique=true];segments(code);groupBy(code)[default='OR'];
+;trigger1;SpringSaleVipBronzeMen;;Men,VIPBronze;AND
+;trigger2;SpringSaleVipGoldWomen;;Women,VIPGold,CATEGORY Burton;AND
+;trigger3;SpringSaleVipSilverWomen;;Women,VIPSilver;AND
+;trigger4;SummerSaleMenShortsLover;;Men,CATEGORY 250600;AND
+;trigger5;SummerSaleVipGoldWomen;;Women,VIPGold,CATEGORY Burton;AND
+;trigger6;VipGold;;VIPGold;
+;trigger7;VipSilver;;VIPSilver;
+;trigger8;VipBronze;;VIPBronze;
+;trigger9;ShortsLover;;CATEGORY 250600;
+;trigger10;BurtonLover;;CATEGORY Burton;
+
+UPDATE CxCustomization;code[unique=true];name;$contentCV[unique=true];variations(code,$contentCV)
+;CategoryLover;CategoryLover;;ShortsLover,BurtonLover;
+;SpringSale;SpringSale;;SpringSaleVipBronzeMen,SpringSaleVipGoldWomen,SpringSaleVipSilverWomen;
+;SummerSale;SummerSale;;SummerSaleMenShortsLover,SummerSaleVipGoldWomen;
+;VIP;VIP;;VipGold,VipSilver,VipBronze;
+
+INSERT_UPDATE PromotionSourceRule;code[unique=true];name[lang=$lang];messageFired[lang=$lang];priority;stackable[default=false];status(code)[default=$defaultRuleStatus];website(identifier)[default=$defaultPromoGrp];ruleGroup(code);conditions;actions;excludeFromStorefrontDisplay[default=true];
+"#% afterEach: de.hybris.platform.personalizationsampledataaddon.util.CxAddOnSampleDataUtils.storeToCompile(impex.getLastImportedItem());"
+;personalized_de_burton_lover_fixed_discount;Burton product category fixed discount;10 Euro Preisnachlass auf Ihre Lieblingsprodukte;80;;;;productPromotionRuleGroup;"[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":1},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""Burton""]},""excluded_products"":{""type"":""List(ItemType(Product))"",""value"":[]},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_entry_fixed_discount"",""parameters"":{""value"":{""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{""EUR"":10}}}}]"
+;personalized_de_shorts_lover_fixed_discount;Shorts product category fixed discount;10 Euro Preisnachlass auf Ihre Lieblingsprodukte;80;;;;productPromotionRuleGroup;"[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":1},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""250600""]},""excluded_products"":{""type"":""List(ItemType(Product))"",""value"":[]},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_entry_fixed_discount"",""parameters"":{""value"":{""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{""EUR"":10}}}}]"
+;personalized_de_buy_2_shorts_get_1_shorts_free;Buy 2 shorts get 1 for free;Zwei Artikel zum Preis von einem;90;;;;productPromotionRuleGroup;"[{""definitionId"":""y_container"",""parameters"":{""id"":{""type"":""java.lang.String"",""value"":""CONTAINER_X""}},""children"":[{""definitionId"":""y_group"",""parameters"":{""operator"":{""type"":""Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator)"",""value"":""OR""}},""children"":[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":2},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""250600""]},""excluded_products"":{""type"":""List(ItemType(Product))""},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]}]}]},{""definitionId"":""y_container"",""parameters"":{""id"":{""type"":""java.lang.String"",""value"":""CONTAINER_Y""}},""children"":[{""definitionId"":""y_group"",""parameters"":{""operator"":{""type"":""Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator)"",""value"":""OR""}},""children"":[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":1},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""250600""]},""excluded_products"":{""type"":""List(ItemType(Product))""},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]}]}]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_partner_order_entry_percentage_discount"",""parameters"":{""selection_strategy"":{""type"":""Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy)"",""value"":""CHEAPEST""},""qualifying_containers"":{""type"":""Map(java.lang.String,java.lang.Integer)"",""value"":{""CONTAINER_X"":2}},""target_containers"":{""type"":""Map(java.lang.String,java.lang.Integer)"",""value"":{""CONTAINER_Y"":1}},""value"":{""type"":""java.math.BigDecimal"",""value"":100}}}]"
+;personalized_de_order_threshold_change_delivery_mode_to_free_shipping;Order threshold change delivery method;Kostenloser Versand für Bestellungen über 100 Euro;90;true;;;orderPromotionRuleGroup;"[{""definitionId"":""y_cart_total"",""parameters"":{""value"":{""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{""EUR"":100,""GBP"":100}},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_change_delivery_mode"",""parameters"":{""delivery_mode"":{""type"":""ItemType(DeliveryMode)"",""value"":""free-standard-shipping""}}}]"
+;personalized_de_vip_gold_customer_percentage_discount_cart;VIP Gold customer specific percentage discount;20 % Preisnachlass für Stammkunden;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":20}}}]"
+;personalized_de_vip_silver_customer_percentage_discount_cart;VIP Silver customer specific percentage discount;10 % Preisnachlass für Stammkunden;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":10}}}]"
+;personalized_de_vip_bronze_customer_percentage_discount_cart;VIP Bronze customer specific percentage discount;5 % Preisnachlass für Stammkunden;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":5}}}]"
+
+INSERT_UPDATE CxPromotionAction;code[unique=true];promotionId[unique=true];variation(code,$contentCV)[unique=true];target;type(code);$contentCV[unique=true]
+;promotionaction_burton_lover_fixed_discount;personalized_de_burton_lover_fixed_discount;BurtonLover;cxPromotionActionPerformable;PLAIN;
+;promotionaction_shorts_lover_fixed_discount;personalized_de_shorts_lover_fixed_discount;ShortsLover;cxPromotionActionPerformable;PLAIN;
+;promotionaction_buy_2_shorts_get_1_shorts_free;personalized_de_buy_2_shorts_get_1_shorts_free;ShortsLover;cxPromotionActionPerformable;PLAIN;
+;promotionaction_order_threshold_change_delivery_mode_to_free_shipping;personalized_de_order_threshold_change_delivery_mode_to_free_shipping;VipGold;cxPromotionActionPerformable;PLAIN;
+;promotionaction_vip_bronze_customer_percentage_discount_cart;personalized_de_vip_bronze_customer_percentage_discount_cart;VipBronze;cxPromotionActionPerformable;PLAIN;
+;promotionaction_vip_gold_customer_percentage_discount_cart;personalized_de_vip_gold_customer_percentage_discount_cart;VipGold;cxPromotionActionPerformable;PLAIN;
+;promotionaction_vip_silver_customer_percentage_discount_cart;personalized_de_vip_silver_customer_percentage_discount_cart;VipSilver;cxPromotionActionPerformable;PLAIN;

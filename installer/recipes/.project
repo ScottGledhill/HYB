@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>sapproductconfig recipes</name>
+	<comment>Contains installation recipes for the CPQ module</comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

@@ -1,0 +1,102 @@
+/* *
+/* This file includes the styles used in Combined View Panel and Modal
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+
+@import (reference) "variables.less";
+@import (reference) "commons.less";
+.combinedview-configure-layout {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 15px;
+    padding: 15px 0 15px 10px;
+    .status-toggle label {
+        //reset the initial height, fix the IE allignment issue; remove when fixed in techme
+        height: inherit;
+    }
+    .combinedview-btn {
+        font-weight: @font-weight-semibold;
+        font-family: @font-family-open-sans;
+    }
+}
+
+.combinedview-divider {
+    border-top: 1px solid @border-color-light-grey;
+}
+
+.combinedview-list-layout {
+    font-size: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 15px;
+    border-bottom: 1px solid @border-color-light-grey;
+}
+
+.combinedview-list-item--last {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: -20px;
+}
+
+.combinedview-variation-layout {
+    font-weight: @font-weight-semibold;
+}
+
+.combinedview-inactive-layout {
+    opacity: @opacity_point-five;
+}
+
+.combinedview-modal-search {
+    margin: 20px 0 40px 0;
+    .select2-container .select2-arrow {
+        line-height: 2.5em;
+    }
+    .select2-disabled {
+        opacity: @opacity_point-four;
+        background: none;
+        cursor: none;
+    }
+}
+
+.combinedview-modal-search-placeholder {
+    font-size: 15px;
+    color: @text-color-light-grey;
+}
+
+.combinedview-search-items-layout {
+    border-right: 1px solid @border-color-light-grey;
+    border-bottom: 1px solid @border-color-light-grey;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.combinedview-search-items-text {
+    padding-top: 15px;
+    font-weight: @font-weight-semibold;
+}
+
+.combinedview-reset-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.combinedview-reset-right {
+    padding-right: 0;
+}
+
+.combinedview-hyicon-remove {
+    top: 0;
+    right: 5px;
+    position: relative;
+    padding: 5px 0 0 0;
+    font-weight: @font-weight-semibold;
+    font-size: 22px;
+    color: @text-color-light-blue-grey;
+    &:hover {
+        opacity: @opacity_point-five;
+    }
+}
+
+.combinedview-dropdown-item-selected {
+    font-weight: bold;
+}

@@ -1,0 +1,82 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-addon-plugin'
+
+def subpl = platformFactory.createPlatform()
+def orbeonDir = "${suiteHome}/../orbeon-module"
+
+def config = {
+    localProperties {
+		property 'storefront.show.debug.info', 'false'
+		property 'commerceservices.default.desktop.ui.experience', 'desktop'
+    }
+
+	extensions {
+		scanPath "${orbeonDir}"
+
+		extensionNames(
+			"yacceleratorcockpits",
+			"ycommercewebservices",
+			"xyformscockpits",
+			"commercesearchbackoffice",
+			"commerceservicesbackoffice",
+			"solrfacetsearchbackoffice",
+			"xyformsbackoffice",
+			"xyformssamples",
+			"orbeonservices",
+			"yacceleratorstorefront",
+			"assistedservicestorefront",
+			"financialcheckout",
+			"financialstore",
+			"yacceleratorfulfilmentprocess",
+			"financialcockpits",
+			"financialacceleratorstorefrontatddtests",
+			"solrserver"
+		)
+		webApp {
+			contextRoot "orbeon"
+			path "${suiteHome}/hybris/bin/custom/orbeon"
+		}
+	}
+}
+
+def pl = platform(config)
+
+task setup << {
+	if (!file(orbeonDir).exists()) {
+		throw new InvalidUserDataException("Please download orbeon module from Extension Marketplace and unpack it to ${orbeonDir}")
+	}
+
+	pl.setup()
+
+	pl.executeAntTarget 'install.orbeon-module'
+	pl.executeAntTarget 'install.financialacceleratorstorefront'
+
+	pl.project.addons {
+		names "financialcheckout"
+		template "yacceleratorstorefront"
+		storeFronts "yacceleratorstorefront"
+		platform pl
+	}
+
+	pl.executeAntTarget 'install.xyformsstorefrontcommons'
+
+	pl.project.addons {
+		names "assistedservicestorefront"
+		template "yacceleratorstorefront"
+		storeFronts "yacceleratorstorefront"
+		platform pl
+	}
+}
+
+task initialize << {
+	pl.build()
+	pl.initialize()
+}
+
+task start << {
+	pl.startInBackground()
+}
+
+task stop << {
+	pl.stopInBackground()
+}

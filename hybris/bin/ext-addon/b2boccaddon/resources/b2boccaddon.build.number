@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Jan 17 23:09:02 UTC 2017
+builddate=20170117 2308
+description=b2boccaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=b2boccaddon
+releasedate=20161206 1357
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

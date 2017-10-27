@@ -1,0 +1,151 @@
+<div id="editConfigurationsBody" class="manage-customization">
+
+    <h2 class="text-capitalize h2-color--grey-font" ng-bind="catalogName"></h2>
+    <div class="row customization-search">
+        <div class="col-sm-4 col-sm-offset-3">
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search ySESearchIcon"></span>
+                <input type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="{{ 'personalization.modal.manager.search.placeholder' | translate}}" ng-model="search.name" ng-keyup="searchInputKeypress($event)"></input>
+                <span data-ng-show="search.name" class="input-group-addon glyphicon glyphicon-remove-sign ySESearchIcon" ng-click="search.name=''; searchInputKeypress($event)"></span>
+            </div>
+        </div>
+        <div class="col-sm-2 pull-left filter-layout">
+            <ui-select ng-model="search.status" theme="select2" title="" search-enabled="false">
+                <ui-select-match>
+                    <span ng-bind="$select.selected.text | translate"></span>
+                </ui-select-match>
+                <ui-select-choices repeat="item in statuses" position="down">
+                    <span ng-bind="item.text | translate"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="search-results">
+        <span ng-bind="filteredCustomizationsCount"></span>
+        <span data-translate="personalization.modal.manager.search.result.label"></span>
+    </div>
+    <button class="y-add y-add-btn button-margin" type="button" data-ng-click="openNewModal();">
+        <span class="hyicon hyicon-add" data-translate="personalization.modal.manager.add.button"></span>
+    </button>
+
+    <div class="categoryTable">
+        <!-- headers -->
+        <div class="row row-reset-margin tablehead hidden-xs">
+            <div class="col-xs-4 text-left" data-translate="personalization.modal.manager.grid.header.customization"></div>
+            <div class="col-xs-1 text-left" data-translate="personalization.modal.manager.grid.header.variations"></div>
+            <div class="col-xs-1 text-left" data-translate="personalization.modal.manager.grid.header.components"></div>
+            <div class="col-xs-1 col-reset-padding">
+                <span class="header-status-layout" data-translate="personalization.modal.manager.grid.header.status"></span>
+            </div>
+            <div class="col-xs-2" data-translate="personalization.modal.manager.grid.header.startdate"></div>
+            <div class="col-xs-2" data-translate="personalization.modal.manager.grid.header.enddate"></div>
+        </div>
+
+        <div data-ng-repeat="customization in getVisibleCustomizations()" ng-init="customization.isCollapsed=true">
+            <div class="row row-reset-margin customizationLayout divider" ng-class="allCustomizationsCollapsed()?'':'customizationLayoutGrey'">
+                <div class="pull-left" ng-click="customization.isCollapsed =! customization.isCollapsed; customizationClickAction(customization)">
+                    <a class="btn btn-link category-toggle">
+                        <span class="glyphicon glyphicon-chevron-down customization__glyphicon-chevron"></span>
+                    </a>
+                </div>
+                <div class="col-xs-4 text-left" ng-click="customization.isCollapsed =! customization.isCollapsed; customizationClickAction(customization)">
+                    <p class="primaryData customization-rank-{{customization.rank}}-row ">
+                        <span class="categoryName personalizationsmartedit-customization-code " ng-bind="customization.name"></span>
+                    </p>
+                </div>
+                <div class="col-xs-1 text-left">
+                    <p ng-bind="filteredVariations.length || 0"></p>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-1 col-reset-padding text-left statusDataValue" ng-class="getActivityStateForCustomization(customization)">
+                    <span ng-bind="getEnablementTextForCustomization(customization)"></span>
+                </div>
+                <div ng-show="customization.status === PERSONALIZATION_MODEL_STATUS_CODES.ENABLED" class="col-xs-2 dates-layout">
+                    <span ng-bind="getFormattedDate(customization.enabledStartDate)"></span>
+                </div>
+                <div ng-show="customization.status === PERSONALIZATION_MODEL_STATUS_CODES.ENABLED" class="col-xs-2 dates-layout">
+                    <span ng-bind="getFormattedDate(customization.enabledEndDate)"></span>
+                </div>
+                <div class="pull-right">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-link dropdown-toggle pull-right" data-toggle="dropdown">
+                            <span class="hyicon hyicon-more"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right text-left" role="menu">
+                            <li>
+                                <a class="customization-edit-button" ng-click="editCustomizationAction(customization)" data-translate="personalization.modal.manager.customization.options.edit"></a>
+                            </li>
+                            <li>
+                                <a class="customization-delete-button" ng-click="deleteCustomizationAction(customization)" data-translate="personalization.modal.manager.customization.options.delete"></a>
+                            </li>
+                            <li ng-class="isFilterEnabled() || ($first && pagination.currentPage == 0) ? 'disabled' : '' ">
+                                <a class="customization-move-up-button" ng-click="setCustomizationRank(customization, -1, $event, $first)" data-translate="personalization.modal.manager.customization.options.moveup"></a>
+                            </li>
+                            <li ng-class="isFilterEnabled() || ($last && pagination.currentPage == pagination.pages.length-1) ? 'disabled' : '' ">
+                                <a class="customization-move-down-button" ng-click="setCustomizationRank(customization, 1, $event, $last)" data-translate="personalization.modal.manager.customization.options.movedown"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--end col-sm-5 for contextual menu-->
+            </div>
+            <!--end customizationLayout-->
+
+            <div data-uib-collapse="customization.isCollapsed">
+                <div ng-repeat="variation in customization.variations | statusNotDeleted as filteredVariations" ng-init="variation.isCommerceCustomizationEnabled=isCommerceCustomizationEnabled()">
+                    <div class="variationLayout divider">
+                        <div class="row row-reset-margin variation-rank-{{variation.rank}}-row">
+                            <div class="pull-left">
+                                <span ng-class="hasCommerceCustomization(variation) ? 'commerce-customization__marker--icon':'customization__marker'" data-uib-tooltip="{{getCommerceCustomizationTooltip(variation)}}"></span>
+                            </div>
+                            <div class="col-xs-5 text-left">
+                                <span ng-bind="variation.name"></span>
+                            </div>
+                            <div class="col-xs-1 text-left ">
+                                <span ng-bind="variation.numberOfComponents"></span>
+                            </div>
+                            <div class="col-xs-1 col-reset-padding text-left statusDataValue" ng-class="getActivityStateForVariation(customization,variation)">
+                                <span ng-bind="getEnablementTextForVariation(variation)"></span>
+                            </div>
+                            <div class="pull-right">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-link dropdown-toggle pull-right" data-toggle="dropdown">
+                                        <span class="hyicon hyicon-more"></span>
+                                    </button>
+                                    <ul class="dropdown-menu text-left pull-right" role="menu">
+                                        <li>
+                                            <a class="customization-edit-button" ng-click="editVariationAction(customization, variation)" data-translate="personalization.modal.manager.variation.options.edit"></a>
+                                        </li>
+                                        <li ng-show="variation.isCommerceCustomizationEnabled">
+                                            <a class="variation-commerce-customization-button" ng-click="manageCommerceCustomization(customization, variation)" data-translate="personalization.modal.manager.variation.options.commercecustomization"></a>
+                                        </li>
+                                        <li ng-class="isDeleteVariationEnabled(customization) ? '' : 'disabled' ">
+                                            <a class="customization-delete-button" ng-click="deleteVariationAction(customization, variation, $event)" data-translate="personalization.modal.manager.variation.options.delete"></a>
+                                        </li>
+                                        <li ng-class="$first ? 'disabled' : '' ">
+                                            <a class="variation-move-down-button" ng-click="setVariationRank(customization, variation, -1, $event, $first)" data-translate="personalization.modal.manager.variation.options.moveup"></a>
+                                        </li>
+                                        <li ng-class="$last ? 'disabled' : '' ">
+                                            <a class="variation-move-down-button" ng-click="setVariationRank(customization, variation, 1, $event, $last)" data-translate="personalization.modal.manager.variation.options.movedown"></a>
+                                        </li>
+                                        <li>
+                                            <a class="variation-enable-button" ng-click="toogleVariationActive(customization,variation)" ng-bind="getEnablementActionTextForVariation(variation)"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--end col-sm-2 for contextual menu-->
+                        </div>
+                        <!--end variation-rank-->
+                    </div>
+                    <!--end variationLayout-->
+                </div>
+                <!--end variation-repeat-->
+            </div>
+            <!--end collapse-->
+        </div>
+        <!--end customization-repeat-->
+    </div>
+    <!--end categoryTable-->
+    <personalizationsmartedit-pagination pages="pagination.pages" current-page="pagination.page" page-sizes="pagination.pageSizes" current-size="pagination.count" pages-offset="pagination.pagesOffset" callback="paginationCallback" />
+</div>

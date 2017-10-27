@@ -1,0 +1,89 @@
+<div id="personalizationsmartedit-right-toolbar-item-template" class="manage-customization">
+
+    <div data-ng-controller="personalizationsmarteditPageCustomizationsToolbarController">
+        <div class="overflow-wrapper-lefttoolbar" personalization-infinite-scroll="addMoreCustomizationItems()" personalization-infinite-scroll-distance="2" data-customizations-loaded="{{customizationsOnPage.length > 0}}">
+
+            <div data-ng-show="!search.searchCustomizationEnabled">
+                <button class="y-add y-add-btn" type="button" data-ng-click="toggleAddMoreCustomizationsClick()">
+                    <span class="hyicon hyicon-add" data-translate="personalization.toolbar.pagecustomizations.addmorecustomizations.button"></span>
+                </button>
+            </div>
+            <div class="text-left search-item-lefttoolbar" data-ng-show="search.searchCustomizationEnabled">
+                <ui-select id="dropdownCustomizationsLibrary" multiple='true' class="form-control" ng-model="search.selectedLibraryCustomizations" theme="select2" ng-disabled="disabled" on-select="addCustomizationFromLibrary()" ng-keyup="customizationSearchInputKeypress($event, $select.search)" uis-open-close="libraryCustomizationsDropdownOpenClose(isOpen)">
+                    <ui-select-match placeholder="{{'personalization.toolbar.pagecustomizations.addmorecustomizations.customization.library.search.placeholder' | translate}}">
+                        {{$item.name}} &lt;{{$item.name}}&gt;
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in search.libraryCustomizations" personalization-infinite-scroll="addMoreLibraryCustomizationItems()" personalization-infinite-scroll-distance="2">
+                        <div ng-html-bind="item.name | highlight: $select.search"></div>
+                        <div class="row">
+                            <div class="col-xs-9" ng-bind="item.name"></div>
+                            <div class="col-xs-3 statusDataValue">
+                                <small ng-class="getActivityStateForCustomization(item)" ng-bind="getEnablementTextForCustomization(item)"></small>
+                            </div>
+                        </div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="row-lefttoolbar filter-layout customizationsStatusDropdown" ng-class="customizationsOnPage.length < 1 ? 'filter-layout--no-results':''">
+                <ui-select id="dropdownCustomizationsStatus" ng-model="search.status" theme="select2" title="" search-enabled="false" on-select="clearContext()" uis-open-close="statusCustomizationsDropdownOpenClose(isOpen)">
+                    <ui-select-match>
+                        <span ng-bind="$select.selected.text | translate"></span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in statuses" position="down">
+                        <span ng-bind="item.text | translate"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="categoryTable categoryTable-lefttoolbar" data-ng-click="closeCustomizeDropdowns()">
+                <div data-ng-repeat="customization in customizationsOnPage | orderBy: 'rank'" data-ng-init="initCustomization(customization)">
+                    <div class="row row-lefttoolbar" ng-class="$last && customization.collapsed ? 'customization--last':''">
+                        <div ng-class="{'custFromLibExtraStyling customization-from-library':customization.fromLibrary, 'customization-rank-{{customization.rank}}':true}">
+                            <div class="col-xs-1 col-lefttoolbar-glyphicon" ng-click="clearAllSubMenu(); customization.collapsed = !customization.collapsed; customizationClick(customization);">
+                                <a class="btn btn-link category-toggle">
+                                    <span class="glyphicon glyphicon-chevron-down glyphicon-down-lefttoolbar"></span>
+                                </a>
+                            </div>
+                            <div class="col-xs-10 col-reset-padding text-left" ng-click="clearAllSubMenu(); customization.collapsed = !customization.collapsed; customizationClick(customization)">
+                                <span class="primaryData" ng-bind="customization.name"></span>
+                                <div>
+                                    <span class="statusDataValue" ng-class="getActivityStateForCustomization(customization)" ng-bind="getEnablementTextForCustomization(customization)"></span>
+                                    <span class="dates-layout" ng-if="isEnabled(customization)" ng-bind="getDatesForCustomization(customization)"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-1 col-lefttoolbar-hyicon text-left" ng-init="clearAllSubMenu();">
+                                <button type="button" class="btn btn-link dropdown-toggle pull-right customization-rank-{{customization.rank}}-dropdown-toggle" data-toggle="dropdown" ng-click="customizationSubMenuAction(customization)">
+                                    <span class="hyicon hyicon-lefttoolbar hyicon-more"></span>
+                                </button>
+                                <ul ng-if="customization.subMenu" class="dropdown-menu pull-right text-left dropdown-menu-leftoolbar" role="menu">
+                                    <li>
+                                        <a class="dropdown-menu-single-item cutomization-rank-{{customization.rank}}-edit-button" ng-click="clearAllSubMenu(); editCustomizationAction(customization);" data-translate="personalization.toolbar.pagecustomizations.customization.options.edit "></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row desktopLayout-->
+                    <div data-uib-collapse="customization.collapsed">
+                        <div ng-repeat="variation in customization.variations | statusNotDeleted">
+                            <div class="row row-lefttoolbar" ng-class="getSelectedVariationClass(variation)">
+                                <div class="col-xs-1 col-lefttoolbar-glyphicon text-left">
+                                    <span class="customize-panel__marker-icon" ng-class="isCommerceCustomization(variation) ? 'commerce-customization__marker--icon':'customization__marker'"></span>
+                                </div>
+                                <div class="col-xs-9 col-reset-padding text-left" ng-click="clearAllSubMenu(); variationClick(customization, variation);">
+                                    <span ng-bind="variation.name"></span>
+                                    <div class="statusDataValue" ng-class="getActivityStateForVariation(customization, variation)" ng-bind="getEnablementTextForVariation(variation)"></div>
+                                    <div ng-class="getSelectedVariationClass(variation)"></div>
+                                </div>
+                                <div class="col-xs-1 text-right selectedVariation-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end data repeat-->
+            </div>
+            <!--end of categoryTable-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+﻿# Language
+$lang=en
+
+
+UPDATE Page;code[unique=true];title[lang=$lang];subTitle[lang=$lang];subTitle2[lang=$lang];$publication[unique=true];
+;caps_intro;"Caps";
+;caps;"Caps";
+;sunglasses;"Sunglasses";
+;shoes;"Shoes";
+;shirts;"Shirts";
+;helmet;"Helmets";
+;backpack;"Backpacks";
+
+;skigear;"Ski Gear";
+;goggles;"Goggles";
+;tools;"Tools";
+
+;sandales;"Sandales";
+;tshirts;"T-Shirts";
+;guides;"Guides";
+;boards;"Snowboards";
+
+;kids;"Kids";
+;streetwear;"Streetwear";

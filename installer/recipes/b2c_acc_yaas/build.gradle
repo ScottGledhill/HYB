@@ -1,0 +1,173 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-addon-plugin'
+apply plugin: 'installer-datahub-plugin'
+
+def CATALINA_OPTS = "-Xms4096m -Xmx4096m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing"
+
+def config = {
+    localProperties {
+        property 'commerceservices.default.desktop.ui.experience', 'responsive'
+        property 'y2ysync.datahub.url', 'http://localhost:8080/datahub-webapp/v1/y2ysync/v60'
+        property 'y2ysync.home.url', 'http://localhost:9001'
+        property 'datahubadapter.datahuboutbound.url', 'http://localhost:9001'
+        property 'datahubadapter.datahuboutbound.user', 'admin'
+        property 'datahubadapter.datahuboutbound.password', 'nimda'
+        property 'datahub.backoffice.rest.client.username', 'admin'
+        property 'datahub.backoffice.rest.client.password', 'nimda'
+    }
+    extensions {
+        extensions {
+            extName 'mcc'
+            extName 'backoffice'
+            extName 'commercesearchbackoffice'
+            extName 'solrserver'
+            extName 'yacceleratorcockpits'
+            extName 'yacceleratorinitialdata'
+            extName 'yacceleratorfulfilmentprocess'
+            extName 'yacceleratorstorefront'
+            extName 'yaddon'
+            extName 'ycommercewebservices'
+            extName 'electronicsstore'
+            extName 'liveeditaddon'
+            extName 'acceleratorwebservicesaddon'
+            extName 'y2ysyncbackoffice'
+            extName 'datahubbackoffice'
+            extName 'datahubadapter'
+            extName 'fractussyncservices'
+            extName 'fractussyncaddon'
+            extName 'yacceleratorfractusfulfilmentprocess'
+            extName 'yaasconfiguration'
+            extName 'yaasconfigurationbackoffice'
+            extName 'fractussyncconfigurationtrigger'
+            extName 'customersupportbackoffice'
+			extName 'customerticketingaddon'
+        }
+    }
+}
+
+def datahubServerId = 'datahub-tomcat'
+
+def datahubCfg = {
+    libraries {
+        propertyFile "local.properties", {
+        }
+    }
+    extensionDir platformHome + "/../ext-integration/datahub/extensions/fractussync-integration"
+    extensionDir platformHome + "/../ext-integration/datahub/extensions/y2ysync-datahub-ext"
+	extensionDir platformHome + "/../ext-integration/datahub/extensions/sap"
+
+    extensions \
+        'category-raw-fractussync', \
+        'category-canonical-fractussync', \
+        'category-target-fractussync', \
+        'category-client-fractussync', \
+        'commons-fractussync', \
+        'config-raw-fractussync', \
+        'config-canonical-fractussync', \
+        'config-target-fractussync', \
+        'config-client-fractussync', \
+        'inventory-raw-fractussync', \
+        'inventory-canonical-fractussync', \
+        'inventory-target-fractussync', \
+        'inventory-client-fractussync', \
+        'order-raw-fractussync', \
+        'order-canonical-fractussync', \
+        'order-target-fractussync', \
+        'order-client-fractussync', \
+        'orderstatus-raw-fractussync', \
+        'orderstatus-canonical-fractussync', \
+        'orderstatus-target-fractussync', \
+        'orderstatus-client-fractussync', \
+        'price-raw-fractussync', \
+        'price-canonical-fractussync', \
+        'price-target-fractussync', \
+        'price-client-fractussync', \
+        'product-raw-fractussync', \
+        'product-canonical-fractussync', \
+        'product-target-fractussync', \
+        'product-client-fractussync', \
+        'customer-raw-fractussync', \
+        'customer-canonical-fractussync', \
+        'customer-target-fractussync', \
+        'customer-client-fractussync', \
+		'party-canonical', \
+        'y2ysync-datahub-ext'
+
+    webappDir platformHome + "/../ext-integration/datahub/web-app"
+
+    ports {
+        http 8080
+        ssl 9793
+    }
+}
+
+task setupPlatform << {
+    def pl = platform(config)
+    pl.setup()
+
+    pl.project.addons {
+        names "liveeditaddon,customerticketingaddon"
+        template "yacceleratorstorefront"
+        storeFronts "yacceleratorstorefront"
+        platform pl
+    }
+
+    pl.project.addons {
+        names "acceleratorwebservicesaddon"
+        template "ycommercewebservices"
+        storeFronts "ycommercewebservices"
+        platform pl
+    }
+
+    pl.project.addons {
+        names "fractussyncaddon"
+        template "yacceleratorstorefront"
+        storeFronts "yacceleratorstorefront"
+        platform pl
+    }
+}
+
+task setupDataHub << {
+    copy {
+        from platformHome + "/../ext-integration/datahub/extensions/dependencies"
+        into "${installerHome}/recipes/b2c_acc_yaas/build/datahub-webapp/WEB-INF/lib"
+    }
+    copy {
+        from "${installerHome}/recipes/b2c_acc_yaas/configs/local.properties"
+        into "${installerHome}/recipes/b2c_acc_yaas/build/datahub-webapp/WEB-INF/classes"
+    }
+    copy {
+        from "${installerHome}/recipes/b2c_acc_yaas/configs/encryption-key.txt"
+        into "${installerHome}/recipes/b2c_acc_yaas/build/datahub-webapp/WEB-INF/classes"
+    }
+    
+    datahub(datahubServerId).setup datahubCfg
+}
+
+task setup(dependsOn: [setupPlatform, setupDataHub])
+
+task initialize << {
+    def pl = platform(config)
+    pl.build()
+    pl.initialize()
+}
+
+task start << { 
+
+	def pl = platform(config) 
+	pl.startInBackground() 
+}
+
+task stop << {
+
+	def pl = platform(config) 
+	pl.stopInBackground() 
+} 
+
+task startDataHub << {
+    datahub(datahubServerId).start CATALINA_OPTS
+}
+
+task stopDataHub << {
+    datahub(datahubServerId).stop()
+}

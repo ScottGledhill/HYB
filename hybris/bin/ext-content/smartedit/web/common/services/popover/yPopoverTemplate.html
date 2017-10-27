@@ -1,0 +1,11 @@
+<div class="help-control"
+    data-uib-popover-html="ypop.template"
+    data-uib-popover-template="ypop.templateUrl"
+    data-popover-title="{{ypop.title | translate}}"
+    data-popover-append-to-body="true"
+    data-popover-placement="{{ypop.placement}}"
+    data-popover-trigger="'{{ypop.trigger}}'"
+    data-ng-click="$event.stopPropagation()">
+    <div data-ng-transclude
+        class="popoverAnchor"></div>
+</div>

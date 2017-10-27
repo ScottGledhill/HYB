@@ -1,0 +1,158 @@
+/* *
+/* This file includes the styles used in Create New Customization modal
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+.customization-form {
+  margin-top: 43px;
+  word-wrap: break-word;
+  color: #27394f;
+}
+.customization-form .btn-link:hover,
+.customization-form .btn-link:focus {
+  text-decoration: none;
+}
+.customization-form .form-group-dates {
+  margin-bottom: 5px;
+}
+.customization-form .form-group {
+  margin-bottom: 30px;
+}
+.customization-form .description-area {
+  resize: none;
+}
+.customization-form .status-toggle {
+  padding-right: 0;
+}
+.customization-form .status-toggle label {
+  height: inherit;
+  padding-bottom: 30px;
+}
+.customization-form .control-label {
+  font-size: 13px;
+}
+.customization-form .optional-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+.customization-form .text-muted {
+  font-size: 13px;
+  font-style: italic;
+}
+.customization-form .help-icon-inline {
+  font-size: larger;
+}
+.customization-form .navtab-info {
+  margin-top: -20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+.customization-form .navtab-info::after {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid #d4d7dc;
+  padding-top: 20px;
+}
+.customization-form .navtab-info--name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.customization-form .navtab-info--dates {
+  font-size: 11px;
+  float: right;
+}
+.customization-form .navtab-forms {
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+.customization-form .navtab-row {
+  margin-left: 0;
+}
+.customization-form .navtab-col {
+  padding-left: 0;
+}
+.customization-form .badge {
+  margin-right: 0;
+  font-weight: 700;
+}
+.customization-form .commerce-customization__marker--icon {
+  margin-bottom: -10px;
+}
+.customization-form .variation-status {
+  float: right;
+  padding-right: 20px;
+}
+.customization-form .select2-container .select2-arrow {
+  line-height: 2.5em;
+}
+.customization-form .select2-choices {
+  margin-top: 15px;
+}
+.customization-form .ui-select-match-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: inline-block;
+}
+.customization-form .ui-select-match-item.select2-search-choice {
+  background: #caddf0;
+  border-style: none;
+  line-height: 22px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+.customization-form .select2-disabled {
+  opacity: 0.4;
+  background: none;
+  cursor: none;
+}
+.customization-form .ui-select-match-close {
+  position: inherit;
+  vertical-align: top;
+  padding-left: 10px;
+}
+.customization-form .list-group-item:hover {
+  background-color: #a9c9ea;
+}
+.customization-form .list-group-item {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-style: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.customization-form .segments-layout {
+  margin-top: 10px;
+}
+.customization-form .criteria-layout__title {
+  font-weight: 600;
+}
+.customization-form .variation-layout {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0486e0;
+}
+.customization-form .variation-layout--selected {
+  color: #8592a2;
+}
+.customization-form .variation-layout--selected .status-active,
+.customization-form .variation-layout--selected .status-inactive,
+.customization-form .variation-layout--selected .status-ignore {
+  color: #8592a2;
+}
+.customization-form .variation-layout--selected .commerce-customization__marker--icon {
+  opacity: 0.5;
+}
+.customization-form .hyicon-in-modal-size {
+  font-size: 24px;
+  vertical-align: top;
+}
+@media (max-width: 768px) {
+  .customization-form .navtab-info--dates {
+    padding-left: 1%;
+  }
+  .customization-form .commerce-customization-ui-select-sm {
+    width: 250px;
+  }
+}

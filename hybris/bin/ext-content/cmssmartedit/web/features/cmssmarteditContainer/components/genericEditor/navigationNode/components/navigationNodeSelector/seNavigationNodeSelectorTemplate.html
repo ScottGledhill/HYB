@@ -1,0 +1,33 @@
+<div data-ng-if="nav.isReady()">
+    <div data-ng-if="nav.model[nav.qualifier]"
+        class="se-navigation-mode">
+
+        <div class="row">
+            <div class="col-sm-10 se-navigation-node-breadcrumb">
+                <se-breadcrumb data-node-uid="nav.model[nav.qualifier]"
+                    data-uri-context="nav.uriContext"></se-breadcrumb>
+            </div>
+            <div class="col-sm-2 se-navigation-node-button">
+                <div class="se-navigation-node-button__wrapper">
+                    <button class="btn btn-link se-navigation-node-button__frameless"
+                        data-ng-click="nav.remove($event)">
+                        <p class=""
+                            data-translate="navigationcomponent.management.node.selection.remove.action"></p>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <navigation-editor data-uri-context="nav.uriContext"
+            data-read-only="true"
+            data-root-node-uid="nav.model[nav.qualifier]"></navigation-editor>
+    </div>
+    <div data-ng-if="!nav.model[nav.qualifier]">
+
+        <label data-translate="navigationcomponent.management.node.selection.invite.action"></label>
+        <se-navigation-picker data-uri-context="nav.uriContext"
+            data-model="nav.model"
+            data-qualifier="nav.qualifier"></se-navigation-picker>
+    </div>
+</div>

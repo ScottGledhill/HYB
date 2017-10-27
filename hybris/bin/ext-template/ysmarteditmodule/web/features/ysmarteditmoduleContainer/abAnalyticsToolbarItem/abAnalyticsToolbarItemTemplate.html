@@ -1,0 +1,12 @@
+<div data-uib-dropdown data-is-open="$ctrl.isOpen" data-auto-close="{{$ctrl.autoClose}}" class="ySEComponentMenuW">
+    <button type="button" class="btn btn-default yHybridAction ySEComponentMenuW--button" aria-pressed="false" data-uib-dropdown-toggle>
+        <img data-ng-src="{{$ctrl.isOpen ? $ctrl.openIcon : $ctrl.closedIcon}}" src="//:0" />
+        <span class="ySEComponentMenuW--button--txt">{{$ctrl.label | translate}}</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-left btn-block ySEVisibilityMenu" role="menu" data-ng-click="$ctrl.preventDefault($event);">
+        <li role="menuitem" data-ng-if="$ctrl.isOpen">
+            <h2>AB Analytics</h2>
+            <p>This is a dummy toolbar item used to demonstrate functionality.</p>
+        </li>
+    </ul>
+</div>

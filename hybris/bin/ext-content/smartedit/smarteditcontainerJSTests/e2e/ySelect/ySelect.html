@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="../../../../../" />
+
+    <!--3rd prty libs-->
+    <script src="../../../web/webroot/static-resources/dist/smartedit/js/thirdparties.js"></script>
+    <script src="../../../web/webroot/static-resources/thirdparties/ckeditor/ckeditor.js"></script>
+
+    <!-- 3rd party css -->
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/dist/smartedit/css/outer-styling.css">
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/thirdparties/angular-ui-select/dist/select.min.css">
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/thirdparties/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/thirdparties/select2/select2.css">
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/thirdparties/selectize/dist/css/selectize.default.css">
+    <link rel="stylesheet"
+        href="../../../web/webroot/static-resources/techne/css/techne.min.css">
+    <link rel="stylesheet"
+        href="/smarteditcontainerJSTests/e2e/ySelect/ySelect.css">
+
+    <script src="../../../jsTarget/templates.js"></script>
+    <script src="../../../web/webroot/static-resources/smarteditloader/js/smarteditloader.js"></script>
+    <script src="../../../web/webroot/static-resources/smarteditcontainer/js/smarteditcontainer.js"></script>
+
+    <script src="/smarteditcontainerJSTests/e2e/ySelect/ySelectApp.js"></script>
+    <script src="/smarteditcontainerJSTests/e2e/ySelect/backendMocks.js"></script>
+
+
+</head>
+
+<body data-ng-app="ySelectApp"
+    data-ng-controller="defaultController as ctrl">
+
+    <!--
+        First language example
+    -->
+    <h2>First language example.</h2>
+    <div>Selected value: {{ctrl.example1.model}} Force Reset: {{ctrl.example1.forceReset}}</div>
+
+    <input type="button"
+        value="Change source"
+        data-ng-click="ctrl.changeSource( 'example1' )"
+        id="ex1_button" /> Force Reset:
+    <input type="checkbox"
+        data-ng-model="ctrl.example1.forceReset" />
+
+    <y-select id="ctrl.example1.id"
+        ng-model="ctrl.example1.model"
+        reset="ctrl.example1.reset"
+        keep-model-on-reset="!ctrl.example1.forceReset"
+        fetch-strategy="ctrl.example1.fetchStrategy">
+    </y-select>
+
+    <!--
+        Second language example
+    -->
+    <h2>Second language example.</h2>
+    <div>Selected value: {{ctrl.example2.model}} Force Reset: {{ctrl.example2.forceReset}}</div>
+
+    <input type="button"
+        value="Change source"
+        data-ng-click="ctrl.changeSource( 'example2' )"
+        id="ex2_button" /> Force Reset:
+    <input type="checkbox"
+        data-ng-model="ctrl.example2.forceReset" />
+
+    <y-select id="ctrl.example2.id"
+        ng-model="ctrl.example2.model"
+        reset="ctrl.example2.reset"
+        keep-model-on-reset="!ctrl.example2.forceReset"
+        fetch-strategy="ctrl.example2.fetchStrategy">
+    </y-select>
+
+    <!--
+        First products example
+    -->
+    <h2>First products example.</h2>
+    <div>Selected value: {{ctrl.exampleMulti1.model}} Force Reset: {{ctrl.exampleMulti1.forceReset}}</div>
+    <input type="button"
+        value="Change source"
+        data-ng-click="ctrl.changeSource( 'exampleMulti1' )"
+        id="multi1_button" /> Force Reset:
+    <input type="checkbox"
+        data-ng-model="ctrl.exampleMulti1.forceReset" />
+
+    <y-select id="ctrl.exampleMulti1.id"
+        ng-model="ctrl.exampleMulti1.model"
+        controls="true"
+        multi-select="true"
+        reset="ctrl.exampleMulti1.reset"
+        keep-model-on-reset="!ctrl.exampleMulti1.forceReset"
+        fetch-strategy="ctrl.exampleMulti1.fetchStrategy"></y-select>
+
+    <!--
+        Second products example
+    -->
+    <h2>Second products example.</h2>
+    <div>Selected value: {{ctrl.exampleMulti2.model}} Force Reset: {{ctrl.exampleMulti2.forceReset}}</div>
+    <input type="button"
+        value="Change source"
+        data-ng-click="ctrl.changeSource( 'exampleMulti2' )"
+        id="multi2_button" /> Force Reset:
+    <input type="checkbox"
+        data-ng-model="ctrl.exampleMulti2.forceReset" />
+
+    <y-select id="ctrl.exampleMulti2.id"
+        ng-model="ctrl.exampleMulti2.model"
+        controls="true"
+        multi-select="true"
+        reset="ctrl.exampleMulti2.reset"
+        keep-model-on-reset="!ctrl.exampleMulti2.forceReset"
+        fetch-strategy="ctrl.exampleMulti2.fetchStrategy"></y-select>
+
+    <!--
+        Third language example
+    -->
+    <h2>Third products example.</h2>
+    <div>Selected value: {{ctrl.exampleMulti3.model}} Force Reset: {{ctrl.exampleMulti3.forceReset}}</div>
+    <input type="button"
+        value="Change source"
+        data-ng-click="ctrl.changeSource( 'exampleMulti3' )"
+        id="multi3_button" /> Force Reset:
+    <input type="checkbox"
+        data-ng-model="ctrl.exampleMulti3.forceReset" />
+
+    <y-select id="{{ctrl.exampleMulti3.id}}"
+        ng-model="ctrl.exampleMulti3.model"
+        controls="true"
+        multi-select="true"
+        keep-model-on-reset="!ctrl.exampleMulti3.forceReset"
+        reset="ctrl.exampleMulti3.reset"
+        item-template="ctrl.exampleMulti3.template"
+        fetch-strategy="ctrl.exampleMulti3.fetchStrategy"
+        settings="ctrl.exampleMulti3.settings"></y-select>
+
+    <!-- Second language example -->
+
+    <!-- First example -->
+</body>
+
+</html>

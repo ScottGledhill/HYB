@@ -1,0 +1,54 @@
+<div class="ySERestrictionsContainer ySERestrictionsContainer-left {{$ctrl.customClass}}">
+
+    <div data-ng-if="$ctrl.restrictions.length > 1">
+        <div data-ng-if="$ctrl.editable">
+            <ui-select on-select="$ctrl.criteriaClicked($item)"
+                data-ng-model="$ctrl.restrictionCriteria"
+                class="form-control ySERestriction-select"
+                search-enabled="false"
+                theme="select2"
+                data-dropdown-auto-width="false">
+                <ui-select-match placeholder="{{ 'page.restrictions.picker.type.placeholder' | translate }}"
+                    class="ySERestriction-select__placeholder">
+                    {{$select.selected.editLabel | translate}}
+                </ui-select-match>
+                <ui-select-choices repeat="criteriaOption in $ctrl.criteriaOptions"
+                    class="ySERestriction-select__choices"
+                    position="down ">
+                    {{ criteriaOption.editLabel | translate }}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="ySERestrictionsCriteria"
+            data-ng-if="!$ctrl.editable">
+            <span class="ySERestrictionsCriteriaLabel">{{ 'page.restrictions.criteria' | translate }} {{ $ctrl.restrictionCriteria.label | translate }}</span>
+        </div>
+    </div>
+
+    <span class="ySERestrictionsListContainer"
+        data-ng-if="$ctrl.restrictions.length > 0">
+        <div class="container-fluid ySERestrictionsList">
+            <div class="row-fluid">
+                <span id="restriction-{{$index+1}}"
+                    data-ng-repeat="restriction in $ctrl.restrictions"
+                    class="ySERestrictionsList--restriction">
+                    <div class="col-md-10 ySERestrictionsList-item"
+                        data-ng-click="$ctrl.onSelect(restriction)">
+                        <p class="ySERestrictionsNameHeader">{{ restriction.name }}</p>
+                        <div class="ySERestrictionsTypeAndID">{{ restriction.typeCode }}</div>
+                        <div class="ySERestrictionsDescription"
+                            title="{{ restriction.description }}">{{ restriction.description }}</div>
+                    </div>
+                    <div class="col-md-2 ySERestrictionsList-item-btn">
+                        <y-drop-down-menu data-ng-if="$ctrl.editable"
+                            dropdown-items="$ctrl.actions"
+                            selected-item="restriction"
+                            class="y-dropdown ySERestrictionsList-item-btn__more pull-right" />
+                    </div>
+                </span>
+            </div>
+        </div>
+    </span>
+
+
+</div>

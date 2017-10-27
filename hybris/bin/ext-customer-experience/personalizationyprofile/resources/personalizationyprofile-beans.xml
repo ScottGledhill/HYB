@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.personalizationyprofile.Neighbour">
+		<property name="id" type="String" />
+		<property name="tenant" type="String" />
+		<property name="schema" type="String" />
+		<property name="consentReference" type="String" />
+		<property name="created" type="String" />
+		<property name="neighbours_url" type="String" />
+		<property name="locked" type="Boolean" />
+		<property name="hasSkippedProperties" type="Boolean" />
+		<property name="properties" type="java.util.Map&lt;String,String>" />
+		<property name="relations" type="java.util.List&lt;de.hybris.platform.personalizationyprofile.Relation>" />
+		<property name="neighbours" type="java.util.List&lt;de.hybris.platform.personalizationyprofile.Neighbour>" />
+	</bean>
+
+	<bean class="de.hybris.platform.personalizationyprofile.Relation">
+		<property name="id" type="String" />
+		<property name="fid" type="String" />
+		<property name="tid" type="String" />
+		<property name="tenant" type="String" />
+		<property name="schema" type="String" />
+		<property name="created" type="String" />		
+		<property name="locked" type="Boolean" />
+		<property name="consentReference" type="String" />
+		<property name="hasSkippedProperties" type="Boolean" />
+		<property name="properties" type="java.util.Map&lt;String,String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.personalizationyprofile.service.YprofileNodeReadConfig">
+		<property name="nodeTypeId" type="String" />
+		<property name="nodesToExpand" type="java.util.Set&lt;String>" />
+		<property name="includeRelations" type="java.util.Set&lt;String>" />
+	</bean>
+	
+</beans>

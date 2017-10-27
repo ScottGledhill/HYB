@@ -1,0 +1,43 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+# Import essential data for the cxm core;;;;
+#;;;;
+# Includes:;;;;
+# * Customers;;;;
+;;;;
+;;;;
+# Users;;;;
+$defaultPassword=12341234
+$defaultCatalog=Default
+$defaultCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$defaultCatalog]),CatalogVersion.version[default=Staged])[default=$defaultCatalog:Staged]
+
+;;;;
+$regulargroup=regulargroup;;;;
+$customergroup=customergroup;;;;
+;;;;
+# Create Customer Group;;;;
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];;
+;$regulargroup;customergroup;;
+;;;;
+INSERT_UPDATE Customer;uid[unique=true];groups(uid);password[default=$defaultPassword];name
+;cxcontextcustomer@hybris.com;customergroup;;Cxer Contexter
+;;;;
+
+INSERT_UPDATE CxCustomizationsGroup;code[unique=true];$defaultCV[unique=true];
+;default;;
+
+INSERT_UPDATE CxPersonalizationProcessCleanupCronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);maxProcessAge;processStates(code)[default=SUCCEEDED]
+;cleanupCxPersonalizationProcessesCronJob;cleanupCxPersonalizationProcessJobsPerformable;false;de;120;SUCCEEDED,FAILED,ERROR
+
+# Run the cleanupCxPersonalizationProcessesCronJob every 30 minutes
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;cleanupCxPersonalizationProcessesCronJob;0;30;-1;-1;-1;-1;true;true;-1

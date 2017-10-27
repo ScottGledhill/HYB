@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Dec 08 01:16:36 CET 2016
+builddate=20161208 0116
+description=sapordermgmtcfgfacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapordermgmtcfgfacades
+releasedate=20161207 1559
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

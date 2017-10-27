@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<project name="chinaacceleratorservices_buildcallbacks">
+	<macrodef name="chinaacceleratorservices_after_build">
+		<sequential>
+			<impexGenerate extname="chinaacceleratorservices"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="chinaacceleratorservices_after_clean">
+		<sequential>
+			<delete failonerror="false" file="${ext.chinaacceleratorservices.path}/resources-lang/touch_impexgen"/>
+		</sequential>
+	</macrodef>
+	
+    <macrodef name="chinaacceleratorservices_after_dist_copy">
+        <sequential>
+            <copy todir="${destination.folder}/../installer/recipes" preservelastmodified="true">
+                <fileset dir="${ext.chinaacceleratorservices.path}/../installer/recipes/"/>
+            </copy>
+            <if>
+                <istrue value="${dist.development.dist}"/>
+                <then>
+                    <copy todir="${destination.develop.folder}/../installer/recipes" preservelastmodified="true">
+                        <fileset dir="${ext.chinaacceleratorservices.path}/../installer/recipes/"/>
+                    </copy>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+</project>

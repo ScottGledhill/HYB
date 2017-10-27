@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="config/cmssmarteditwebservices-products-spring.xml" />
+	<import resource="config/cmssmarteditwebservices-structuretypes-spring.xml" />
+	
+	
+	<!-- Prototype DTOs -->
+	
+	<alias name="cmsSeComponentTypeAttributeData" alias="componentTypeAttributeData" />
+	<bean id="cmsSeComponentTypeAttributeData" class="de.hybris.platform.cmswebservices.data.ComponentTypeAttributeData" scope="prototype">
+		<property name="editable" value="true" />		
+	</bean>
+	
+		
+	<!-- Structure beans -->
+
+	<alias alias="cmsSeStructureFacade" name="defaultStructureFacade" />
+	<bean id="defaultStructureFacade" class="de.hybris.platform.cmssmarteditwebservices.structures.facade.impl.DefaultStructureFacade">
+		<property name="typeStructureConverter" ref="cmsSeTypeStructureConverter" />
+		<property name="typeService" ref="typeService" />
+		<property name="cmsSupportedAbstractTypecodes" ref="cmsSupportedAbstractTypecodes" />
+		<property name="typeStructureRegistry" ref="cmsSeTypeStructureRegistry" />
+		<property name="componentTypeAttributeDataComparatorRegistry" ref="cmsSeComponentTypeAttributeDataComparatorRegistry" />
+	</bean>
+	
+	<alias alias="cmsSeTypeStructureConverter" name="defaultTypeStructureConverter" />
+	<bean id="defaultTypeStructureConverter" class="de.hybris.platform.cmssmarteditwebservices.structures.converter.impl.DefaultTypeStructureConverter" parent="componentTypeStructureConverter">
+		<property name="typeStructureRegistry" ref="cmsSeTypeStructureRegistry" />
+		<property name="componentTypeAttributeDataFactory" ref="componentTypeAttributeDataFactory" />
+	</bean>
+	
+	<alias alias="cmsSeTypeStructureRegistry" name="defaultTypeStructureRegistry" />
+	<bean id="defaultTypeStructureRegistry" class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeStructureRegistry">
+		<property name="facadeValidationService" ref="facadeValidationService" />
+		<property name="structureTypesPostCreationValidator" ref="structureTypesPostCreationValidator" />
+		<property name="typeService" ref="typeService" />
+		<property name="cmsSupportedAbstractTypecodes" ref="cmsSupportedAbstractTypecodes" />
+	</bean>
+	
+	<alias alias="cmsSeComponentTypeAttributeDataComparatorRegistry" name="defaultComponentTypeAttributeDataComparatorRegistry" />
+	<bean id="defaultComponentTypeAttributeDataComparatorRegistry" class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultComponentTypeAttributeDataComparatorRegistry" />
+	
+</beans>

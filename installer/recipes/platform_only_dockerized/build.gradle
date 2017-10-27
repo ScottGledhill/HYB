@@ -1,0 +1,57 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-platform-containerization-plugin'
+
+def pl = platform {
+    localProperties {
+        property 'persistence.legacy.mode', 'false'
+    }
+
+    dbSetup {
+        dbType 'hsqldb'
+        dbUrl 'jdbc:hsqldb:hsql://hsql:9090/hybris;hsqldb.tx=MVCC'
+        dbUser 'hybris'
+        dbPassword 'hybris'
+    }
+
+    clusterSettings {
+        enableAutodiscovery()
+        udpMulticast()
+    }
+}
+
+def dpl = deployment('simpleDeployment') {
+
+    loadBalancer("${project.installerHome}/recipes/platform_only_dockerized/resources/apachelb")
+
+    hsqlImage('hsql') {
+        properties {
+            property 'port', '9090'
+        }
+    }
+
+    platformImage('platform') {
+        basedOn pl
+
+        aspect('hac') {
+            enabledWebApps 'hac'
+            disableBackgroundProcessing()
+        }
+
+        aspect('backgroundProcessing')
+
+        adminAspect()
+    }
+}
+
+task setup << {
+    pl.setup()
+}
+
+task build(dependsOn: setup) << {
+    pl.build()
+}
+
+task createImagesStructure(dependsOn: build) << {
+    dpl.createImagesStructure()
+    dpl.writeDockerBuildScript()
+}

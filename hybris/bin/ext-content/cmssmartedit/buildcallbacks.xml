@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<project name="cmssmartedit_buildcallbacks">
+
+	<patternset id="extension.cmssmartedit.binary.filter">
+		<patternset refid="extension.binary.filter" />
+		<exclude name="node_modules/" />
+		<exclude name="jsTarget/" />
+		<exclude name="**/static-resources/dist/" />
+		<exclude name="**/webroot/cmssmartedit/" />
+		<exclude name="**/webroot/css/style.css" />
+		<exclude name="buildArtifacts/" />
+	</patternset>
+
+	<patternset id="extension.cmssmartedit.source.filter">
+		<patternset refid="extension.source.filter" />
+		<exclude name="node_modules/" />
+		<exclude name="jsTarget/" />
+		<exclude name="**/static-resources/dist/" />
+		<exclude name="**/webroot/cmssmartedit/" />
+		<exclude name="**/webroot/css/style.css" />
+		<exclude name="buildArtifacts/" />
+	</patternset>
+
+	<patternset id="extension.cmssmartedit.production.filter">
+	    <patternset refid="extension.production.filter" />
+	    <exclude name="node_modules/**" />
+		<exclude name="jsTarget/" />
+		<exclude name="seLibraries/"/>
+		<exclude name="buildArtifacts/" />
+	</patternset>
+	
+	<macrodef name="cmssmartedit_before_clean">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<removeLinkToSELibraries path="${ext.cmssmartedit.path}"/>
+					<removeLinkToSELibraries path="${ext.cmssmartedit.path}"/>
+					
+					<removeLink path="${ext.cmssmartedit.path}/tmp" />
+					<removeLink path="${ext.cmssmartedit.path}/jsTarget" />
+					<removeLink path="${ext.cmssmartedit.path}/web/webroot/css" />
+					<removeLink path="${ext.cmssmartedit.path}/web/webroot/cmssmartedit/js" />
+
+					<removeNodeModulesSymlink path="${ext.cmssmartedit.path}"/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+	<macrodef name="cmssmartedit_before_build">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<linkToSELibraries path="${ext.cmssmartedit.path}"/>
+					<gruntBuild path="${ext.cmssmartedit.path}" phase="packageSkipTests" />
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="cmssmartedit_before_yunit">
+		<sequential>
+			<if>
+				<isset property="ext.npmancillary.path"/>
+				<then>
+					<gruntBuild path="${ext.cmssmartedit.path}" phase="test_only" />
+					<!--<gruntBuild path="${ext.cmssmartedit.path}" phase="verify_only" />-->
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+</project>

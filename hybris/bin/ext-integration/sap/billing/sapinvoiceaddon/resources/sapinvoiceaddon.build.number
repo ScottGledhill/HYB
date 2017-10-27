@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 06 16:26:57 CET 2016
+builddate=20161206 1626
+description=sapinvoiceaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapinvoiceaddon
+releasedate=20161129 1237
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

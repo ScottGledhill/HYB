@@ -1,0 +1,47 @@
+version: '2'
+services:
+    hsql:
+        image: dynamic_load_balancer_demo_hsql
+        volumes:
+        - ./state/hsql:/opt/hsqldb/data
+    platform_admin_init:
+        image: dynamic_load_balancer_demo_platform
+        environment:
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql     
+        command: admin initialize  
+    platform_hac:
+        image: dynamic_load_balancer_demo_platform
+        environment:
+            - JVM_ROUTE=dynamic
+            - WAIT_FOR=hsql:9090 load_balancer:6666
+            - MOD_CLUSTER_PROXY_LIST=load_balancer:6666
+        volumes:
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+            - load_balancer
+        command: hac
+    platform_background_processing:
+        image: dynamic_load_balancer_demo_platform
+        environment:
+            - WAIT_FOR=hsql:9090
+        volumes:
+            - ./resources/secrets/:/etc/ssl/certs/hybris
+            - ./state/media:/opt/hybris/data/media
+        links:
+            - hsql
+        command: backgroundProcessing
+    load_balancer:
+        image: dynamic_load_balancer_demo_mod_cluster_apache
+        environment:
+            - HTTPD_LOG_LEVEL=debug
+        volumes:
+            - ./resources/secrets/:/opt/httpd-build/conf/ssl
+        ports:
+            - "80:80"
+            - "443:443"
+            - "7777:6666"

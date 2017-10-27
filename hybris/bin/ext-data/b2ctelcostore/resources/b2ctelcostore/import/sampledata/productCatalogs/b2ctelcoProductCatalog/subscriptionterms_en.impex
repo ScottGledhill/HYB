@@ -1,0 +1,34 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# Impex for SBG Subscription Terms - en
+
+# Macros / Replacement Parameter definitions
+$lang=en
+
+UPDATE SubscriptionTerm;id[unique=true];name[lang=$lang]
+;6_months_non_renewing_cancel;6 month contract - cancellable, non-renewing, monthly billing
+;6_months_auto_renewing_cancel;6 month contract - cancellable, auto-renewing, monthly billing
+;1_year_auto_renewing_cancel;1 year contract - cancellable, auto-renewing, monthly billing
+
+
+# Impex for Telco Subscription Terms - en
+
+UPDATE SubscriptionTerm;id[unique=true];name[lang=$lang]
+;none;No contract
+;monthly_1;1 Month contract - monthly billing
+;monthly_12;12 Months contract - monthly billing
+;monthly_18;18 Months contract - monthly billing
+;monthly_24;24 Months contract - monthly billing
+;monthly_36;36 Months contract - monthly billing
+;annually_1;1 Year contract - monthly billing
+;annually_2;2 Years contract - monthly billing
+;annually_3;3 Years contract - monthly billing
+;annually_24;24 Months contract - annually billing

@@ -1,0 +1,72 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-platform-containerization-plugin'
+
+def pl = platform {
+    localProperties {
+        property 'persistence.legacy.mode', 'false'
+        property 'installed.tenants', ''
+    }
+
+    dbSetup {
+        dbType 'hsqldb'
+        dbUrl 'jdbc:hsqldb:hsql://hsql:9090/hybris;hsqldb.tx=MVCC'
+        dbUser 'hybris'
+        dbPassword 'hybris'
+    }
+
+    clusterSettings {
+        enableAutodiscovery()
+        udpMulticast()
+    }
+}
+
+def dpl = deployment('dynamicLoadBalancerDemo') {
+
+    modClusterApache("${project.projectDir}/resources/modclusterlb")
+
+    hsqlImage('hsql') {
+        properties {
+            property 'port', '9090'
+        }
+    }
+
+    platformImage('platform') {
+        basedOn pl
+
+        customTomcatFiles "${project.projectDir}/resources/mod-cluster-binaries"
+
+        aspect('hac') {
+            enabledWebApps 'hac'
+            disableBackgroundProcessing()
+
+            localProperties {
+                property 'spring.session.enabled', 'true'
+                property 'spring.session.hac.save', 'async'
+                property 'spring.session.hac.cookie.name', 'JSESSIONID'
+                property 'spring.session.hac.cookie.path', '/'
+            }
+
+            templatesProperties {
+                property 'httpsConnectorEnabled', 'false'
+                property 'serverXmlServerHook', '''<Listener className="org.jboss.modcluster.container.catalina.standalone.ModClusterListener" advertise="false" stickySession="true" stickySessionForce="false" stickySessionRemove="true" proxyList="${ENV::MOD_CLUSTER_PROXY_LIST}"/>'''
+            }
+        }
+
+        aspect('backgroundProcessing')
+
+        adminAspect()
+    }
+}
+
+task setup << {
+    pl.setup()
+}
+
+task build(dependsOn: setup) << {
+    pl.build()
+}
+
+task createImagesStructure(dependsOn: build) << {
+    dpl.createImagesStructure()
+    dpl.writeDockerBuildScript()
+}

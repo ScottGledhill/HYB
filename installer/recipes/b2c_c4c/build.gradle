@@ -1,0 +1,168 @@
+apply plugin: 'installer-platform-plugin'
+apply plugin: 'installer-addon-plugin'
+apply plugin: 'installer-datahub-plugin'
+
+def CATALINA_OPTS = "-Xms4096m -Xmx4096m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing"
+
+def config = {
+
+	localProperties {
+		property 'datahub.c4c.exportURL', 'http://127.0.0.1:9001/c4c-endpoint-mock-webapp/services/businessPartnerReplicationInMockService'
+		property 'datahub.server.url', 'http://localhost:9001/datahub/v1'
+		property 'datahub.publication.saveImpex', 'true'
+		property 'datahub.c4c.userName', 'dummyUser'
+		property 'datahub.c4c.password', 'dummyPassword'
+		property 'datahub.c4c.senderParty.schemeID.C4CCUSTOMER_POOL', 'senderSchemeID'
+		property 'datahub.c4c.senderParty.internalID.C4CCUSTOMER_POOL', 'senderInternalId'
+		property 'datahub.c4c.senderParty.schemeAgencyID.C4CCUSTOMER_POOL', '000'
+		property 'datahub.c4c.recipientParty.schemeID.C4CCUSTOMER_POOL', 'recipientSchemeID'
+		property 'datahub.c4c.recipientParty.internalID.C4CCUSTOMER_POOL', 'recipientInternalID'
+		property 'datahub.c4c.recipientParty.schemeAgencyID.C4CCUSTOMER_POOL', '111'
+		property 'c4c.payload.filename', 'payload.xml'
+		property 'kernel.autoInitMode', 'create-drop'
+		property 'datahub.encryption.key.path', '/encryption-key.txt'
+		property 'c4c.soap.request.size.threshold', '1000'
+		property 'c4c.soap.request.pause.between.requests', '5000'
+
+		property 'datahub.security.basic.admin.user', 'admin'
+		property 'datahub.security.basic.admin.password', 'nimda'
+		property 'datahub.security.basic.read_only.user', 'datahub'
+		property 'datahub.security.basic.read_only.password', 'datahub'
+
+		property 'datahubadapter.datahuboutbound.user', 'admin'
+		property 'datahubadapter.datahuboutbound.password', 'nimda'
+	}
+
+	extensions {
+		
+		extensions {
+			extName 'mcc'
+			extName 'backoffice'
+			extName 'commercesearchbackoffice'
+			extName 'commerceservicesbackoffice'
+			extName 'solrfacetsearchbackoffice'
+			extName 'solrserver'
+			extName 'yacceleratorcockpits'
+			extName 'yacceleratorinitialdata'
+			extName 'yacceleratorfulfilmentprocess'
+			extName 'yacceleratorstorefront'
+			extName 'yaddon'
+			extName 'ycommercewebservices'
+	
+			extName 'electronicsstore'
+			extName 'apparelstore'
+			
+			extName 'liveeditaddon'
+			extName 'acceleratorwebservicesaddon'
+			
+			extName 'customerticketingaddon'
+			extName 'customerticketingc4cintegrationatddtests'
+			
+			extName 'assistedservicestorefront'
+			extName 'assistedserviceatddtests'
+						
+			extName 'c4ccustomer'
+			extName 'c4ccustomeratddtests'
+			extName 'y2ysyncbackoffice'
+		}
+
+		webApp {
+			contextRoot "datahub"
+			path platformHome + "/../../../installer/work/datahub-tomcat/webapps/datahub-webapp.war"
+		}
+
+		webApp {
+			contextRoot "c4c-endpoint-mock-webapp"
+			path platformHome + "/../../../c4c-integration/binary/c4c-endpoint-mock-webapp.war"
+		}
+	}
+}
+
+def datahubServerId = 'datahub-tomcat'
+
+def datahubCfg = {
+	libraries {
+		propertyFile "local.properties", {
+		}
+	}
+	extensionDir platformHome + "/../ext-integration/datahub/extensions/c4c-integration"
+	extensionDir platformHome + "/../ext-integration/datahub/extensions/y2ysync-datahub-ext"
+	extensions \
+		'c4c-integration-canonical', \
+		'c4c-integration-raw', \
+		'c4c-integration-target', \
+		'c4c-integration-soap-schema', \
+		'c4c-integration-soap-adapter', \
+		'y2ysync-datahub-ext'
+
+	webappDir platformHome + "/../ext-integration/datahub/web-app"
+
+}
+
+task setupPlatform << {
+	def pl = platformFactory.createPlatform config
+	pl.setup()
+	
+	pl.project.addons {                                             
+			names "liveeditaddon,assistedservicestorefront,customerticketingaddon"
+			template "yacceleratorstorefront"
+			storeFronts "yacceleratorstorefront"
+			platform pl
+       }
+
+    pl.project.addons {                                             
+			names "acceleratorwebservicesaddon"
+			template "ycommercewebservices"
+			storeFronts "ycommercewebservices"
+			platform pl
+       }
+	copy {
+ 		from (
+ 			zipTree(new File(platformHome + "/../ext-integration/datahub/web-app").listFiles().
+ 				find {
+ 					it.isFile() && it=~/datahub-webapp/
+ 				}
+ 			).getFiles()
+ 		) {
+			include "**/HikariCP*.jar"
+			include "**/hsqldb*.jar"
+			include "**/javassist*.jar"
+			include "**/slf4j-api*.jar"
+		}
+		into platformHome + "/../ext-atddtests/c4ccustomeratddtests/resources/jetty/lib"
+ 	}
+}
+
+task setupDataHub << {
+	copy {
+		from platformHome + "/../ext-integration/datahub/extensions/dependencies"
+		into "${installerHome}/recipes/b2c_c4c/build/datahub-webapp/WEB-INF/lib"
+	}
+	copy {
+		from "${installerHome}/recipes/b2c_c4c/configs/encryption-key.txt"
+		into "${installerHome}/recipes/b2c_c4c/build/datahub-webapp/WEB-INF/classes"
+	}
+	datahub(datahubServerId).setup datahubCfg
+}
+
+task setup(dependsOn: [setupPlatform, setupDataHub])
+
+task initialize << {
+		def pl = platformFactory.createPlatform config
+		pl.build()
+		pl.initialize()
+}
+
+task startPlatform << {
+	def pl = platformFactory.createPlatform config
+	pl.startInBackground()
+}
+
+task start(dependsOn: [startPlatform])
+
+task stopPlatform << {
+	def pl = platformFactory.createPlatform config
+	pl.stopInBackground()
+}
+
+task stop(dependsOn: [stopPlatform])

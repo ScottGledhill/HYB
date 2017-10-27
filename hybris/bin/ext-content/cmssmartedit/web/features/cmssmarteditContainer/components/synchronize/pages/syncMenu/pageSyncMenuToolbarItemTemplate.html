@@ -1,0 +1,34 @@
+<div data-ng-if="$ctrl.isContentCatalogVersionNonActive"
+    data-uib-dropdown
+    data-is-open="$ctrl.isOpen"
+    data-auto-close="disabled"
+    class="se-toolbar-menu-ddlb syncMenu">
+    <button type="button"
+        class="btn btn-default yHybridAction se-toolbar-menu-ddlb--button"
+        data-uib-dropdown-toggle
+        data-ng-disabled="$ctrl.disabled"
+        aria-pressed="false">
+        <span class="hyicon hyicon-sync se-toolbar-menu-ddlb--button__icon"></span>
+        <span class="se-toolbar-menu-ddlb--button--txt">
+            <span>{{$ctrl.toolbarItem.name | translate}}</span>
+            <span data-ng-if="$ctrl.isNotInSync"
+                class="hyicon hyicon-caution se-toolbar-menu-ddlb--button__caution"></span>
+        </span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-left btn-block se-toolbar-menu-content se-toolbar-menu-content__page-sync"
+        role="menu">
+        <li role="menuitem"
+            data-ng-if="$ctrl.isOpen">
+            <div class="se-toolbar-menu-content--wrapper">
+                <div class="se-toolbar-menu-content--header">
+                    <div class="se-toolbar-menu-content--header__title"
+                        data-translate="se.cms.synchronization.page.title">
+                    </div>
+                </div>
+                <div class="se-toolbar-menu-content--body">
+                    <page-synchronization-panel></page-synchronization-panel>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

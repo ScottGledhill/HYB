@@ -1,0 +1,11 @@
+#Ant properties
+#Sun Dec 18 15:56:48 UTC 2016
+builddate=20161218 1556
+description=commerceservicesbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=commerceservicesbackoffice
+releasedate=20161208 1831
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Dec 07 08:32:51 CET 2016
+builddate=20161207 0832
+description=timedaccesspromotionsfacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=timedaccesspromotionsfacades
+releasedate=20161206 1357
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

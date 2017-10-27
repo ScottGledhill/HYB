@@ -1,0 +1,22 @@
+<div data-ng-controller="topToolbarMenuController" data-uib-dropdown data-is-open="status.isopen" data-auto-close="disabled" class="ySEComponentMenuW">
+    <button type="button" class="btn btn-default yHybridAction ySEComponentMenuW--button personalizationsmarteditTopToolbarButton" data-uib-dropdown-toggle data-ng-disabled="disabled" aria-pressed="false">
+        <img data-ng-if="status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_library_s.png" />
+        <img data-ng-if="!status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_library.png" />
+        <span class="ySEComponentMenuW--button--txt" data-translate="personalization.toolbar.library.name"></span>
+    </button>
+    <ul data-ng-if="status.isopen" class="dropdown-menu btn-block ySEComponentMenu ySEComponentMenu-customized" role="menu" data-ng-click="preventDefault($event);">
+        <div class="ySEComponentMenu-headers">
+            <h2 class="text-uppercase h2" data-translate="personalization.toolbar.library.header.title"></h2>
+            <small class="small" data-translate="personalization.toolbar.library.header.description"></small>
+        </div>
+        <li class="divider divider-lefttoolbar">
+        </li>
+        <li class="item ySEComponentMenuList--item">
+            <a class="ySEComponentMenu-anchor" id="personalizationsmartedit-pagecustomizations-toolbar-customization-anchor" data-translate="personalization.toolbar.library.manager.name" data-ng-click="managerViewClick()"></a>
+        </li>
+        <li class="divider divider-lefttoolbar"></li>
+        <li class="item ySEComponentMenuList--item--last">
+            <a class="ySEComponentMenu-anchor" id="personalizationsmartedit-pagecustomizations-toolbar-customization-anchor" data-translate="personalization.toolbar.library.customizationvariationmanagement.name" data-ng-click="createCustomizationClick()"></a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Dec 01 15:08:44 CET 2016
+builddate=20161201 1508
+description=textfieldconfiguratortemplateaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=textfieldconfiguratortemplateaddon
+releasedate=20161129 1237
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

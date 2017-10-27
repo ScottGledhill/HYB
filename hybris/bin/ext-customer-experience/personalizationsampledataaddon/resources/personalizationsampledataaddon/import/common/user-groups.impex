@@ -1,0 +1,78 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$regulargroup=regulargroup
+$customergroup=customergroup
+
+$defaultPassword=12341234
+
+INSERT_UPDATE Employee;UID[unique=true];password[default=1234];groups(uid)[mode=append];
+;cmsmanager;;cmsmanagergroup;
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];;
+;$regulargroup;customergroup;;
+
+
+INSERT_UPDATE CxSegment;code[unique=true];
+;VIPGold;
+;VIPSilver;
+;VIPBronze;
+;CATEGORY Burton;
+;CATEGORY 250600;
+;Women;
+;Men;
+;BeachwearLover;
+;FlannelShirtsFan;
+;FlipFlopsEnthusiast;
+;ShadesConnoisseur;
+;BeltsOldHand;
+;HatsFan;
+;Under20;
+;20-29;
+;30-39;
+;40-49;
+;50-59;
+;60-69;
+;70-79;
+;80-89;
+;90-99;
+
+INSERT_UPDATE Customer;uid[unique=true];groups(uid);password[default=$defaultPassword];name;&userref;
+;vipgold@hybris.com;customergroup;;Customer VIP Gold;vipgold@hybris.com;
+;vipsilver@hybris.com;customergroup;;Customer VIP Silver;vipsilver@hybris.com;
+;vipbronze@hybris.com;customergroup;;Customer VIP Bronze;vipbronze@hybris.com;
+;women@hybris.com;customergroup;;Women;women@hybris.com;
+;men@hybris.com;customergroup;;Men;men@hybris.com;
+;womenvipgold@hybris.com;customergroup;;Women Vip Gold;womenvipgold@hybris.com;
+;womenvipsilver@hybris.com;customergroup;;Women Vip Silver;womenvipsilver@hybris.com;
+;menvipbronze@hybris.com;customergroup;;Men Vip bronze;;menvipbronze@hybris.com;
+;menshortslover@hybris.com;customergroup;;Men Shorts Lover;;menshortslover@hybris.com;
+;shortslover@hybris.com;customergroup;;Shorts Lover;;shortslover@hybris.com;
+;burtonlover@hybris.com;customergroup;;Burton Lover;;burtonlover@hybris.com;
+
+INSERT_UPDATE CxUserToSegment;segment(code)[unique=true];user(uid)[unique=true];affinity[default=1];
+;VIPGold;vipgold@hybris.com;
+;VIPSilver;vipsilver@hybris.com;
+;VIPBronze;vipbronze@hybris.com;
+;Women;women@hybris.com;
+;Women;womenvipgold@hybris.com;
+;VIPGold;womenvipgold@hybris.com;
+;Women;womenvipsilver@hybris.com;
+;VIPSilver;womenvipsilver@hybris.com;
+;Men;men@hybris.com;
+;Men;menvipbronze@hybris.com;
+;VIPBronze;menvipbronze@hybris.com;
+;Men;menshortslover@hybris.com;
+;CATEGORY 250600;menshortslover@hybris.com;
+;CATEGORY Burton;womenvipgold@hybris.com;
+;CATEGORY 250600;shortslover@hybris.com;
+;CATEGORY Burton;burtonlover@hybris.com;

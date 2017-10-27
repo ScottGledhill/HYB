@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	
+	<!-- DATA -->
+	<enum class="de.hybris.platform.cmssmarteditwebservices.data.StructureTypeMode">
+		<description>StructureTypeMode.BASE is used to tag attributes defined outside of this extension.</description>
+		<value>BASE</value>
+		<value>DEFAULT</value>
+		<value>ADD</value>
+		<value>CREATE</value>
+		<value>EDIT</value>
+	</enum>
+	
+	<bean class="de.hybris.platform.cmswebservices.data.ComponentTypeAttributeData">
+		<property name="editable" type="boolean" />
+		<property name="mode" type="String" />
+	</bean>
+
+	<!-- Media -->
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.MediaData">
+		<property name="code" type="String" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+		<property name="mime" type="String" />
+		<property name="altText" type="String" />
+		<property name="description" type="String" />
+		<property name="url" type="String" />
+		<property name="downloadUrl" type="String" />
+	</bean>
+
+
+	<!-- Products -->
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.ProductData">
+		<property name="uid" type="String" />
+		<property name="code" type="String" />
+		<property name="name" type="java.util.Map&lt;String,String>" />
+		<property name="description" type="java.util.Map&lt;String,String>" />
+		<property name="thumbnail" type="MediaData" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.CategoryData">
+		<property name="uid" type="String" />
+		<property name="code" type="String" />
+		<property name="name" type="java.util.Map&lt;String,String>" />
+		<property name="description" type="java.util.Map&lt;String,String>" />
+		<property name="thumbnail" type="MediaData" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+	</bean>
+
+	
+	<!-- DTO -->
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.PageableWsDTO">
+		<property name="pageSize" type="int" />
+		<property name="currentPage" type="int" />
+		<property name="sort" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.StructureListWsDTO">
+		<property name="structures" type="java.util.List&lt;de.hybris.platform.cmssmarteditwebservices.dto.StructureWsDTO>" />
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.StructureWsDTO">
+		<property name="code" type="String" />
+		<property name="category" type="String" />
+		<property name="name" type="String" />
+		<property name="i18nKey" type="String" />
+		<property name="type" type="String" />
+		<property name="attributes" type="java.util.List&lt;de.hybris.platform.cmssmarteditwebservices.dto.StructureAttributeWsDTO>" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.StructureAttributeWsDTO">
+		<property name="qualifier" type="String" />
+		<property name="required" type="boolean" />
+		<property name="localized" type="Boolean" />
+		<property name="cmsStructureType" type="String" />
+		<property name="cmsStructureEnumType" type="String" />
+		<property name="i18nKey" type="String" />
+		<property name="dependsOn" type="String" />
+		<property name="options" type="java.util.List&lt;de.hybris.platform.cmswebservices.data.OptionData&gt;" />
+		<property name="mode" type="String" />
+		<property name="editable" type="boolean" />
+	</bean>
+
+
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.CategorySearchResultWsDTO">
+		<property name="productCategories" type="java.util.List&lt;CategoryWsDTO>" />
+		<property name="pagination" type="de.hybris.platform.webservicescommons.dto.PaginationWsDTO" />
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.CategoryWsDTO">
+		<property name="uid" type="String" />
+		<property name="code" type="String" />
+		<property name="name" type="java.util.Map&lt;String,String>" />
+		<property name="description" type="java.util.Map&lt;String,String>" />
+		<property name="thumbnail" type="MediaWsDTO" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.ProductSearchResultWsDTO">
+		<property name="products" type="java.util.List&lt;ProductWsDTO>" />
+		<property name="pagination" type="de.hybris.platform.webservicescommons.dto.PaginationWsDTO" />
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.ProductWsDTO">
+		<property name="uid" type="String" />
+		<property name="code" type="String" />
+		<property name="name" type="java.util.Map&lt;String,String>" />
+		<property name="description" type="java.util.Map&lt;String,String>" />
+		<property name="thumbnail" type="MediaWsDTO" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.dto.MediaWsDTO">
+		<property name="code" type="String" />
+		<property name="catalogId" type="String" />
+		<property name="catalogVersion" type="String" />
+		<property name="mime" type="String" />
+		<property name="altText" type="String" />
+		<property name="description" type="String" />
+		<property name="url" type="String" />
+		<property name="downloadUrl" type="String" />
+	</bean>
+	
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.ItemTypeWsDTO">
+		<property name="itemType" type="String" />
+		<property name="i18nKey" type="String" />
+	</bean>
+	
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.SyncItemStatusWsDTO">
+		<property name="itemId" type="String" />
+		<property name="itemType" type="String" />
+		<property name="name" type="String" />
+		<property name="status" type="String" />
+		<property name="lastSyncStatus" type="Long"/>
+		<property name="dependentItemTypesOutOfSync" type="java.util.List&lt;ItemTypeWsDTO>" />
+		<property name="selectedDependencies" type="java.util.List&lt;SyncItemStatusWsDTO>" />
+		<property name="sharedDependencies" type="java.util.List&lt;SyncItemStatusWsDTO>" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.ItemSynchronizationWsDTO">
+		<property name="itemId" type="String" />
+		<property name="itemType" type="String" />
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.data.SynchronizationWsDTO">
+		<property name="items" type="java.util.List&lt;ItemSynchronizationWsDTO>" />
+	</bean>
+	
+	
+</beans>

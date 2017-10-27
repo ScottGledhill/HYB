@@ -1,0 +1,62 @@
+<div data-ng-cloak
+    data-ng-class="{'smartEditLogin':modalController.initialized!==true, 'smartEditLoginModal':modalController.initialized!==false, 'vertical-center':true}">
+    <div class="ySELoginContent">
+        <div class="text-center ySELogo">
+            <img src="static-resources/images/SmartEditLogo.svg"
+                class="ySELogoImage">
+        </div>
+        <form autocomplete="off"
+            data-ng-submit="modalController.submit(loginDialogForm)"
+            class="signinForm"
+            name='loginDialogForm'
+            novalidate>
+            <div class="ySELoginAuthMessage"
+                data-ng-show="modalController.initialized!==false">
+                <div class="ySELoginInlineMsg"
+                    data-translate="logindialogform.reauth.message1"></div>
+                <div class="ySELoginInlineMsg"
+                    data-translate="logindialogform.reauth.message2"></div>
+            </div>
+
+            <div class="form-group hyLoginError ySELoginGroup"
+                data-ng-if="loginDialogForm.errorMessage && loginDialogForm.posted && (loginDialogForm.$invalid || loginDialogForm.failed)">
+                <div class="ySELoginGroup-error"
+                    data-ng-class="{'alert alert-error-bluebg errorDiv':true}"
+                    id="invalidError"> {{loginDialogForm.errorMessage | translate}}</div>
+            </div>
+
+            <div class="form-group ySELoginGroup">
+                <input class="ySELoginField"
+                    type="text"
+                    id="username_{{modalController.authURIKey}}"
+                    name="username"
+                    placeholder="{{ 'authentication.form.input.username' | translate}}"
+                    autofocus
+                    data-ng-model="modalController.auth.username"
+                    required/>
+            </div>
+            <div class="form-group ySELoginGroup">
+                <input class="ySELoginField"
+                    type="password"
+                    id='password_{{modalController.authURIKey}}'
+                    name='password'
+                    placeholder="{{ 'authentication.form.input.password' | translate}}"
+                    data-ng-model="modalController.auth.password"
+                    required/>
+            </div>
+
+            <div class="form-group ySELoginGroup">
+                <language-selector class="ySELoginLanguageSelector"></language-selector>
+            </div>
+
+            <div class="form-group top-buffer2 ySELoginGroup">
+                <button class="btn btn-lg btn-primary ySELoginButton"
+                    id="submit_{{modalController.authURIKey}}"
+                    name="submit"
+                    type="submit"
+                    data-translate="authentication.form.button.submit"></button>
+            </div>
+
+        </form>
+    </div>
+</div>

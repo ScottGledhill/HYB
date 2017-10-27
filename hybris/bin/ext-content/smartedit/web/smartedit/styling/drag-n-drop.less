@@ -1,0 +1,167 @@
+@import (reference) "../../../web/webroot/static-resources/thirdparties/bootstrap/less/bootstrap.less";
+@import (reference) "variables.less";
+
+.over-slot-enabled {
+  border: 2px rgb(7,96,164) solid;
+  opacity: 0.65;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.over-slot-disabled {
+  border: solid #ff3b30 1px;
+  background-color: #ff3b30;
+  opacity: 0.65;
+  cursor: no-drop;
+}
+
+.over-slot-disabled:after{
+  text-align: center;
+  color: #ffffff;
+  content: attr(data-content);
+  display: block;
+  z-index: 500;
+}
+
+.eligible-slot {
+  border: dashed #b7c1cd 1px;
+}
+
+.ui-sortable-handle {
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.ySEemptySlot{
+  min-height: 72px;
+  border: 1px dashed #b7c1cd;
+}
+
+body .ySmartEditToolbars .dropdown-menu {
+  overflow: auto !important;
+}
+
+// HTML 5 DRAG AND DROP STYLING
+.ySECmsScrollArea{
+  position: fixed;
+  background-color: rgba(86, 86, 86, .7);
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  text-align: center;
+  transition: 1s all;
+
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  vertical-align: middle;
+}
+
+.ySEIconBckg {
+  background-color: #7ac1f3;
+}
+
+#smarteditoverlay .overlayDnd {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  pointer-events: none;
+}
+
+#smarteditoverlay.smarteditoverlay_dndRendering {
+  animation: fadeInDndRendering .5s 1;
+  background-color: rgba(255,255,255,.7);
+
+  .smartEditComponentX[ data-smartedit-component-type='ContentSlot' ]{
+    border: 1px rgb(7,96,164) dashed;
+  }
+}
+
+#smarteditoverlay .component_dragged {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(0,0,0,.1) 15px, rgba(0,0,0,.1) 30px);
+}
+
+#smarteditoverlay .component_dragged_hovered {
+  background-color: rgba(0,255,0,.3);
+  background-image: none;
+}
+
+#smarteditoverlay .overlayDropzone {
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+}
+
+#smarteditoverlay .over-slot-enabled .overlayDropzone:not(.overlayDropzone--hovered) {
+  visibility: visible;
+  background-color: rgba(7,96,164,.3);
+}
+
+#smarteditoverlay .over-slot-enabled .component_dragged .overlayDropzone {
+  visibility: hidden;
+}
+
+#smarteditoverlay .overlayDropzone.overlayDropzone--hovered{
+  visibility: visible;
+  animation: fadeSuccessContentSlot .3s 1;
+  background-color: rgba(0,255,0,.3);
+}
+
+#smarteditoverlay .overlayDropzone--left,
+#smarteditoverlay .overlayDropzone--right {
+  height: 100% !important;
+  top: 0px !important;
+  width: 20px !important;
+}
+
+#smarteditoverlay .overlayDropzone--top,
+#smarteditoverlay .overlayDropzone--bottom {
+  top: 0px !important;
+  width: 100% !important;
+  height: 20px !important;
+}
+
+#smarteditoverlay .overlayDropzone--left {
+  left: 0px !important;
+}
+
+#smarteditoverlay .overlayDropzone--right {
+  left: auto !important;
+  right: 0px !important;
+}
+
+#smarteditoverlay .overlayDropzone--top {
+  top: 0px !important;
+}
+#smarteditoverlay .overlayDropzone--bottom {
+  bottom: 0px !important;
+  top: auto !important;
+}
+
+#smarteditoverlay .overlayDropzone.overlayDropzone--full{
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  animation: fadeSuccessContentSlot .3s 1;
+  background-color: rgba(0,255,0,.3) !important;
+ }
+
+#smarteditoverlay .overlayDropzone--hovered.overlayDropzone--top,
+#smarteditoverlay .overlayDropzone--hovered.overlayDropzone--bottom {
+  transform:scale(1,2);
+  transition-duration: 0.2s;
+}
+
+#smarteditoverlay .overlayDropzone--hovered.overlayDropzone--left,
+#smarteditoverlay .overlayDropzone--hovered.overlayDropzone--right {
+  transform:scale(2,1);
+  transition-duration: 0.2s;
+}

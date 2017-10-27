@@ -1,0 +1,23 @@
+<div class="input-group date ySEDateField"
+    data-ng-class="{'ySEDataDisabled':!isEditable}"
+    id="date-time-picker-{{name}}"
+    data-ng-show="isEditable">
+    <input type='text'
+        class="form-control ySEDateField__input"
+        placeholder="{{ placeholderText | translate}}"
+        name="{{name}}" />
+    <span class="input-group-addon ySEDateField__date">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+<div class="input-group date ySEDateField"
+    data-ng-if="!isEditable"
+    data-ng-class="{'ySEDataDisabled':!isEditable}"
+    data-ng-if="!isEditable">
+    <input type='text'
+        class="form-control ySEDateField__input"
+        data-ng-model="model"
+        data-date-formatter
+        data-ng-disabled="true"
+        data-format-type="short">
+</div>

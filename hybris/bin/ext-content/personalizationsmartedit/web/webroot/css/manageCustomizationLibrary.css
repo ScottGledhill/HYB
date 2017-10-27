@@ -1,0 +1,289 @@
+/* *
+/* This file includes the styles used in Manage Customization Library modal
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+.manage-customization {
+  text-align: center;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+.manage-customization .modal-header.ng-scope h4 {
+  font-family: Dosis, medium;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+  color: #27394f;
+  margin: 0 auto 0 auto;
+}
+.manage-customization .modal-header {
+  border: none;
+  padding-right: 0px;
+}
+.manage-customization .modal-body {
+  padding-top: 0;
+}
+.manage-customization .h2-color--grey-font {
+  color: #8592a2;
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.manage-customization .customization-search {
+  margin: 2em auto .5em auto;
+}
+.manage-customization .customization-search .glyphicon {
+  top: 0;
+  background-color: #ffffff;
+  font-size: 16px;
+}
+.manage-customization .customization-search .glyphicon-search {
+  border-right: none;
+}
+.manage-customization .customization-search .form-control {
+  color: #27394f;
+  font-size: 15px;
+  font-weight: 500;
+  border-left: none;
+  padding-left: 0;
+  box-shadow: none;
+  border-right: none;
+}
+.manage-customization .customization-search input[type=text]:focus {
+  border-bottom: 1px solid #d4d7dc;
+  border-top: 1px solid #d4d7dc;
+  border-left: none;
+  border-right: none;
+}
+.manage-customization .search-results {
+  width: 50%;
+  margin: auto auto .5em auto;
+  color: #8592a2;
+  font-style: italic;
+}
+.manage-customization .filter-layout .ui-select-container {
+  width: 96%;
+  text-align: left;
+}
+.manage-customization .filter-layout--no-results {
+  min-height: 150px;
+}
+.manage-customization .col-reset-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+.manage-customization .categoryTable {
+  margin: 0 auto .5em auto;
+  color: #27394f;
+}
+.manage-customization .categoryTable-lefttoolbar {
+  margin-top: 5px;
+}
+.manage-customization .statusDataValue {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.manage-customization .dates-layout {
+  font-size: 12px;
+}
+.manage-customization .customization__glyphicon-chevron {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+.manage-customization .glyphicon-down-lefttoolbar {
+  font-size: 14px;
+  top: 10px;
+}
+.manage-customization .hyicon-more {
+  font-size: 24px;
+}
+.manage-customization .divider {
+  border-bottom: 1px solid #d4d7dc;
+}
+.manage-customization .button-margin {
+  margin-top: 15px;
+}
+.manage-customization .hyicon {
+  font-family: inherit;
+}
+.manage-customization .hyicon:before {
+  vertical-align: top;
+}
+.manage-customization .hyicon-lefttoolbar::before {
+  vertical-align: middle;
+  font-size: 28px;
+}
+.manage-customization .y-add-btn .hyicon:before {
+  padding-right: 5px;
+}
+.manage-customization a:hover {
+  border: none;
+}
+.manage-customization .primaryData {
+  font-weight: 600;
+}
+.manage-customization .hyicon-arrow {
+  font-size: 18px;
+}
+.manage-customization .customizationLayout,
+.manage-customization .variationLayout {
+  padding: 20px 15px 10px 15px;
+  background: #ffffff;
+}
+.manage-customization .customizationLayoutGrey {
+  background: #f3f6f9;
+}
+.manage-customization .row-reset-margin {
+  margin-left: 0;
+  margin-right: 0;
+}
+.manage-customization personalizationsmartedit-pagination .dropdown-menu {
+  min-width: 160px;
+  text-align: left;
+}
+.manage-customization .search-item-lefttoolbar {
+  width: 102%;
+  height: 100%;
+  padding: 15px;
+  background: #f3f6f9;
+  box-shadow: 0 2px 3px rgba(138, 143, 161, 0.2);
+}
+.manage-customization .search-item-lefttoolbar .select2-search-field input {
+  padding-left: 5px;
+}
+.manage-customization .search-item-lefttoolbar .select2-search-field::before {
+  font-weight: 400;
+  font-family: hyicon;
+  content: "\e00f";
+  padding-left: 10px;
+  vertical-align: middle;
+  font-size: 18px;
+}
+.manage-customization .search-item-lefttoolbar .statusDataValue {
+  font-size: 11px;
+}
+.manage-customization .row-lefttoolbar {
+  margin-left: 0;
+  padding: 15px;
+  border-bottom: 1px solid #d4d7dc;
+}
+.manage-customization .row-lefttoolbar.filter-layout.filter-layout--no-results,
+.manage-customization .row-lefttoolbar.customization--last {
+  border-bottom: none;
+}
+.manage-customization .customization--last {
+  padding-bottom: 30px;
+}
+.manage-customization .col-lefttoolbar-glyphicon {
+  padding-left: 0;
+  padding-right: 15px;
+}
+.manage-customization .col-lefttoolbar-hyicon {
+  padding-left: 0;
+  padding-right: 5px;
+}
+.manage-customization .dropdown-menu-leftoolbar {
+  min-width: 100px;
+}
+.manage-customization .overflow-wrapper-lefttoolbar {
+  margin-bottom: -30px;
+  max-height: 55vh;
+  overflow-x: hidden;
+}
+.manage-customization .dropdown-menu-single-item {
+  margin-top: -5px;
+  margin-bottom: -5px;
+  padding: 10px 16px;
+}
+.manage-customization .selectedVariation {
+  background-color: #32a0ec;
+  color: #ffffff;
+}
+.manage-customization .selectedVariation .selectedVariation-icon {
+  background-image: url("../icons/selected_variation.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 45px;
+  top: -5px;
+}
+.manage-customization .selectedVariation .status-active,
+.manage-customization .selectedVariation .status-inactive,
+.manage-customization .selectedVariation .status-ignore {
+  color: #ffffff;
+}
+.manage-customization .selectedVariation .commerce-customization__marker--icon {
+  background-image: url("../icons/promotion_on.png");
+}
+.manage-customization .btn-link:hover,
+.manage-customization .btn-link:focus,
+.manage-customization .no-underline a:hover,
+.manage-customization .no-underline a:focus {
+  text-decoration: none;
+}
+.select2-highlighted .status-active,
+.select2-highlighted .status-inactive,
+.select2-highlighted .status-ignore {
+  color: #ffffff;
+}
+.customize-panel__marker-icon {
+  margin-left: -10px;
+}
+.ySEComponentMenu-customized {
+  max-width: 360px;
+  top: inherit;
+}
+.ySEComponentMenu-customized .ySEComponentMenuList--item,
+.ySEComponentMenu-customized .ySEComponentMenuList--item--last {
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: -10px;
+  overflow: hidden;
+}
+.ySEComponentMenu-customized .ySEComponentMenuList--item .ySEComponentMenu-anchor,
+.ySEComponentMenu-customized .ySEComponentMenuList--item--last .ySEComponentMenu-anchor {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  padding-bottom: 0;
+}
+.ySEComponentMenu-customized .ySEComponentMenuList--item .ySEComponentMenu-anchor:hover,
+.ySEComponentMenu-customized .ySEComponentMenuList--item--last .ySEComponentMenu-anchor:hover,
+.ySEComponentMenu-customized .ySEComponentMenuList--item .ySEComponentMenu-anchor:focus,
+.ySEComponentMenu-customized .ySEComponentMenuList--item--last .ySEComponentMenu-anchor:focus {
+  background: none;
+  text-decoration: none;
+  color: #ffffff;
+  opacity: 0.8;
+}
+.ySEComponentMenu-customized .ySEComponentMenuList--item--last {
+  margin-bottom: 9px;
+}
+.ySEComponentMenu-headers {
+  color: #ffffff;
+  padding-left: 25px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+}
+.ySEComponentMenu-headers .h2 {
+  font-size: 19px;
+  font-weight: normal;
+}
+.ySEComponentMenu-headers .small {
+  font-style: italic;
+}
+.ySEComponentMenu-customized > li.item:first-of-type {
+  padding: 0 0 30px 0;
+}
+.menuitem-lefttoolbar {
+  background: #ffffff;
+  margin-bottom: -5px;
+}
+.divider-lefttoolbar {
+  margin: 0;
+}
+@media (min-width: 1600px) {
+  .header-status-layout {
+    padding-right: 25%;
+  }
+}

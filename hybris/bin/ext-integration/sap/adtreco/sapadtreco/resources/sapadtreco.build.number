@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 06 20:22:54 CET 2016
+builddate=20161206 2022
+description=sapadtreco
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapadtreco
+releasedate=20161205 1328
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

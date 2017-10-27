@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype generate="true" code="SAPRecommendationBuffer"
+			jaloclass="de.hybris.platform.sapprodrecobuffer.jalo.SAPRecommendationBuffer"
+			extends="GenericItem" autocreate="true">
+			<deployment table="SAPRecommendationBuffer" typecode="9327" />
+
+			<attributes>
+				<attribute qualifier="scenarioId" type="java.lang.String">
+					<description>Scenario ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="hashId" type="java.lang.String">
+					<description>Hash ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="leadingItems" type="java.lang.String">
+					<description>Leading products or categories</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="recoList" type="java.lang.String">
+					<description>List of products to recommend</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="false" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="expiresOn" type="java.util.Date">
+					<description>Recommendation expiry</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="SAPRecommendationMapping"
+			jaloclass="de.hybris.platform.sapprodrecobuffer.jalo.SAPRecommendationMapping"
+			extends="GenericItem" autocreate="true">
+			<deployment table="SAPRecommendationMapping" typecode="9328" />
+
+			<attributes>
+				<attribute qualifier="userId" type="java.lang.String">
+					<description>User ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="scenarioId" type="java.lang.String">
+					<description>Scenario ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="hashId" type="java.lang.String">
+					<description>Hash ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="expiresOn" type="java.util.Date">
+					<description>Recommendation expiry</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+
+		<itemtype generate="true" code="SAPRecoTypeMapping"
+			jaloclass="de.hybris.platform.sapprodrecobuffer.jalo.SAPRecoTypeMapping"
+			extends="GenericItem" autocreate="true">
+			<deployment table="SAPRecoTypeMapping" typecode="9329" />
+
+			<attributes>
+				<attribute qualifier="scenarioId" type="java.lang.String">
+					<description>Scenario ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="recoType" type="java.lang.String">
+					<description>Recommendation type</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="hashId" type="java.lang.String">
+					<description>Hash ID</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="false" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="expiresOn" type="java.util.Date">
+					<description>Recommendation expiry</description>
+					<modifiers read="true" write="true" initial="false"
+						optional="false" unique="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

@@ -1,0 +1,21 @@
+<div data-uib-dropdown
+    data-is-open="$ctrl.isOpen"
+    data-auto-close="$ctrl.disabled"
+    class="ySEComponentMenuW">
+    <button type="button"
+        class="btn btn-default yHybridAction ySEComponentMenuW--button"
+        data-uib-dropdown-toggle
+        data-ng-disabled="$ctrl.disabled"
+        aria-pressed="false">
+        <img data-ng-src="{{$ctrl.menuIcon}}" />
+        <span class="ySEComponentMenuW--button--txt">{{$ctrl.label | translate}}</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-left btn-block ySEPageInfoMenu"
+        role="menu"
+        data-ng-click="$ctrl.preventDefault($event);">
+        <li role="menuitem"
+            data-ng-if="$ctrl.isOpen">
+            <page-info-container data-on-edit-click-callback="$ctrl.toggleMenu()"></page-info-container>
+        </li>
+    </ul>
+</div>

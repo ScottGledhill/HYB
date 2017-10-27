@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<base href="/web/webroot" />-->
+    <base href="/buildArtifacts/static-resources/" />
+
+    <!--3rd prty libs-->
+    <script src="dist/smartedit/js/thirdparties.js"></script>
+    <script src="thirdparties/ckeditor/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="/buildArtifacts/static-resources/dist/smartedit/css/outer-styling.css">
+
+    <script src="/buildArtifacts/static-resources/smarteditloader/js/smarteditloader.js"></script>
+    <script src="/buildArtifacts/static-resources/smarteditcontainer/js/smarteditcontainer.js"></script>
+    <script src="/web/webroot/cmssmartedit/js/cmssmarteditContainer.js"></script>
+
+    <!-- mocks -->
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorTabset/tabsetApp.js"></script>
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorTabset/backendMocks.js"></script>
+    <script src="../../jsTests/tests/cmssmarteditContainer/e2e/features/editorTabset/mockRenderService.js"></script>
+
+</head>
+
+<body data-ng-app="tabsetApp" data-ng-controller="defaultController as ctl">
+
+    <h1>Tabset Test</h1>
+    <editor-tabset control="ctl.tabsetControl" model="ctl.data" tabs="ctl.tabs"></editor-tabset>
+
+    <br/>
+    <br/>
+
+    <button id="save-button" ng-click="ctl.tabsetControl.saveTabs()">Save Tabs</button>
+    <button id="reset-button" ng-click="ctl.tabsetControl.resetTabs()">Reset Tabs</button>
+    <button id="cancel-button" ng-click="ctl.tabsetControl.cancelTabs()">Cancel Tabs</button>
+
+</body>
+
+
+</html>

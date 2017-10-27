@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 06 15:41:55 CET 2016
+builddate=20161206 1541
+description=groovynature
+group.id=de.hybris.platform
+module.name=platform-module
+name=groovynature
+releasedate=20160927 1348
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

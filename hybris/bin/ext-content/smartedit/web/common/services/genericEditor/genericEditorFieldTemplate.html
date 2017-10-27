@@ -1,0 +1,14 @@
+<div validation-id="{{field.qualifier}}"
+    data-ng-cloack
+    class="ySEField">
+
+    <div data-ng-if="field.prefixText"
+        class="ySEText ySEFieldPrefix">{{field.prefixText | translate}}</div>
+    <div data-ng-if="field.template"
+        data-ng-include="field.template"></div>
+
+    <se-generic-editor-field-errors data-field="field"
+        data-qualifier="qualifier"></se-generic-editor-field-errors>
+    <div data-ng-if="field.postfixText"
+        class="ySEText ySEFieldPostfix">{{field.postfixText | translate}}</div>
+</div>

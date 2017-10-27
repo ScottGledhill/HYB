@@ -1,0 +1,154 @@
+def config = {
+	localProperties {
+		property 'googleApiKey', ''
+		property 'website.electronics.http', 'http://electronics.local:9001/yacceleratorstorefront'
+		property 'website.electronics.https', 'https://electronics.local:9002/yacceleratorstorefront'
+		property 'website.apparel-de.http', 'http://apparel-de.local:9001/yacceleratorstorefront'
+		property 'website.apparel-de.https', 'https://apparel-de.local:9002/yacceleratorstorefront'
+		property 'website.apparel-uk.http', 'http://apparel-uk.local:9001/yacceleratorstorefront'
+		property 'website.apparel-uk.https', 'https://apparel-uk.local:9002/yacceleratorstorefront'
+		property 'website.powertools.http', 'http://powertools.local:9001/yb2bacceleratorstorefront'
+		property 'website.powertools.https', 'https://powertools.local:9002/yb2bacceleratorstorefront'
+		
+		
+		/* CPQ related Properties */
+		
+		/* The type the DBMS you use for storing knowledge bases: MySQL, Microsoft SQL Server 2, Oracle */
+		property 'crm.system_type', 'MySQL'
+				
+		/* DB host example localhost*/
+		property 'crm.database_hostname', 'localhost'
+		
+		/* DB ID */
+		property 'crm.database', 'ssc'
+				
+		/* DB port example 3306*/
+		property 'crm.database_port', '3306'
+				
+		/* DB user*/
+		property 'crm.database_user', 'sscuser'
+				
+		/* DB password*/
+		property 'crm.database_password', '1234'
+				
+		/* DB ssc jndi usage enabled*/
+		property 'crm.ssc_jndi_usage', 'false'
+				
+		/* jndi datasource*/
+		property 'crm.ssc_jndi_datasource', 'jdbc/SSC_IPC'		
+	}
+
+		extensions {
+				scanPath '${HYBRIS_BIN_DIR}/ext-integration/sap'
+
+				extName 'mcc'
+				extName 'commercesearchbackoffice'
+				extName 'b2bcommercebackoffice'
+				extName 'solrfacetsearchbackoffice'
+				extName 'b2badmincockpit'
+
+				extName 'yacceleratorcockpits'
+				extName 'yacceleratorinitialdata'
+				extName 'yacceleratorfulfilmentprocess'
+				extName 'yacceleratorstorefront'
+				extName 'ycommercewebservices'
+				extName 'ycommercewebservicestest'
+
+				extName 'apparelstore'
+				extName 'electronicsstore'
+				extName 'powertoolsstore'
+				extName 'solrserver'
+
+				extName 'acceleratorwebservicesaddon'
+				extName 'b2bacceleratoraddon'
+				extName 'commerceorgaddon'
+				extName 'commerceorgsamplesaddon'
+				extName 'orderselfserviceaddon'
+
+				extName 'assistedservicestorefront'
+				extName 'customerticketingaddon'
+				extName 'customersupportbackoffice'
+
+				extName 'rulebuilderbackoffice'
+				extName 'couponbackoffice'
+				extName 'droolsruleengineservices'
+				extName 'couponfacades'
+				extName 'promotionenginesamplesaddon'
+			
+				extName 'textfieldconfiguratortemplatebackoffice'
+				extName 'textfieldconfiguratortemplateaddon'
+
+				extName 'assistedserviceatddtests'
+				extName 'promotionengineatddtests'
+				extName 'commercesearchatddtests'
+				extName 'textfieldconfiguratortemplateatddtests'
+
+				extName 'liveeditaddon'
+				extName 'cmswebservices'
+				extName 'smarteditwebservices'
+				extName 'permissionswebservices'
+				extName 'smarteditaddon'
+				extName 'cmssmartedit'
+				extName 'previewwebservices'
+				extName 'cmssmarteditwebservices'
+				
+				
+				/* CPQ related extensions */
+				extName 'sapproductconfigb2b' 
+				extName 'sapproductconfigbackoffice'
+				extName 'sapproductconfigb2bservices' 
+				extName 'sapproductconfigruntimessc'
+				extName 'sapproductconfigrules'
+				extName 'sapproductconfigrulesbackoffice'		
+				extName 'ysapproductconfigaddon' 				
+
+		}
+}
+
+task setup << {
+		apply plugin: 'installer-platform-plugin'
+		apply plugin: 'installer-addon-plugin'
+		def pl = platform(config)
+		pl.setup()
+	
+		pl.executeAntTarget 'extgen -Dinput.template=yacceleratorstorefront -Dinput.name=yb2bacceleratorstorefront -Dinput.package=de.hybris.platform.yb2bacceleratorstorefront'
+	
+		pl.extensions {
+			extName 'yb2bacceleratorstorefront'
+		}
+		pl.setup()
+		
+		pl.project.addons {
+				names "commerceorgsamplesaddon,assistedservicestorefront,customerticketingaddon,promotionenginesamplesaddon,textfieldconfiguratortemplateaddon,orderselfserviceaddon,liveeditaddon,smarteditaddon,ysapproductconfigaddon"
+				template "yacceleratorstorefront"
+				storeFronts "yacceleratorstorefront,yb2bacceleratorstorefront"
+				platform pl
+		}
+
+		pl.project.addons {
+				names "b2bacceleratoraddon,commerceorgaddon"
+				template "yacceleratorstorefront"
+				storeFronts "yb2bacceleratorstorefront"
+				platform pl
+		}
+			
+		pl.project.addons {
+				names "acceleratorwebservicesaddon"
+				template "ycommercewebservices"
+				storeFronts "ycommercewebservices"
+				platform pl
+		}
+}
+
+task initialize << {
+		apply plugin: 'installer-platform-plugin'
+		def pl = platform(config)
+		pl.build()
+		pl.initialize()
+}
+
+task start << {
+		apply plugin: 'installer-platform-plugin'
+		def pl = platform(config)
+		pl.start()
+}

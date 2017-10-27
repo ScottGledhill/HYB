@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+ 
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+ 
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<context:annotation-config/>
+	<context:component-scan base-package="de.hybris.platform.yaasyprofileconnect.client"/>
+	
+	<!-- configure Charon client -->
+	<bean id="profileSecuredGraphClient" class="com.hybris.charon.HttpClientFactoryBean">
+		<property name="propertyResolver" ref="defaultProfilePlatformPropertyResolver"/>
+		<property name="clientId" value="profileSecuredGraph"/>
+		<property name="type" value="de.hybris.platform.yaasyprofileconnect.client.ProfileSecuredGraphClient"/>
+	</bean>
+
+	<bean id="defaultProfilePlatformPropertyResolver" class="de.hybris.platform.rest.config.PlatformPropertyResolver">
+		<constructor-arg value="yaasyprofileconnect" />
+		<constructor-arg ref="configurationService" />
+	</bean>
+			
+</beans>

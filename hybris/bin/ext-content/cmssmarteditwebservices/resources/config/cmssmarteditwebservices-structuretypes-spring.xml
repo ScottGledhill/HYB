@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Type Attribute Populators -->
+	
+	<bean id="editableComponentTypeAttributePopulator" class="de.hybris.platform.cmssmarteditwebservices.structures.populator.EditableComponentTypeAttributePopulator">
+		<property name="editable" value="true" />
+	</bean>
+	<bean id="nonEditableComponentTypeAttributePopulator" class="de.hybris.platform.cmssmarteditwebservices.structures.populator.EditableComponentTypeAttributePopulator">
+		<property name="editable" value="false" />
+	</bean>
+	
+	
+	<!-- Type Attribute Comparators :: this is used to determine the fields ordering -->
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.comparator.ComponentTypeAttributeDataComparator"
+			p:typecode="CMSTimeRestriction" p:mode="DEFAULT">
+		<property name="orderedAttributes">
+			<list>
+				<value>name</value>
+				<value>activeFrom</value>
+				<value>activeUntil</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.comparator.ComponentTypeAttributeDataComparator"
+			p:typecode="CMSCategoryRestriction" p:mode="DEFAULT">
+		<property name="orderedAttributes">
+			<list>
+				<value>name</value>
+				<value>recursive</value>
+				<value>categories</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.comparator.ComponentTypeAttributeDataComparator"
+			p:typecode="ProductCarouselComponent" p:mode="DEFAULT">
+		<property name="orderedAttributes">
+			<list>
+				<value>title</value>
+				<value>products</value>
+				<value>categories</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Type Attributes -->
+	
+	<!-- Restriction Data Attributes -->
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="AbstractRestriction" p:qualifier="name" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSTimeRestriction" p:qualifier="activeFrom" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSTimeRestriction" p:qualifier="activeUntil" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="AbstractRestriction" p:qualifier="name" p:mode="ADD">
+		<property name="populators">
+			<set>
+				<ref bean="nonEditableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSTimeRestriction" p:qualifier="activeFrom" p:mode="ADD">
+		<property name="populators">
+			<set>
+				<ref bean="nonEditableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSTimeRestriction" p:qualifier="activeUntil" p:mode="ADD">
+		<property name="populators">
+			<set>
+				<ref bean="nonEditableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSCategoryRestriction" p:qualifier="categories" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSCategoryRestriction" p:qualifier="categories" p:mode="ADD">
+		<property name="populators">
+			<set>
+				<ref bean="nonEditableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSCategoryRestriction" p:qualifier="recursive" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="CMSCategoryRestriction" p:qualifier="recursive" p:mode="ADD">
+		<property name="populators">
+			<set>
+				<ref bean="nonEditableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+	<!-- Product Carousel Component Data Attributes -->
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="ProductCarouselComponent" p:qualifier="title" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="ProductCarouselComponent" p:qualifier="products" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	<bean class="de.hybris.platform.cmssmarteditwebservices.structures.service.impl.DefaultTypeAttributeStructure"
+			p:typecode="ProductCarouselComponent" p:qualifier="categories" p:mode="DEFAULT">
+		<property name="populators">
+			<set>
+				<ref bean="editableComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+		
+</beans>

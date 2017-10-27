@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--YaaS configuration -->
+
+	<alias name="defaultCxYaasAppIdResolver" alias="cxYaasAppIdResolver"/>
+	<bean id="defaultCxYaasAppIdResolver" class="de.hybris.platform.personalizationyprofile.resolver.impl.DefaultCxYaasAppIdResolver">
+		<property name="fallbackAppId" value="${yaas.personalizationProfile.appId}" />
+		<property name="yaasConfigurationService" ref="yaasConfigurationService"/>
+		<property name="yaasSessionService" ref="yaasSessionService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+
+	<alias name="defaultYaasConfigurationUtil" alias="cxYaasConfigurationUtil"/>
+	<bean id="defaultYaasConfigurationUtil" class="de.hybris.platform.personalizationyprofile.util.CxYaasConfigurationUtil">
+		<property name="yaasConfigurationService" ref="yaasConfigurationService"/>
+		<property name="cxYaasAppIdResolver" ref="cxYaasAppIdResolver"/>
+	</bean>
+		
+	<alias name="defaultCxGraphClientAdapter" alias="cxSecuredGraphClient"/>	
+	<bean id="defaultCxGraphClientAdapter" class="de.hybris.platform.personalizationyprofile.yaas.client.CxSecureGraphClientAdapter">
+		<property name="charonFactory" ref="charonFactory"/>
+		<property name="cxYaasConfigurationUtil" ref="cxYaasConfigurationUtil"/>
+	</bean>
+
+    <!-- yprofile data service -->
+    <alias alias="cxYprofileDataService" name="defaultCxYprofileDataService" />
+	<bean id="defaultCxYprofileDataService" class="de.hybris.platform.personalizationyprofile.service.impl.DefaultCxYprofileDataService">
+		<property name="cxSecuredGraphClient" ref="cxSecuredGraphClient" />
+		<property name="cxYaasConfigurationUtil" ref="cxYaasConfigurationUtil"/>
+	</bean>	
+
+	<!-- Read data configuration -->
+	<alias alias="yprofileNodeReadConfig" name="defaultYprofileNodeReadConfig"/>
+	<bean id="defaultYprofileNodeReadConfig"
+	      class="de.hybris.platform.personalizationyprofile.service.YprofileNodeReadConfig"
+	      abstract="true"/>
+	
+	<bean id="identityNodeReadConfig" parent="yprofileNodeReadConfig">
+		<property name="nodeTypeId" value="core/Identity" />
+		<property name="nodesToExpand">
+			<set>
+				<value>core/Profile</value>
+			</set>
+		</property>
+		<property name="includeRelations">
+			<set>
+				<value>relations/core/Identity/core/Profile/core/IDENTIFIES</value>
+			</set>
+		</property>		
+	</bean>
+	
+	<bean id="profileNodeReadConfig" parent="yprofileNodeReadConfig">
+		<property name="nodeTypeId" value="core/Profile" />
+		<property name="nodesToExpand">
+			<set>
+				<value>commerce/ProductAffinity</value>
+			</set>
+		</property>
+		<property name="includeRelations">
+			<set>
+				<value>relations/core/Profile/commerce/Category/commerce/HAS_AFFINITY</value>
+				<value>relations/core/Profile/commerce/ProductAffinity/core/HAS</value>
+			</set>
+		</property>		
+	</bean>
+	
+	<bean id="productAffinityNodeReadConfig" parent="yprofileNodeReadConfig">
+		<property name="nodeTypeId" value="commerce/ProductAffinity" />
+		<property name="includeRelations">
+			<set>
+				<value>relations/commerce/ProductAffinity/commerce/Product/commerce/TO</value>
+			</set>
+		</property>	
+	</bean>
+	   	
+	<!-- Converter for mappers mechanism -->
+	<alias name="defaultYprofileIntegrationConverter" alias="yprofileIntegrationConverter"/>
+	<bean id="defaultYprofileIntegrationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.personalizationintegration.mapping.MappingData"/>
+		<property name="populators">
+			<list>
+				<ref bean="cxFixedSegmentsYprofileMapper"/>
+				<ref bean="cxScripYprofileMapper"/>
+				<ref bean="cxCatalogYprofileMapper" />
+				<ref bean="cxProductYprofileMapper" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean depends-on="cxIntegrationConvertersMap" parent="mapMergeDirective">
+		<property name="key" value="yprofileIntegrationConverter" />
+		<property name="value" ref="yprofileIntegrationConverter" />
+	</bean>
+	
+	<alias name="defaultCxFixedSegmentsYprofileMapper" alias="cxFixedSegmentsYprofileMapper"/>
+	<bean id="defaultCxFixedSegmentsYprofileMapper" class="de.hybris.platform.personalizationyprofile.mapper.impl.DefaultCxFixedSegmentsYprofileMapper" parent="cxFixedSegmentsProfileMapper"/>
+	
+	<alias name="defaultCxScripYprofileMapper" alias="cxScripYprofileMapper"/>
+	<bean id="defaultCxScripYprofileMapper" class="de.hybris.platform.personalizationyprofile.mapper.impl.DefaultCxScripYprofileMapper" parent="cxScriptProfileMapper">
+		<property name="scriptGroup" value="yprofile"/>
+	</bean>
+	
+	<alias name="defaultCxCatalogYprofileMapper" alias="cxCatalogYprofileMapper"/>
+	<bean id="defaultCxCatalogYprofileMapper" class="de.hybris.platform.personalizationyprofile.mapper.impl.CxCategoryYprofileMapper" >
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<alias name="defaultCxProductYprofileMapper" alias="cxProductYprofileMapper"/>
+	<bean id="defaultCxProductYprofileMapper" class="de.hybris.platform.personalizationyprofile.mapper.impl.CxProductYprofileMapper" >
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<!-- Update strategy -->
+	<bean id="yprofileUserSegmentProvider"
+		class="de.hybris.platform.personalizationyprofile.segment.DefaultYprofileUserSegmentsProvider">
+		<property name="cxYprofileDataService" ref="cxYprofileDataService"/>
+		<property name="cxIntegrationMappingService" ref="cxIntegrationMappingService"/>
+	</bean>
+	
+	<!-- Deprecated beans -->
+	<!-- These beans are not used anymore and will be removed in future -->
+	<bean id="personalizationApplicationPropertyResolver" class="de.hybris.platform.personalizationyprofile.yaas.client.CxApplicationPropertyResolver">
+		<constructor-arg ref="yaasConfigurationService" />
+        <constructor-arg value="${yaas.personalizationProfile.appId}" />
+	</bean>
+
+	<bean id="personalizationPlatformPropertyResolver" class="de.hybris.platform.rest.config.PlatformPropertyResolver">
+		<constructor-arg value="yaas" />
+		<constructor-arg ref="configurationService" />
+	</bean>
+
+	<bean id="personalizationCombinePropertyResolver" class="com.hybris.charon.conf.CombinePropertyResolver">
+		<constructor-arg ref="personalizationApplicationPropertyResolver" />
+		<constructor-arg ref="personalizationPlatformPropertyResolver" />
+	</bean>
+
+	<bean id="personalizationCharonClientFactory" class="de.hybris.platform.personalizationyprofile.yaas.client.CharonClientFactory" destroy-method="clearCache" parent="charonFactory">
+		<property name="resolver" ref="personalizationCombinePropertyResolver" />
+		<property name="yaasConfigurationService" ref="yaasConfigurationService"/>
+	</bean>
+	
+</beans>

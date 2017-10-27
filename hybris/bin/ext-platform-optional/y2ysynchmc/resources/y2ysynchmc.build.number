@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Dec 06 11:13:19 CET 2016
+builddate=20161206 1113
+description=y2ysynchmc
+group.id=de.hybris.platform
+module.name=platform-module
+name=y2ysynchmc
+releasedate=20161109 1354
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

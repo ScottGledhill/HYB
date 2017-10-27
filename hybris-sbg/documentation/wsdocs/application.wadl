@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wadl:application xmlns:wadl="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wadl:doc xmlns:enunciate="http://enunciate.codehaus.org/" enunciate:generatedBy="Enunciate-1.28"/>
+  <wadl:grammars>
+    <wadl:include href="ns0.xsd"/>
+  </wadl:grammars>
+  <wadl:resources base="http://localhost:8080/OMS">
+    <wadl:resource path="/rest/sub/{serviceId}/accounts">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="POST">
+        <wadl:doc>
+          <![CDATA[Creates a new account.]]>
+<![CDATA[Example url : POST]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock/accounts]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the account create request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProfileRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProfileResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/hpfurl">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="HEAD">
+        <wadl:doc>
+          <![CDATA[Returns the vendor specific URL to the hosted payment front-end (HPF).]]>
+        </wadl:doc>
+        <wadl:request/>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[The url and the location of the authorization resource (returned in location header)]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/ping">
+      <wadl:param name="serviceId" style="template"/>
+      <wadl:method name="HEAD">
+        <wadl:request/>
+        <wadl:response>
+          <wadl:representation mediaType="application/xml"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="POST">
+        <wadl:doc>
+          <![CDATA[Create a subscription.]]>
+<![CDATA[Example url : POST]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock/subscriptions]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[request for subscription creation]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionCreateRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionData"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/transactions">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[identifying the service id of the implementation]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="POST">
+        <wadl:doc>
+          <![CDATA[Resource used to authorize capture a one time transaction.]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the request for processing a one time transaction]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProcessPayNowRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[a subscription transaction result with details of the AuthCapture]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/usages">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Passes customer usage for a subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock/usages]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the usage request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="customerUsageRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="customerUsage"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/websessions">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="POST">
+        <wadl:doc>
+          <![CDATA[Initialize a session with the 3rd party billing provider.]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:representation mediaType="application/xml" element="subscriptionSessionInitRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[a subscription transaction result with details of the finalization]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/accounts/{accountId}">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="accountId" style="template">
+        <wadl:doc>
+          <![CDATA[the account id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Updates an existing account.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/accounts/9997000011804610]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the update account request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProfileRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProfileResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+      <wadl:method name="GET">
+        <wadl:doc>
+          <![CDATA[Retrieves an existing account.]]>
+<![CDATA[Example url : GET]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/accounts/9997000011804610]]>
+        </wadl:doc>
+        <wadl:request/>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionProfileResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/billingactivitydetails/{billingActivityDetailId}">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="billingActivityDetailId" style="template">
+        <wadl:doc>
+          <![CDATA[billing activity detail id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="GET">
+        <wadl:doc>
+          <![CDATA[Returns a specific billing activity detail.]]>
+<![CDATA[Example url : GET]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/billingActivityDetails/999700894284028402]]>
+        </wadl:doc>
+        <wadl:request/>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="fileStream"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/paymentmethods/{paymentMethodId}">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="paymentMethodId" style="template">
+        <wadl:doc>
+          <![CDATA[payment method id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Updates an existing payment method.]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the update request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="paymentMethodUpdateRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="paymentMethodResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[subscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Updates an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/9997000011804610]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the update request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionUpdateRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionData"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/websessions/{websessionId}">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="websessionId" style="template"/>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Finalizes an already initialized session with the 3rd party billing provider.]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:representation mediaType="application/xml" element="subscriptionSessionFinalization"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[a subscription transaction result with details of the finalization]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/paymentmethods/legacy/5_1">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[the service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Changes an existing paymentmethod.]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:representation mediaType="application/xml" element="subscriptionChangePaymentMethodRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/legacy/5_1">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="POST">
+        <wadl:doc>
+          <![CDATA[Create a subscription.]]>
+<![CDATA[Example url : POST]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/legacy/5_1]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[subscription to]]>
+<![CDATA[create]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionOrderPostRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Replaces the payment method for an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/legacy/5_1]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the replace payment method request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionReplacePaymentMethodRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+      <wadl:method name="DELETE">
+        <wadl:doc>
+          <![CDATA[Cancels an existing subscription.]]>
+<![CDATA[Example url : DELETE]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/legacy/5_1]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the cancel request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionCancelSubscriptionRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionTransactionResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}/billingActivities">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[subscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="GET">
+        <wadl:doc>
+          <![CDATA[Returns the billing activities for the given subscription optionally filtered by date.]]>
+<![CDATA[Example url : GET]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/9997000011804610/billingActivities]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:param name="fromTimestamp" style="query">
+            <wadl:doc>
+              <![CDATA[timestamp containing the 'from' date to filter by]]>
+            </wadl:doc>
+          </wadl:param>
+          <wadl:param name="toTimestamp" style="query">
+            <wadl:doc>
+              <![CDATA[timestamp containing the 'to' date to filter by]]>
+            </wadl:doc>
+          </wadl:param>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="billingActivityList"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}/cancel">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[su]]>
+<![CDATA[bscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Cancels an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/9997000011804610/cancel?effectiveFrom=NOW]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:param name="effectiveFrom" style="query">
+            <wadl:doc>
+              <![CDATA[when should the cancellation take effect]]>
+            </wadl:doc>
+          </wadl:param>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionData"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}/changeState">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[subscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Changes the state of an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/9997000011804610/changeState]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the update request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionChangeStateRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionData"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}/replacePaymentMethod">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[subscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Replaces the payment method for an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/9997000011804610/replacePaymentMethod?merchantPaymentMethodId=9997000012761537&effectiveFrom=NOW]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:param name="merchantPaymentMethodId" style="query">
+            <wadl:doc>
+              <![CDATA[payment method id]]>
+            </wadl:doc>
+          </wadl:param>
+          <wadl:param name="effectiveFrom" style="query">
+            <wadl:doc>
+              <![CDATA[when should the cancellation take effect]]>
+            </wadl:doc>
+          </wadl:param>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionData"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/sub/{serviceId}/subscriptions/{subscriptionId}/upgrade">
+      <wadl:param name="serviceId" style="template">
+        <wadl:doc>
+          <![CDATA[service id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:param name="subscriptionId" style="template">
+        <wadl:doc>
+          <![CDATA[subscription id]]>
+        </wadl:doc>
+      </wadl:param>
+      <wadl:method name="PUT">
+        <wadl:doc>
+          <![CDATA[Updgrades an existing subscription.]]>
+<![CDATA[Example url : PUT]]>
+<![CDATA[http://intyellowcabs.fra.hybris.com:8080/hybris-cis-mock-subscription-web/sub/cisSubscriptionMock]]>
+<![CDATA[/subscriptions/99970000118]]>
+<![CDATA[04610/upgrade]]>
+        </wadl:doc>
+        <wadl:request>
+          <wadl:doc>
+            <![CDATA[the update request]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionUpgradeRequest"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:request>
+        <wadl:response>
+          <wadl:doc>
+            <![CDATA[the rest response]]>
+          </wadl:doc>
+          <wadl:representation mediaType="application/xml" element="subscriptionUpgradeResult"/>
+          <wadl:representation mediaType="application/json"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+  </wadl:resources>
+</wadl:application>

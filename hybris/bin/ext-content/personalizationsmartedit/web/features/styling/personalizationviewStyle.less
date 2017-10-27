@@ -1,0 +1,206 @@
+@import (reference) "variables.less";
+.personalizationsmarteditVariationComponentSelected-icon {
+    background-image: @personalizationVariationComponentIcon;
+    background-repeat: no-repeat;
+    background-color: transparent; //in case the image does not load
+}
+
+.personalizationsmarteditComponentSelected,
+.personalizationsmarteditVariationComponentSelected {
+    border: 5px;
+    border-style: solid;
+    border-color: @personalizionComponentSelectedBorderColor;
+}
+
+.personalizationsmarteditComponentSelected0 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor0;
+}
+
+.personalizationsmarteditComponentSelected1 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor1;
+}
+
+.personalizationsmarteditComponentSelected2 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor2;
+}
+
+.personalizationsmarteditComponentSelected3 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor3;
+}
+
+.personalizationsmarteditComponentSelected4 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor4;
+}
+
+.personalizationsmarteditComponentSelected5 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor5;
+}
+
+.personalizationsmarteditComponentSelected6 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor6;
+}
+
+.personalizationsmarteditComponentSelected7 {
+    &:extend(.personalizationsmarteditComponentSelected);
+    border-color: @personalizationComponentColor7;
+}
+
+.personalizationsmarteditComponentSelectedList {
+    color: @text-color-white;
+    width: 44px;
+    height: 44px; //to make sure it stays within a small component border
+    padding-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+.personalizationsmarteditComponentSelectedList0 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor0;
+}
+
+.personalizationsmarteditComponentSelectedList1 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor1;
+}
+
+.personalizationsmarteditComponentSelectedList2 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor2;
+}
+
+.personalizationsmarteditComponentSelectedList3 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor3;
+}
+
+.personalizationsmarteditComponentSelectedList4 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor4;
+}
+
+.personalizationsmarteditComponentSelectedList5 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor5;
+}
+
+.personalizationsmarteditComponentSelectedList6 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor6;
+}
+
+.personalizationsmarteditComponentSelectedList7 {
+    &:extend(.personalizationsmarteditComponentSelectedList);
+    background: @personalizationComponentColor7;
+}
+
+.customization__marker {
+    width: 30px;
+    height: 30px;
+    top: -5px;
+    background-color: transparent; //in case the image does not load
+    display: inline-block;
+}
+
+.commerce-customization__marker--icon {
+    &:extend(.customization__marker);
+    background-image: @personalizationCommerceCustomizationIcon;
+    background-repeat: no-repeat;
+}
+
+.modal-fullscreen {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-fullscreen > .modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+    background-color: @background-color-light-grey1;
+}
+
+.modal_bigger {
+    font-size: 15px;
+}
+
+.ySEComponentMenuW--button-with-context,
+.ySEComponentMenuW--button-with-context:hover,
+.ySEComponentMenuW--button-with-context:active,
+.ySEComponentMenuW--button-with-context:hover:active,
+.ySEComponentMenuW--button-with-context:focus,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:hover,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:active,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:hover:active,
+.ySEComponentMenuW.open .ySEComponentMenuW--button-with-context:focus,
+.ySEComponentMenuW.open .toolbar-context--btn,
+.ySEComponentMenuW.open .toolbar-context--btn:hover,
+.ySEComponentMenuW.open .toolbar-context--btn:active,
+.ySEComponentMenuW.open .toolbar-context--btn:hover:active,
+.ySEComponentMenuW.open .toolbar-context--btn:focus {
+    border-right: 0 none;
+}
+
+.toolbar-context {
+    display: inline-block; //fix for small screens layout
+    background-color: @background-color-light-blue-grey;
+    .hyicon {
+        font-size: 20px;
+        padding-top: 2px;
+        padding-left: 0;
+        &:hover {
+            opacity: @opacity_point-six;
+        }
+    }
+    .ySEComponentMenuW--button-hyicon {
+        min-width: 30px;
+    }
+}
+
+.toolbar-context--btn,
+.toolbar-context--btn:hover,
+.toolbar-context--btn:active,
+.toolbar-context--btn:hover:active,
+.toolbar-context--btn:focus {
+    border-right: 0 none;
+    margin-left: -4px;
+    margin-right: -3px;
+    background: @toolbar-context-border-image no-repeat;
+    cursor: default;
+    opacity: @opacity_one;
+}
+
+.toolbar-context--btn--txt {
+    height: 50px;
+    padding-top: 7px;
+    padding-left: 15px;
+    text-transform: capitalize;
+    font-size: 13px;
+}
+
+.yPersonalizationModal {
+    z-index: 1066 !important;
+}
+
+.yPersonalizationContextModal {
+    z-index: 1046 !important;
+}
+
+.yPersonalizationContextModal + .modal-backdrop {
+    z-index: 1045 !important;
+}
+
+.yPersonalizationManagerModal {
+    z-index: 1052 !important;
+}

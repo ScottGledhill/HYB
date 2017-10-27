@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>    
+   	<link rel="stylesheet" href="/buildArtifacts/static-resources/dist/smartedit/css/outer-styling.css">
+	<script src="/buildArtifacts/static-resources/dist/smartedit/js/thirdparties.js"></script>
+	<script src="/buildArtifacts/static-resources/thirdparties/ckeditor/ckeditor.js"></script>
+    <script src="/buildArtifacts/static-resources/smarteditloader/js/smarteditloader.js"></script>
+    <script src="/buildArtifacts/static-resources/smarteditcontainer/js/smarteditcontainer.js"></script>
+    <script src="/jsTests/tests/cmssmarteditContainer/e2e/features/util/commonMockedModule/i18nMock.js"></script>
+    <script src="/jsTests/tests/cmssmarteditContainer/e2e/features/util/commonMockedModule/synchronizationMocks.js"></script>
+    <script src="../../../../../../../web/webroot/cmssmartedit/js/cmssmarteditContainer.js"></script>
+    
+    <script src="./syncApp.js"></script>
+    
+    <style>
+    	.offset{
+    		margin-top:50px
+    	}
+    
+    </style>
+</head>
+
+<body data-ng-app="syncApp">
+	<div data-ng-controller="defaultController as ctrl" class="offset">
+	<alerts-box alerts='alerts'> </alerts-box>
+		<synchronization-panel
+		data-item-id="ctrl.itemId"
+		data-get-sync-status="ctrl.getSyncStatus"
+		data-perform-sync="ctrl.performSync"
+		data-header-template-url="ctrl.headerTemplateUrl">
+		</synchronization-panel>
+	</div>
+</body>
+
+</html>

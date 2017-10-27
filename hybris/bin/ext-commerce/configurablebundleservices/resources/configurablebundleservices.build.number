@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Dec 01 09:51:05 CET 2016
+builddate=20161201 0951
+description=configurablebundleservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=configurablebundleservices
+releasedate=20161124 1033
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

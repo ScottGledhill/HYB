@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- Predicates for Validators -->
+	<alias name="defaultComponentExistsPredicate" alias="componentExistsPredicate" />
+	<bean id="defaultComponentExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.ComponentExistsPredicate">
+		<property name="cmsAdminComponentService" ref="cmsAdminComponentService" />
+	</bean>
+
+	<alias name="defaultContentSlotExistsPredicate" alias="contentSlotExistsPredicate" />
+	<bean id="defaultContentSlotExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.ContentSlotExistsPredicate">
+		<property name="cmsAdminContentSlotService" ref="cmsAdminContentSlotService" />
+	</bean>
+
+	<alias name="defaultPageExistsPredicate" alias="pageExistsPredicate" />
+	<bean id="defaultPageExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.PageExistsPredicate">
+		<property name="adminPageService" ref="cmsAdminPageService" />
+	</bean>
+	
+	<alias name="defaultPrimaryPageWithLabelExistsPredicate" alias="primaryPageWithLabelExistsPredicate" />
+	<bean id="defaultPrimaryPageWithLabelExistsPredicate" class="de.hybris.platform.cmsfacades.pages.predicate.PrimaryPageWithLabelExistsPredicate">
+		<property name="adminPageService" ref="cmsAdminPageService" />
+		<property name="pageVariationResolver" ref="cmsContentPageVariationResolver" />
+	</bean>
+	
+	<alias name="defaultHasPageLabelChangedPredicate" alias="hasPageLabelChangedPredicate" />
+	<bean id="defaultHasPageLabelChangedPredicate" class="de.hybris.platform.cmsfacades.pages.predicate.HasPageLabelChangedPredicate">
+		<property name="adminPageService" ref="cmsAdminPageService" />
+	</bean>
+	
+	<alias name="defaultOnlyHasSupportedCharactersPredicate" alias="onlyHasSupportedCharactersPredicate" />
+	<bean id="defaultOnlyHasSupportedCharactersPredicate" class="de.hybris.platform.cmsfacades.common.predicate.OnlyHasSupportedCharactersPredicate"/>
+
+	<alias name="defaultRestrictionExistsPredicate" alias="restrictionExistsPredicate" />
+	<bean id="defaultRestrictionExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.RestrictionExistsPredicate">
+		<property name="adminRestrictionService" ref="cmsAdminRestrictionService" />
+	</bean>
+	
+	<alias name="defaultRestrictionNameExistsPredicate" alias="restrictionNameExistsPredicate" />
+	<bean id="defaultRestrictionNameExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.RestrictionNameExistsPredicate">
+		<property name="adminRestrictionService" ref="cmsAdminRestrictionService" />
+	</bean>
+
+	<alias name="defaultHasRestrictionNameChangedPredicate" alias="hasRestrictionNameChangedPredicate" />
+	<bean id="defaultHasRestrictionNameChangedPredicate" class="de.hybris.platform.cmsfacades.common.predicate.HasRestrictionNameChangedPredicate">
+		<property name="adminRestrictionService" ref="cmsAdminRestrictionService" />
+	</bean>
+	
+	<alias name="defaultCategoryExistsPredicate" alias="categoryExistsPredicate" />
+	<bean id="defaultCategoryExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.CategoryExistsPredicate">
+	  <property name="productCatalogItemModelFinder" ref="cmsProductCatalogItemModelFinder" />
+	</bean>
+	
+	<alias name="defaultTypeCodeExistsPredicate" alias="typeCodeExistsPredicate" />
+	<bean id="defaultTypeCodeExistsPredicate" class="de.hybris.platform.cmsfacades.common.predicate.TypeCodeExistsPredicate">
+		<property name="typeService" ref="typeService" />
+	</bean>
+
+	<alias name="defaultComponentAlreadyInContentSlotPredicate" alias="componentAlreadyInContentSlotPredicate" />
+	<bean id="defaultComponentAlreadyInContentSlotPredicate"
+		class="de.hybris.platform.cmsfacades.pagescontentslotscomponents.validator.predicate.ComponentAlreadyInContentSlotPredicate" />
+
+	<alias name="defaultComponentTypeAllowedForContentSlotPredicate" alias="componentTypeAllowedForContentSlotPredicate" />
+	<bean id="defaultComponentTypeAllowedForContentSlotPredicate" class="de.hybris.platform.cmsfacades.common.predicate.ComponentTypeAllowedForContentSlotPredicate">
+		<property name="cmsAdminTypeRestrictionsService" ref="cmsAdminTypeRestrictionsService" />
+	</bean>
+
+	<alias name="defaultValidStringLengthPredicate" alias="validStringLengthPredicate" />
+	<bean id="defaultValidStringLengthPredicate" class="de.hybris.platform.cmsfacades.common.predicate.ValidStringLengthPredicate">
+		<property name="maxLength" value="255" />
+	</bean>
+
+	<alias name="defaultValidPositiveIntegerPredicate" alias="validPositiveIntegerPredicate" />
+	<bean id="defaultValidPositiveIntegerPredicate" class="de.hybris.platform.cmsfacades.common.predicate.ValidIntegerPredicate">
+		<property name="min" value="1" />
+	</bean>
+
+	<alias name="defaultNamedQueryExistsPredicate" alias="namedQueryExistsPredicate" />
+	<bean id="defaultNamedQueryExistsPredicate" class="de.hybris.platform.cmsfacades.namedquery.validator.NamedQueryExistsPredicate">
+		<property name="namedQueryFactory" ref="namedQueryFactory" />
+	</bean>
+	
+</beans>

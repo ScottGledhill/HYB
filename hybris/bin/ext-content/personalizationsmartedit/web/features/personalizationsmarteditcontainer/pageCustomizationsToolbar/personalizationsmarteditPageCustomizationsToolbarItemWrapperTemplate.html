@@ -1,0 +1,30 @@
+<div data-ng-controller="topToolbarMenuController" data-uib-dropdown data-is-open="status.isopen" data-auto-close="disabled" class="ySEComponentMenuW">
+    <button type="button" class="btn btn-default yHybridAction ySEComponentMenuW--button personalizationsmarteditTopToolbarCustomizeButton" data-uib-dropdown-toggle data-ng-disabled="disabled" aria-pressed="false" data-ng-controller="toolbarContextController" ng-class="selectedCustomization ? 'ySEComponentMenuW--button-with-context': '' ">
+        <img data-ng-if="status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_customize_s.png" />
+        <img data-ng-if="!status.isopen" data-ng-src="../personalizationsmartedit/icons/icon_customize.png" />
+        <span class="ySEComponentMenuW--button--txt" data-translate="personalization.toolbar.pagecustomizations"></span>
+    </button>
+
+    <div data-ng-controller="toolbarContextController" data-ng-show="selectedCustomization" class="toolbar-context">
+        <span class="btn btn-default yHybridAction ySEComponentMenuW--button toolbar-context--btn">
+            <div class="ySEComponentMenuW--button--txt toolbar-context--btn--txt">
+                <div>{{selectedCustomization.name}}</div>
+                <div>{{selectedVariation.name}}</div>
+            </div>
+        </span>
+        <span class="btn btn-default yHybridAction ySEComponentMenuW--button ySEComponentMenuW--button-hyicon" data-ng-click="clearSelection()">
+            <div class="ySEComponentMenuW--button--txt toolbar-context--btn--txt hyicon hyicon-remove">
+            </div>
+        </span>
+    </div>
+
+    <ul data-ng-if="status.isopen" class="dropdown-menu dropdown-menu-left btn-block ySEComponentMenu ySEComponentMenu-customized" role="menu" data-ng-click="preventDefault($event);">
+        <div class="ySEComponentMenu-headers">
+            <h2 class="text-uppercase h2" data-translate="personalization.toolbar.pagecustomizations.header.title"></h2>
+            <small class="small" data-translate="personalization.toolbar.pagecustomizations.header.description"></small>
+        </div>
+        <li role="menuitem" class="item menuitem-lefttoolbar">
+            <personalizationsmartedit-page-customizations-toolbar-item></personalizationsmartedit-page-customizations-toolbar-item>
+        </li>
+    </ul>
+</div>

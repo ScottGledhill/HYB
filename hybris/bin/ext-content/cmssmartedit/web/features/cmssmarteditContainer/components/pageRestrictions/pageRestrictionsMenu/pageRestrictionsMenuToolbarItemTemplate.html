@@ -1,0 +1,36 @@
+<div data-uib-dropdown
+    data-is-open="ctrl.isOpen"
+    data-auto-close="ctrl.disabled"
+    class="ySEComponentMenuW">
+    <button type="button"
+        class="btn btn-default yHybridAction ySEComponentMenuW--button"
+        data-uib-dropdown-toggle
+        data-ng-disabled="ctrl.disabled"
+        aria-pressed="false">
+        <img data-ng-src="{{ctrl.menuIcon}}" />
+        <span class="ySEComponentMenuW--button--txt">{{ctrl.label | translate}}</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-left btn-block ySEVisibilityMenu"
+        role="menu"
+        data-ng-click="ctrl.preventDefault($event);">
+        <li role="menuitem"
+            class="ySEVisibilityMenu__header"
+            data-ng-if="ctrl.isOpen">
+            <restrictions-page-info data-page-id="ctrl.pageId"
+                data-page-name="ctrl.pageName"
+                data-page-type="ctrl.pageType"
+                data-page-is-primary="ctrl.pageIsPrimary"
+                data-associated-primary-page-name="ctrl.associatedPrimaryPageName">
+            </restrictions-page-info>
+        </li>
+        <li role="menuitem"
+            class="ySEVisibilityMenu__restrictions"
+            data-ng-if="ctrl.isOpen && !ctrl.pageIsPrimary">
+            <restrictions-table data-editable="false"
+                data-restrictions="ctrl.restrictions"
+                data-restriction-criteria="ctrl.restrictionCriteria"
+                data-custom-class="'ySERestrictionMenu'">
+            </restrictions-table>
+        </li>
+    </ul>
+</div>

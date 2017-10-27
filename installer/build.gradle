@@ -1,0 +1,125 @@
+import org.gradle.logging.StyledTextOutput
+import org.gradle.logging.StyledTextOutputFactory
+import org.gradle.logging.internal.LoggingOutputInternal
+
+project.subprojects.each { subProject ->
+    subProject.buildscript.dependencies {
+        delegate.classpath(fileTree(dir: "${rootProject.projectDir}/libs", include: '*.jar'))
+    }
+}
+
+subprojects {
+
+    repositories {
+        flatDir {
+            dirs "${rootProject.projectDir}/libs"
+        }
+    }
+
+    buildscript {
+        repositories {
+            flatDir {
+                dirs "${rootProject.projectDir}/libs"
+            }
+        }
+    }
+}
+
+if (project.hasProperty('logToFile')) {
+    def tstamp = new Date().format('yyyy-MM-dd_HH-mm-ss')
+    def buildLog = new File("${rootProject.rootDir}/logs/${tstamp}_build.log")
+
+    gradle.services.get(LoggingOutputInternal).addStandardOutputListener(new StandardOutputListener() {
+        void onOutput(CharSequence output) {
+            buildLog << output
+        }
+    })
+
+    gradle.services.get(LoggingOutputInternal).addStandardErrorListener(new StandardOutputListener() {
+        void onOutput(CharSequence output) {
+            buildLog << output
+        }
+    })
+}
+
+subprojects {
+    afterEvaluate { subProject ->
+        def setupTask = createTaskInSubProject subProject, 'setup', 'Setups platform (writes configuration into local.properties, localextensions.xml)'
+        def buildTask = createTaskInSubProject subProject, 'build', 'Builds platform'
+        def initializeTask = createTaskInSubProject subProject, 'initialize', 'Initializes platform fully'
+        def initializeJunitTask =  createTaskInSubProject subProject, 'initializeJunit', 'Initializes platform JUnitTenant'
+        def startTask = createTaskInSubProject subProject, 'start', 'Starts platform interactively'
+        def startInBackgroundTask = createTaskInSubProject subProject, 'startInBackground', 'Starts platform in background'
+        def stopInBackgroundTask = createTaskInSubProject subProject, 'stopInBackground', 'Stops platform in background'
+        def testJunitTask = createTaskInSubProject subProject, 'testJunit', 'Runs JUnit tests'
+        def testInitializeTask = createTaskInSubProject subProject, 'testInitialize', 'Runs initialization tests'
+        def testServerTask = createTaskInSubProject subProject, 'testServer', 'Runs JUnit tests'
+        createTaskInSubProject subProject, 'createImagesStructure', 'Creates images structure'
+
+        buildTask.mustRunAfter setupTask
+        initializeTask.mustRunAfter buildTask
+        initializeJunitTask.mustRunAfter buildTask
+        startTask.mustRunAfter initializeTask
+        startInBackgroundTask.mustRunAfter initializeTask
+        stopInBackgroundTask.mustRunAfter testServerTask
+
+        testJunitTask.mustRunAfter initializeJunitTask
+        testInitializeTask.mustRunAfter initializeTask
+        testServerTask.mustRunAfter startInBackgroundTask
+
+        def performTask = createTaskInSubProject subProject, 'perform', 'Performs setup, build, initialize and start - in this order'
+        performTask.dependsOn = [setupTask, buildTask, initializeTask, startTask]
+
+        def performTestJunitTask = createTaskInSubProject subProject, 'performTestJunit', 'Performs setup, build, initializeJunit, testJunit - in this order'
+        performTestJunitTask.dependsOn = [setupTask, buildTask, initializeJunitTask, testJunitTask]
+
+        def performTestInitializeTask = createTaskInSubProject subProject, 'performTestInitialize', 'Performs setup, build, initialize, testInitialize - in this order'
+        performTestInitializeTask.dependsOn = [setupTask, buildTask, initializeTask, testInitialize]
+
+        def performTestServerTask = createTaskInSubProject subProject, 'performTestServer', 'Performs setup, build, initialize, startInBackground, testServer - in this order'
+        performTestServerTask.dependsOn = [setupTask, buildTask, initializeTask, startInBackgroundTask, testServerTask, stopInBackgroundTask]
+    }
+}
+
+Task createTaskInSubProject(subProject, String name, String description) {
+    def taskNames = subProject.tasks*.name
+
+    if (!taskNames.contains(name)) {
+        Task task = subProject.task(name)
+        task.description = description
+    }
+
+    subProject.tasks.getByPath(name)
+}
+
+task listRecipes << {
+    def out = services.get(StyledTextOutputFactory).create('logger')
+    out.withStyle(StyledTextOutput.Style.Header).println 'Available recipes:'
+    println ''
+
+    int idx = 1;
+
+    file("${rootProject.rootDir}/recipes").listFiles().each { File recipeDir ->
+
+        if (!recipeDir.directory) {
+            return
+        }
+
+        String recipeDirName = recipeDir.name
+
+        out.withStyle(StyledTextOutput.Style.Info).println "${idx}) ${recipeDirName}"
+
+        out.withStyle(StyledTextOutput.Style.Info).println '    Description:'
+        File readmeFile = new File("${rootProject.rootDir}/recipes/${recipeDirName}/readme.txt")
+        if (readmeFile.exists()) {
+            readmeFile.eachLine { line ->
+                println "    $line"
+            }
+        } else {
+            out.withStyle(StyledTextOutput.Style.Failure).println '    Missing description.'
+        }
+
+        idx++;
+    }
+
+}
